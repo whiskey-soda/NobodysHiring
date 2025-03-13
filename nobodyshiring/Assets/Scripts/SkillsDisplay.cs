@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -21,16 +22,10 @@ public class SkillsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        statsText.text = $"skills\n" +
-            $"software engineering: {playerSkills.softwareEng}\n" +
-            $"networking: {playerSkills.networking}\n" +
-            $"marketing: {playerSkills.marketing}\n" +
-            $"game design: {playerSkills.gameDesign}\n" +
-            $"unity: {playerSkills.unity}\n" +
-            $"unreal engine: {playerSkills.unrealEngine}\n" +
-            $"godot: {playerSkills.godot}\n" +
-            $"gamemaker: {playerSkills.gameMaker}\n" +
-            $"audio: {playerSkills.audioSkill}\n" +
-            $"art: {playerSkills.art}";
+        statsText.text = $"skills\n";
+        for (int i = 0; i < playerSkills.skills.Length; i++)
+        {
+            statsText.text += $"{(Skill)i}: {playerSkills.skills[i]}\n";
+        }
     }
 }
