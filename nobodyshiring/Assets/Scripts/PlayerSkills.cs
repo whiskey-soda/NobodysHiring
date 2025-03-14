@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum Skill
 {
-    SoftwareEngineering, Networking, Marketing,
+    Coding, Networking, Marketing,
     GameDesign, Unity, UnrealEngine,
     Godot, GameMaker,
     Audio, Art
