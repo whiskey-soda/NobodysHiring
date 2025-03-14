@@ -11,7 +11,10 @@ public class PlayerStats : MonoBehaviour
 
 
     [SerializeField] float highMotivationThresholdPercent = .7f;
+    public float lowMotivationThreshold { get; private set; }
+
     [SerializeField] float lowMotivationThresholdPercent = .25f;
+    public float highMotivationThreshold { get; private set; }
 
     [SerializeField] float highMotivationEnergyCostMultMAX = .25f;
     [SerializeField] float lowMotivationEnergyCostMultMAX = 2;
@@ -32,6 +35,9 @@ public class PlayerStats : MonoBehaviour
 
         motivation = motivationMax;
         energy = energyMax;
+
+        lowMotivationThreshold = lowMotivationThresholdPercent * motivationMax;
+        highMotivationThreshold = highMotivationThresholdPercent * motivationMax;
     }
 
     public void ChangeMotivation(float value)
@@ -60,9 +66,8 @@ public class PlayerStats : MonoBehaviour
 
         float adjustedEnergyCost = energyCost;
 
-        if (motivation < lowMotivationThresholdPercent * motivationMax)
+        if (motivation < lowMotivationThreshold)
         {
-            float lowMotivationThreshold = lowMotivationThresholdPercent * motivationMax;
             float interpValue = (lowMotivationThreshold - motivation) / lowMotivationThreshold;
             adjustedEnergyCost *= Mathf.Lerp(1, lowMotivationEnergyCostMultMAX, interpValue);
 
@@ -73,9 +78,8 @@ public class PlayerStats : MonoBehaviour
                 $"coefficient: {Mathf.Lerp(1, lowMotivationEnergyCostMultMAX, interpValue)}");
             */
         }
-        else if (motivation > highMotivationThresholdPercent * motivationMax)
+        else if (motivation > highMotivationThreshold)
         {
-            float highMotivationThreshold = highMotivationThresholdPercent * motivationMax;
             float interpValue = (motivation - highMotivationThreshold) / (motivationMax - highMotivationThreshold);
             adjustedEnergyCost *= Mathf.Lerp(1, highMotivationEnergyCostMultMAX, interpValue);
 
