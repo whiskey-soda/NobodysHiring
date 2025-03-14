@@ -21,8 +21,22 @@ public class Task : MonoBehaviour
     [SerializeField] float recommendedGameMaker;
     [SerializeField] float recommendedAudio;
     [SerializeField] float recommendedArt;
+    [Space]
+    [Space]
 
     float[] recommededSkillLevels = new float[10];
+
+
+    float lowSkillDiffMult = .3f;
+    float highSkillDiffMult = .7f;
+    float extremeSkillDiffMult = 1;
+
+    float highMotivationMult = .35f;
+    float highEnergyMult = .15f;
+
+    float lowMotivationPenaltyCoefficient = .5f;
+    float lowEnergyPenaltyCoefficient = .5f;
+
 
     PlayerStats playerStats;
     PlayerSkills playerSkills;
@@ -52,14 +66,40 @@ public class Task : MonoBehaviour
         recommededSkillLevels = _recommendedSkillLevels;
     }
 
+    [ContextMenu("work 1 h")]
+    void work1h()
+    {
+        Work(1);
+    }
+
     void Work(float hours)
     {
-        float progressMult = CalculateProgressMultiplier();
-
-        currentProgress += hours * progressMult;
+        currentProgress += hours * CalculateProgressMult();
 
         playerStats.ChangeMotivation(-motivationCostPerHour * hours);
         playerStats.ChangeEnergy(-energyCostPerHour * hours);
+    }
+
+    /// <summary>
+    /// calculates the total multiplier applied to progress,
+    /// based on skill levels and stats.
+    /// </summary>
+    /// <returns></returns>
+    private float CalculateProgressMult()
+    {
+        float progressMult = 1;
+
+        // additive bonuses to progress are awarded first
+        progressMult += CalculateMultFromSkills();
+        progressMult += CalculateMultBonusFromStats();
+
+        // multiplicative penalty is applied last
+        progressMult *= CalculateMultPenaltyCoefficientFromStats();
+
+        // capped at a minimum of 0
+        if (progressMult < 0) { progressMult = 0; }
+
+        return progressMult;
     }
 
     /// <summary>
@@ -67,9 +107,9 @@ public class Task : MonoBehaviour
     /// based on the players skill levels and the tasks skill levels
     /// </summary>
     /// <returns></returns>
-    private float CalculateProgressMultiplier()
+    private float CalculateMultFromSkills()
     {
-        float progressMultiplier = 1;
+        float multFromSkills = 0;
 
         for (int i = 0; i < playerSkills.skills.Length; i++)
         {
@@ -83,22 +123,73 @@ public class Task : MonoBehaviour
 
                 if (Mathf.Abs(skillDiff) >= 3)
                 {
-                    progressMultAwarded = 1;
+                    progressMultAwarded = extremeSkillDiffMult;
                 }
                 else if (Mathf.Abs(skillDiff) >= 2)
                 {
-                    progressMultAwarded = .75f;
+                    progressMultAwarded = highSkillDiffMult;
                 }
                 else if (Mathf.Abs(skillDiff) >= 1)
                 {
-                    progressMultAwarded = .5f;
+                    progressMultAwarded = lowSkillDiffMult;
                 }
 
-                progressMultiplier += Mathf.Sign(skillDiff) * progressMultAwarded;
+                multFromSkills += Mathf.Sign(skillDiff) * progressMultAwarded;
 
             }
         }
 
-        return progressMultiplier;
+        return multFromSkills;
     }
+
+    /// <summary>
+    /// calculates the progress multiplier bonus awarded from high motivation and/or high energy
+    /// </summary>
+    /// <returns></returns>
+    float CalculateMultBonusFromStats()
+    {
+        float multFromStats = 0;
+
+        if (playerStats.motivation > playerStats.highMotivationThreshold)
+        {
+            multFromStats += highMotivationMult;
+        }
+
+        if (playerStats.energy > playerStats.highEnergyThreshold)
+        {
+            multFromStats += highEnergyMult;
+        }
+
+        return multFromStats;
+    }
+
+    /// <summary>
+    /// calculates the penalty coefficient based on low energy and/or motivation
+    /// </summary>
+    /// <returns></returns>
+    float CalculateMultPenaltyCoefficientFromStats()
+    {
+
+        // motivation and energy each make up half of the progress penalty coefficient.
+        // low stats will lower the coefficient, dividing the amount of progress gained.
+
+        float penaltyCoefficient = 1;
+
+        // motivation
+        if (playerStats.motivation < playerStats.lowMotivationThreshold)
+        {
+            float interpValue = (playerStats.lowMotivationThreshold - playerStats.motivation) / playerStats.lowMotivationThreshold;
+             penaltyCoefficient -= Mathf.Lerp(0, lowMotivationPenaltyCoefficient, interpValue);
+        }
+
+        //energy
+        if (playerStats.energy < playerStats.lowEnergyThreshold)
+        {
+            float interpValue = (playerStats.lowEnergyThreshold - playerStats.energy) / playerStats.lowEnergyThreshold;
+            penaltyCoefficient -= Mathf.Lerp(0, lowEnergyPenaltyCoefficient, interpValue);
+        }
+
+        return penaltyCoefficient;
+    }
+
 }

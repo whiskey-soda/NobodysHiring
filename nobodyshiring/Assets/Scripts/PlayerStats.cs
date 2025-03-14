@@ -4,17 +4,25 @@ using UnityEngine.Rendering;
 
 public class PlayerStats : MonoBehaviour
 {
-    float motivationMax = 100;
-    float energyMax = 100;
+    public float motivationMax { get; private set; } = 100;
+    public float energyMax { get; private set; } = 100;
+
     public float motivation { get; private set; } = 100;
     public float energy { get; private set; } = 100;
 
 
     [SerializeField] float highMotivationThresholdPercent = .7f;
-    public float lowMotivationThreshold { get; private set; }
-
     [SerializeField] float lowMotivationThresholdPercent = .25f;
+    public float lowMotivationThreshold { get; private set; }
     public float highMotivationThreshold { get; private set; }
+
+
+    [SerializeField] float highEnergyThresholdPercent = .7f;
+    [SerializeField] float lowEnergyThresholdPercent = .25f;
+    public float lowEnergyThreshold { get; private set; }
+    public float highEnergyThreshold { get; private set; }
+
+
 
     [SerializeField] float highMotivationEnergyCostMultMAX = .25f;
     [SerializeField] float lowMotivationEnergyCostMultMAX = 2;
@@ -38,6 +46,9 @@ public class PlayerStats : MonoBehaviour
 
         lowMotivationThreshold = lowMotivationThresholdPercent * motivationMax;
         highMotivationThreshold = highMotivationThresholdPercent * motivationMax;
+
+        lowEnergyThreshold = lowEnergyThresholdPercent * energyMax;
+        highEnergyThreshold = highEnergyThresholdPercent * energyMax;
     }
 
     public void ChangeMotivation(float value)
