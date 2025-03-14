@@ -8,10 +8,7 @@ public enum LifeFactor
 
 public class LifeFactors : MonoBehaviour
 {
-    public float[] factorCoefficients = { 0, 0, 0, 0, 0 };
-    float[] factorWeights = { .3f, .25f, .2f, .15f, .1f };
-
-    float motivationDrainMax = 50;
+    public float[] factorValues = { 0, 0, 0, 0, 0 };
 
     public static LifeFactors Instance;
 
@@ -30,7 +27,7 @@ public class LifeFactors : MonoBehaviour
 
     public void RaiseFactorCoefficient(LifeFactor factor, float value)
     {
-        factorCoefficients[(int)factor] += value;
+        factorValues[(int)factor] += value;
     }
 
 }

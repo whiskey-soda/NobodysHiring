@@ -21,9 +21,9 @@ public class LifeFactorsDisplay : MonoBehaviour
     void Update()
     {
         factorsText.text = $"life factors\n";
-        for (int i = 0; i < factors.factorCoefficients.Length; i++)
+        for (int i = 0; i < factors.factorValues.Length; i++)
         {
-            factorsText.text += $"{(LifeFactor)i}: {factors.factorCoefficients[i]}\n";
+            factorsText.text += $"{(LifeFactor)i}: {factors.factorValues[i]}\n";
         }
     }
 }

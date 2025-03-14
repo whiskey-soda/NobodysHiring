@@ -3,6 +3,7 @@ using UnityEngine.Rendering;
 
 public class PlayerStats : MonoBehaviour
 {
+    public float motivationMax = 100;
     public float motivation = 100;
     public float energy = 100;
 
@@ -20,5 +21,8 @@ public class PlayerStats : MonoBehaviour
         {
             Destroy(this);
         }
+
+        motivation = motivationMax;
     }
+
 }
