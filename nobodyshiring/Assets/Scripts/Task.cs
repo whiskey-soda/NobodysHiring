@@ -6,9 +6,11 @@ public class Task : MonoBehaviour
     [SerializeField] float progressMax;
     [SerializeField] float currentProgress;
     [Space]
+
     [SerializeField] float motivationCostPerHour = 10;
     [SerializeField] float energyCostPerHour = 25;
     [Space]
+
     [SerializeField] float recommendedCoding;
     [SerializeField] float recommendedNetworking;
     [SerializeField] float recommendedMarketing;
@@ -36,6 +38,10 @@ public class Task : MonoBehaviour
         SetSkillRecs();
     }
 
+    /// <summary>
+    /// sets the recommended skill levels array based on the config floats.
+    /// makes it easier to edit values in the editor.
+    /// </summary>
     void SetSkillRecs()
     {
         float[] _recommendedSkillLevels = { recommendedCoding, recommendedNetworking,
