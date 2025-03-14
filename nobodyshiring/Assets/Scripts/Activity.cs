@@ -18,7 +18,7 @@ public class Activity : MonoBehaviour
     }
 
     [ContextMenu("DoActivity")]
-    void DoActivity()
+    protected virtual void DoActivity()
     {
         time.PassTime(duration);
         playerStats.motivation -= motivationCost;
