@@ -1,12 +1,20 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class PlayerStats : MonoBehaviour
 {
     float motivationMax = 100;
+    float energyMax = 100;
     public float motivation { get; private set; } = 100;
     public float energy { get; private set; } = 100;
 
+
+    [SerializeField] float highMotivationThresholdPercent = .7f;
+    [SerializeField] float lowMotivationThresholdPercent = .25f;
+
+    [SerializeField] float highMotivationEnergyCostMultMAX = .25f;
+    [SerializeField] float lowMotivationEnergyCostMultMAX = 2;
 
     public static PlayerStats Instance;
 
@@ -23,6 +31,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         motivation = motivationMax;
+        energy = energyMax;
     }
 
     public void ChangeMotivation(float value)
@@ -32,7 +41,52 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangeEnergy(float value)
     {
+        // if energy is being lost, high/low motivation multiplies the energy cost
+        if (Mathf.Sign(value) < 0) { value = CalculateMotivationInfluence(value); }
+
         energy += value;
+
     }
 
+    /// <summary>
+    /// adjusts energy cost up or down based on current motivation levels
+    /// </summary>
+    /// <param name="energyCost"></param>
+    /// <returns></returns>
+    private float CalculateMotivationInfluence(float energyCost)
+    {
+        // at low motivation, energy costs ramp up to a maximum multiplier.
+        // at high motivation, energy costs decrease to a minimum multiplier.
+
+        float adjustedEnergyCost = energyCost;
+
+        if (motivation < lowMotivationThresholdPercent * motivationMax)
+        {
+            float lowMotivationThreshold = lowMotivationThresholdPercent * motivationMax;
+            float interpValue = (lowMotivationThreshold - motivation) / lowMotivationThreshold;
+            adjustedEnergyCost *= Mathf.Lerp(1, lowMotivationEnergyCostMultMAX, interpValue);
+
+            /*
+            Debug.Log($"low motivation is making this cost more energy.\n" +
+                $"original cost: {energyCost}\n" +
+                $"adjusted cost: {adjustedEnergyCost}\n" +
+                $"coefficient: {Mathf.Lerp(1, lowMotivationEnergyCostMultMAX, interpValue)}");
+            */
+        }
+        else if (motivation > highMotivationThresholdPercent * motivationMax)
+        {
+            float highMotivationThreshold = highMotivationThresholdPercent * motivationMax;
+            float interpValue = (motivation - highMotivationThreshold) / (motivationMax - highMotivationThreshold);
+            adjustedEnergyCost *= Mathf.Lerp(1, highMotivationEnergyCostMultMAX, interpValue);
+
+            /*
+            Debug.Log($"high motivation is making this cost less energy.\n" +
+                $"original cost: {energyCost}\n" +
+                $"adjusted cost: {adjustedEnergyCost}\n" +
+                $"coefficient: {Mathf.Lerp(1, lowMotivationEnergyCostMultMAX, interpValue)}");
+            */
+        }
+
+        return adjustedEnergyCost;
+    }
 }

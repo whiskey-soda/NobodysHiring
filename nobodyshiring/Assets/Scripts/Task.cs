@@ -54,9 +54,9 @@ public class Task : MonoBehaviour
 
     void Work(float hours)
     {
-        float progressCoefficient = CalculateProgressCoefficient();
+        float progressMult = CalculateProgressMultiplier();
 
-        currentProgress += hours * progressCoefficient;
+        currentProgress += hours * progressMult;
 
         playerStats.ChangeMotivation(-motivationCostPerHour * hours);
         playerStats.ChangeEnergy(-energyCostPerHour * hours);
@@ -67,9 +67,9 @@ public class Task : MonoBehaviour
     /// based on the players skill levels and the tasks skill levels
     /// </summary>
     /// <returns></returns>
-    private float CalculateProgressCoefficient()
+    private float CalculateProgressMultiplier()
     {
-        float progressCoefficient = 1;
+        float progressMultiplier = 1;
 
         for (int i = 0; i < playerSkills.skills.Length; i++)
         {
@@ -94,11 +94,11 @@ public class Task : MonoBehaviour
                     progressMultAwarded = .5f;
                 }
 
-                progressCoefficient += Mathf.Sign(skillDiff) * progressMultAwarded;
+                progressMultiplier += Mathf.Sign(skillDiff) * progressMultAwarded;
 
             }
         }
 
-        return progressCoefficient;
+        return progressMultiplier;
     }
 }
