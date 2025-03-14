@@ -3,9 +3,9 @@ using UnityEngine.Rendering;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float motivationMax = 100;
-    public float motivation = 100;
-    public float energy = 100;
+    float motivationMax = 100;
+    public float motivation { get; private set; } = 100;
+    public float energy { get; private set; } = 100;
 
 
     public static PlayerStats Instance;
@@ -23,6 +23,16 @@ public class PlayerStats : MonoBehaviour
         }
 
         motivation = motivationMax;
+    }
+
+    public void ChangeMotivation(float value)
+    {
+        motivation += value;
+    }
+
+    public void ChangeEnergy(float value)
+    {
+        energy += value;
     }
 
 }

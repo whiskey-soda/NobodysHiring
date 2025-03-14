@@ -58,8 +58,8 @@ public class Task : MonoBehaviour
 
         currentProgress += hours * progressCoefficient;
 
-        playerStats.motivation -= motivationCostPerHour;
-        playerStats.energy -= energyCostPerHour;
+        playerStats.ChangeMotivation(-motivationCostPerHour * hours);
+        playerStats.ChangeEnergy(-energyCostPerHour * hours);
     }
 
     /// <summary>

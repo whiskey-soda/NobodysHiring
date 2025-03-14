@@ -44,7 +44,7 @@ public class MotivationDrain : MonoBehaviour
             drainAmount -= lifeFactors.factorValues[i] * factorWeights[i] * drainValue;
         }
 
-        playerStats.motivation -= drainAmount;
+        playerStats.ChangeMotivation(-drainAmount);
     }
 
 }

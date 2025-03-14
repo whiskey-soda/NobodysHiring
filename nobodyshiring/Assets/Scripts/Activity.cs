@@ -21,8 +21,8 @@ public class Activity : MonoBehaviour
     protected virtual void DoActivity()
     {
         time.PassTime(duration);
-        playerStats.motivation -= motivationCost;
-        playerStats.energy -= energyCost;
+        playerStats.ChangeMotivation(-motivationCost);
+        playerStats.ChangeEnergy(-energyCost);
     }
 
 }
