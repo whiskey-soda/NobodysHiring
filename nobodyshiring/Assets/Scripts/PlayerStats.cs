@@ -65,6 +65,11 @@ public class PlayerStats : MonoBehaviour
 
     }
 
+    public void SetEnergy(float value)
+    {
+        energy = value;
+    }
+
     /// <summary>
     /// adjusts energy cost up or down based on current motivation levels
     /// </summary>
