@@ -25,14 +25,18 @@ public class LifeFactors : MonoBehaviour
         }
     }
 
-    public void RaiseFactorCoefficient(LifeFactor factor, float value)
+    public void ChangeFactorCoefficient(LifeFactor factor, float value)
     {
         factorValues[(int)factor] += value;
 
-        // cap at 1
+        // clamp from 0-1
         if (factorValues[(int)factor] > 1)
         {
             factorValues[(int)factor] = 1;
+        }
+        else if (factorValues[(int)factor] < 0)
+        {
+            factorValues[(int)factor] = 0;
         }
     }
 

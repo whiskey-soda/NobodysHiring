@@ -28,4 +28,9 @@ public class PlayerSkills : MonoBehaviour
         }
     }
 
+    public void ChangeSkill(Skill skill, float value)
+    {
+        skills[(int)skill] += value;
+    }
+
 }

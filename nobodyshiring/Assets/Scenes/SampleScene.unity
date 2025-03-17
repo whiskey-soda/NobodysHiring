@@ -338,7 +338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1592837391}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Housekeeping, Assembly-CSharp
         m_MethodName: DoActivity
         m_Mode: 1
@@ -445,9 +445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Housekeeping
-
-'
+  m_text: Activity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1323,6 +1321,8 @@ MonoBehaviour:
   description: 
   motivationCost: 0
   energyCost: 0
+  lifeFactorChanges: []
+  skillChanges: []
 --- !u!4 &1484762818
 Transform:
   m_ObjectHideFlags: 0
@@ -1498,7 +1498,7 @@ GameObject:
   - component: {fileID: 1592837388}
   - component: {fileID: 1592837390}
   - component: {fileID: 1592837389}
-  - component: {fileID: 1592837391}
+  - component: {fileID: 1592837393}
   - component: {fileID: 1592837392}
   m_Layer: 5
   m_Name: Housekeeping
@@ -1568,24 +1568,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592837387}
   m_CullTransparentMesh: 1
---- !u!114 &1592837391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592837387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ebc911c721dc7d478769f0ff9708cd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activityName: Housekeeping
-  duration: 1.5
-  description: Clean the house.
-  motivationCost: 10
-  energyCost: 8
-  cleanlinessIncrease: 0.2
 --- !u!114 &1592837392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,10 +1580,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c053b1412c714d94ba4bc73cfef75dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activity: {fileID: 1592837391}
+  activity: {fileID: 1592837393}
   nameText: {fileID: 421751168}
   durationText: {fileID: 710688274}
   descriptionText: {fileID: 260251397}
+--- !u!114 &1592837393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592837387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02172ca7a65b8d46bcbfa13f3105ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activityName: Housekeeping
+  duration: 1.5
+  description: Clean the house.
+  motivationCost: 10
+  energyCost: 8
+  lifeFactorChanges:
+  - lifeFactor: 1
+    value: 0.2
+  skillChanges: []
 --- !u!1 &1624411700
 GameObject:
   m_ObjectHideFlags: 0
