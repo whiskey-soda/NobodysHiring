@@ -30,6 +30,9 @@ public class Activity : MonoBehaviour
     LifeFactors lifeFactors;
 
     [Space]
+    [SerializeField] float motivationGain;
+
+    [Space]
     [SerializeField] List<LifeFactorChange> lifeFactorChanges;
     [SerializeField] List<SkillChange> skillChanges;
 
@@ -46,6 +49,8 @@ public class Activity : MonoBehaviour
         time.PassTime(duration);
         playerStats.ChangeMotivation(-motivationCost);
         playerStats.ChangeEnergy(-energyCost);
+
+        playerStats.ChangeMotivation(motivationGain);
 
         foreach (LifeFactorChange change in lifeFactorChanges)
         {
