@@ -41,7 +41,7 @@ public class MotivationDrain : MonoBehaviour
         float drainAmount = drainValue;
         for (int i = 0; i < lifeFactors.factorValues.Length; i++)
         {
-            drainAmount -= lifeFactors.factorValues[i] * factorWeights[i] * drainValue;
+            drainAmount -= (1 - lifeFactors.factorValues[i]) * factorWeights[i] * drainValue;
         }
 
         playerStats.ChangeMotivation(-drainAmount);

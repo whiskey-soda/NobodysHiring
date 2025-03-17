@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class Activity : MonoBehaviour
 {
-    [SerializeField] float duration;
+    public string activityName;
+    public float duration;
+    public string description;
 
     [SerializeField] float motivationCost;
     [SerializeField] float energyCost;
 
     TimeTracking time;
     PlayerStats playerStats;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,8 +20,7 @@ public class Activity : MonoBehaviour
         playerStats = PlayerStats.Instance;
     }
 
-    [ContextMenu("DoActivity")]
-    protected virtual void DoActivity()
+    public virtual void DoActivity()
     {
         time.PassTime(duration);
         playerStats.ChangeMotivation(-motivationCost);
