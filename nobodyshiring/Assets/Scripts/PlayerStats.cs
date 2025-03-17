@@ -4,6 +4,8 @@ using UnityEngine.Rendering;
 
 public class PlayerStats : MonoBehaviour
 {
+    SleepManager sleepManager;
+
     public float motivationMax { get; private set; } = 100;
     public float energyMax { get; private set; } = 100;
 
@@ -51,6 +53,11 @@ public class PlayerStats : MonoBehaviour
         highEnergyThreshold = highEnergyThresholdPercent * energyMax;
     }
 
+    private void Start()
+    {
+        sleepManager = SleepManager.Instance;
+    }
+
     public void ChangeMotivation(float value)
     {
         motivation += value;
@@ -62,6 +69,11 @@ public class PlayerStats : MonoBehaviour
         if (Mathf.Sign(value) < 0) { value = CalculateMotivationInfluence(value); }
 
         energy += value;
+
+        if (energy <= 0)
+        {
+            sleepManager.PassOut();
+        }
 
     }
 
