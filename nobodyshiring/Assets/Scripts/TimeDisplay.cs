@@ -32,6 +32,8 @@ public class TimeDisplay : MonoBehaviour
         else if (hour == 12) { ampm = "pm"; } // 12 noon
         else if ( hour == 0 ) { hour = 12; } // 12 midnight
 
-        timeText.text = $"{hour}:{minute}{ampm}";
+        timeText.text = $"{hour}:{minute}{ampm}\n" +
+            $"day: {time.day}\n" +
+            $"month: {time.month}";
     }
 }
