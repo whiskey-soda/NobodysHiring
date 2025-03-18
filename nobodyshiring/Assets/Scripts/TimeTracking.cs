@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimeTracking : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class TimeTracking : MonoBehaviour
     public float currentHour = 0;
     public uint day { get; private set; } = 1;
     public uint month { get; private set; } = 1;
+
+    public UnityEvent monthEnd;
 
     public static TimeTracking Instance;
 
@@ -49,6 +52,8 @@ public class TimeTracking : MonoBehaviour
         { 
             month = 1;
         }
+
+        monthEnd.Invoke();
     }
 
 }
