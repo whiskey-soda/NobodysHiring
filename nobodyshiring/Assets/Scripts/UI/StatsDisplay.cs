@@ -24,7 +24,7 @@ public class StatsDisplay : MonoBehaviour
     void Update()
     {
         statsText.text = $"stats\n" +
-            $"motivation: {playerStats.motivation}\n" +
-            $"energy:  {playerStats.energy}\n";
+            $"motivation: {System.Math.Round(playerStats.motivation)}\n" +
+            $"energy:  {System.Math.Round(playerStats.energy)}\n";
     }
 }

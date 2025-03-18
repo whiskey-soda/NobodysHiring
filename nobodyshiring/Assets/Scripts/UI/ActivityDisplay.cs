@@ -28,21 +28,21 @@ public class ActivityDisplay : MonoBehaviour
         nameText.text = activity.activityName;
         //durationText.text = $"Duration: {activity.duration} hours";
         descriptionText.text = $"Description: {activity.description}";
-        minDurationText.text = activity.minDuration.ToString();
+        minDurationText.text = System.Math.Round(activity.minDuration,2).ToString();
 
         durationSlider.minValue = activity.minDuration;
-        durationText.text = "Duration: " + durationSlider.value.ToString();
+        durationText.text = "Duration: " + System.Math.Round(durationSlider.value, 2).ToString();
 
         if (activity.maxDuration == 0)
         {
             float hoursUntilNoEnergy = playerStats.energy / activity.energyCost;
             durationSlider.maxValue = hoursUntilNoEnergy;
-            maxDurationText.text = hoursUntilNoEnergy.ToString();
+            maxDurationText.text = System.Math.Round(hoursUntilNoEnergy, 2).ToString();
         }
         else
         {
             durationSlider.maxValue = activity.maxDuration;
-            maxDurationText.text = activity.maxDuration.ToString();
+            maxDurationText.text = System.Math.Round(activity.maxDuration, 2).ToString();
         }
     }
 }

@@ -26,7 +26,7 @@ public class SkillsDisplay : MonoBehaviour
         statsText.text = $"skills\n";
         for (int i = 0; i < playerSkills.skills.Length; i++)
         {
-            statsText.text += $"{(Skill)i}: {playerSkills.skills[i]}\n";
+            statsText.text += $"{(Skill)i}: {System.Math.Round(playerSkills.skills[i], 2)}\n";
         }
     }
 }

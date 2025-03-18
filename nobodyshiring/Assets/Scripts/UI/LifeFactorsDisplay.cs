@@ -23,7 +23,7 @@ public class LifeFactorsDisplay : MonoBehaviour
         factorsText.text = $"life factors\n";
         for (int i = 0; i < factors.factorValues.Length; i++)
         {
-            factorsText.text += $"{(LifeFactor)i}: {factors.factorValues[i]}\n";
+            factorsText.text += $"{(LifeFactor)i}: {System.Math.Round(factors.factorValues[i], 2)}\n";
         }
     }
 }

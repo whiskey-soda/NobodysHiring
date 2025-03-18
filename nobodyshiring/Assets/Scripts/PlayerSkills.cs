@@ -12,6 +12,7 @@ public class PlayerSkills : MonoBehaviour
 {
     public float[] skills = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+    float maxSkillLevel = 4;
 
     public static PlayerSkills Instance;
 
@@ -31,6 +32,12 @@ public class PlayerSkills : MonoBehaviour
     public void ChangeSkill(Skill skill, float value)
     {
         skills[(int)skill] += value;
+
+        // cap skill level
+        if (skills[(int)skill] > maxSkillLevel)
+        {
+            skills[(int)skill] = maxSkillLevel;
+        }
     }
 
 }
