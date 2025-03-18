@@ -121,15 +121,15 @@ public class Task : MonoBehaviour
                 float skillDiff = playerSkills.skills[i] - recommededSkillLevels[i];
                 float progressMultAwarded = 0;
 
-                if (Mathf.Abs(skillDiff) >= 3)
+                if (Mathf.Abs(skillDiff) > 2)
                 {
                     progressMultAwarded = extremeSkillDiffMult;
                 }
-                else if (Mathf.Abs(skillDiff) >= 2)
+                else if (Mathf.Abs(skillDiff) > 1)
                 {
                     progressMultAwarded = highSkillDiffMult;
                 }
-                else if (Mathf.Abs(skillDiff) >= 1)
+                else if (Mathf.Abs(skillDiff) > 0)
                 {
                     progressMultAwarded = lowSkillDiffMult;
                 }

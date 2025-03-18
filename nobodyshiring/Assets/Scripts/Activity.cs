@@ -19,11 +19,15 @@ struct LifeFactorChange
 public class Activity : MonoBehaviour
 {
     public string activityName;
-    public float duration;
     public string description;
 
+    // EVERY CHANGE IS PER HOUR
     [SerializeField] float motivationCost;
-    [SerializeField] float energyCost;
+    public float energyCost;
+
+    [SerializeField]
+    public float minDuration = 0;
+    public float maxDuration = 0; // 0 means uncapped
 
     TimeTracking time;
     PlayerStats playerStats;
@@ -31,6 +35,7 @@ public class Activity : MonoBehaviour
 
     [Space]
     [SerializeField] float motivationGain;
+    [SerializeField] float energyGain;
 
     [Space]
     [SerializeField] List<LifeFactorChange> lifeFactorChanges;
@@ -44,22 +49,27 @@ public class Activity : MonoBehaviour
         lifeFactors = LifeFactors.Instance;
     }
 
-    public virtual void DoActivity()
+    public virtual void DoActivity(float duration)
     {
-        time.PassTime(duration);
-        playerStats.ChangeMotivation(-motivationCost);
-        playerStats.ChangeEnergy(-energyCost);
+        // clamp duration to min/max values
+        if (duration < minDuration) { duration = minDuration; }
+        else if (maxDuration != 0 && duration > maxDuration) { duration = maxDuration; }
 
-        playerStats.ChangeMotivation(motivationGain);
+        time.PassTime(duration);
+        playerStats.ChangeMotivation(-motivationCost * duration);
+        playerStats.ChangeEnergy(-energyCost * duration);
+
+        playerStats.ChangeMotivation(motivationGain * duration);
+        playerStats.ChangeEnergy(energyGain * duration);
 
         foreach (LifeFactorChange change in lifeFactorChanges)
         {
-            lifeFactors.ChangeFactorCoefficient(change.lifeFactor, change.value);
+            lifeFactors.ChangeFactorCoefficient(change.lifeFactor, change.value * duration);
         }
 
         foreach (SkillChange change in skillChanges)
         {
-            PlayerSkills.Instance.ChangeSkill(change.skill, change.value);
+            PlayerSkills.Instance.ChangeSkill(change.skill, change.value * duration);
         }
     }
 
