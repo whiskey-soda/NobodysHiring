@@ -5,6 +5,7 @@ public class DayEnd : MonoBehaviour
 {
     [SerializeField] float energyBoostThresholdPercent = .3f;
     [SerializeField] float energyBoostAmount = 20;
+    [SerializeField] float motivationBoostAmount = 8;
 
     SleepManager sleep;
     PlayerStats playerStats;
@@ -31,14 +32,15 @@ public class DayEnd : MonoBehaviour
     }
     public void EndDay(float sleepHours)
     {
-        bool energyBoosted = playerStats.energy > energyBoostThresholdPercent * playerStats.energyMax;
+        bool significantEnergyRemaining = playerStats.energy > energyBoostThresholdPercent * playerStats.energyMax;
 
         sleep.Sleep(sleepHours);
 
         // give energy boost based on if energy was left over on previous day
-        if (energyBoosted)
+        if (significantEnergyRemaining)
         {
             playerStats.ChangeEnergy(energyBoostAmount);
+            playerStats.ChangeMotivation(motivationBoostAmount);
         }
     }
 
