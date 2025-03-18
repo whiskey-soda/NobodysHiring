@@ -1,0 +1,46 @@
+using UnityEditor.ShaderGraph.Internal;
+using UnityEngine;
+
+public class DayEnd : MonoBehaviour
+{
+    [SerializeField] float energyBoostThresholdPercent = .3f;
+    [SerializeField] float energyBoostAmount = 20;
+
+    SleepManager sleep;
+    PlayerStats playerStats;
+
+    public static DayEnd Instance;
+    private void Awake()
+    {
+        // singleton code
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        sleep = SleepManager.Instance;
+        playerStats = PlayerStats.Instance;
+    }
+    public void EndDay(float sleepHours)
+    {
+        bool energyBoosted = playerStats.energy > energyBoostThresholdPercent * playerStats.energyMax;
+
+        sleep.Sleep(sleepHours);
+
+        // give energy boost based on if energy was left over on previous day
+        if (energyBoosted)
+        {
+            playerStats.ChangeEnergy(energyBoostAmount);
+        }
+    }
+
+
+}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SleepManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class SleepManager : MonoBehaviour
     [SerializeField] float tiredEnergy = 70;
     [Space]
     [SerializeField] float passOutDuration = 11;
+
+    public UnityEvent PassedOut;
 
     private void Awake()
     {
@@ -65,6 +68,8 @@ public class SleepManager : MonoBehaviour
     {
         time.PassTime(passOutDuration);
         stats.SetEnergy(tiredEnergy);
+
+        PassedOut.Invoke();
     }
 
 }
