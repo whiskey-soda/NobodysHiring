@@ -1095,6 +1095,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHour: 0
+  monthEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &513907918
 Transform:
   m_ObjectHideFlags: 0
@@ -1127,6 +1130,7 @@ MonoBehaviour:
   housingQualityWeight: 0.2
   savingsAmountWeight: 0.15
   workstationQualityWeight: 0.1
+  dailyDrainMax: 10
 --- !u!114 &513907920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3716,6 +3720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyBoostThresholdPercent: 0.3
   energyBoostAmount: 20
+  motivationBoostAmount: 8
 --- !u!4 &1468788212
 Transform:
   m_ObjectHideFlags: 0
@@ -4887,6 +4892,7 @@ GameObject:
   - component: {fileID: 2054782392}
   - component: {fileID: 2054782391}
   - component: {fileID: 2054782390}
+  - component: {fileID: 2054782393}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4950,6 +4956,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2054782393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054782389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bbb713fbbec27845b4a93b67c2f1ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2129178884
 GameObject:
   m_ObjectHideFlags: 0
