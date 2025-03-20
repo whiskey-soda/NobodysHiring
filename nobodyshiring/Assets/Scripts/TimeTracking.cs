@@ -12,6 +12,13 @@ public class TimeTracking : MonoBehaviour
 
     public static TimeTracking Instance;
 
+    MotivationDrain motivationDrain;
+
+    private void Start()
+    {
+        motivationDrain = MotivationDrain.Instance;
+    }
+
     private void Awake()
     {
         // singleton code
@@ -33,6 +40,10 @@ public class TimeTracking : MonoBehaviour
             currentHour = currentHour - 24;
             IncrementDay();
         }
+
+        // apply passive motivation drain per hour passed
+        motivationDrain.ApplyMotivationDrain(time);
+
     }
 
     void IncrementDay()

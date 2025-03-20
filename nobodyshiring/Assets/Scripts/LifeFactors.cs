@@ -8,7 +8,7 @@ public enum LifeFactor
 
 public class LifeFactors : MonoBehaviour
 {
-    public float[] factorValues = { 0, 0, 0, 0, 0 };
+    public float[] factorValues = { 0, 0, 0, 0, 0 }; // 0 is bad, 1 is good
 
     public static LifeFactors Instance;
 

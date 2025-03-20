@@ -10,12 +10,29 @@ public class MotivationDrain : MonoBehaviour
 
     float[] factorWeights = new float[5];
 
+    [SerializeField] float dailyDrainMax = 10;
+    float hourlyDrainMax;
+
     PlayerStats playerStats;
     LifeFactors lifeFactors;
 
+    public static MotivationDrain Instance;
+
     private void Awake()
     {
+        // singleton code
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
+
         SetWeights();
+
+        hourlyDrainMax = dailyDrainMax / 24;
     }
 
     private void Start()
@@ -36,13 +53,21 @@ public class MotivationDrain : MonoBehaviour
         factorWeights = _factorWeights;
     }
 
-    void ApplyMotivationDrain(float drainValue)
+    /// <summary>
+    /// reduces motivation for every hour passed. drain value is reduced according to life factors
+    /// </summary>
+    /// <param name="hours"></param>
+    public void ApplyMotivationDrain(float hours)
     {
-        float drainAmount = drainValue;
+        float drainAmount = hours * hourlyDrainMax;
+
+        // subtracts different amounts from the drain max value depending on life factors
         for (int i = 0; i < lifeFactors.factorValues.Length; i++)
         {
-            drainAmount -= (1 - lifeFactors.factorValues[i]) * factorWeights[i] * drainValue;
+            drainAmount -= (lifeFactors.factorValues[i]) * factorWeights[i] * hours * hourlyDrainMax;
         }
+
+        Debug.Log($"{hours} hours passed. motivation drained by {drainAmount}");
 
         playerStats.ChangeMotivation(-drainAmount);
     }
