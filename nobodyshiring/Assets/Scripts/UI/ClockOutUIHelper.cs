@@ -24,6 +24,7 @@ public class ClockOutUIHelper : MonoBehaviour
     public void EndDay()
     {
         dayEnd.EndDay(float.Parse(sleepHrsInput.text));
+        ShowClockedInActivities();
     }
 
     public void ShowClockedOutActivities()

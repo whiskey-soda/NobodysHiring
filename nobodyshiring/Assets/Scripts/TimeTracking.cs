@@ -8,6 +8,9 @@ public class TimeTracking : MonoBehaviour
     public uint day { get; private set; } = 1;
     public uint month { get; private set; } = 1;
 
+    float daysInMonth = 30;
+
+    public UnityEvent dayEnd;
     public UnityEvent monthEnd;
 
     public static TimeTracking Instance;
@@ -49,11 +52,13 @@ public class TimeTracking : MonoBehaviour
     void IncrementDay()
     {
         day ++;
-        if (day > 30)
+        if (day > daysInMonth)
         {
             IncrementMonth();
             day = 1;
         }
+
+        dayEnd.Invoke();
     }
 
     void IncrementMonth()

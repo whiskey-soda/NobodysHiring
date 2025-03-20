@@ -67,7 +67,7 @@ public class MotivationDrain : MonoBehaviour
             drainAmount -= (lifeFactors.factorValues[i]) * factorWeights[i] * hours * hourlyDrainMax;
         }
 
-        Debug.Log($"{hours} hours passed. motivation drained by {drainAmount}");
+        //Debug.Log($"{hours} hours passed. motivation drained by {drainAmount}");
 
         playerStats.ChangeMotivation(-drainAmount);
     }

@@ -25,6 +25,11 @@ public class LifeFactors : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// adds a value to a given factor's value
+    /// </summary>
+    /// <param name="factor"></param>
+    /// <param name="value"></param>
     public void ChangeFactorCoefficient(LifeFactor factor, float value)
     {
         factorValues[(int)factor] += value;

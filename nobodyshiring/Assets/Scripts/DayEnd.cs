@@ -30,6 +30,11 @@ public class DayEnd : MonoBehaviour
         sleep = SleepManager.Instance;
         playerStats = PlayerStats.Instance;
     }
+
+    /// <summary>
+    /// ends the day by sleeping for a set amount of hours
+    /// </summary>
+    /// <param name="sleepHours"></param>
     public void EndDay(float sleepHours)
     {
         bool significantEnergyRemaining = playerStats.energy > energyBoostThresholdPercent * playerStats.energyMax;

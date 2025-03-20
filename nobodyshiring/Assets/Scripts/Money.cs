@@ -5,7 +5,7 @@ public class Money : MonoBehaviour
 
     public static Money Instance;
 
-    float money;
+    public float money { get; private set; }
 
     private void Awake()
     {
