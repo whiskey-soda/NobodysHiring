@@ -43,7 +43,7 @@ public class Task : MonoBehaviour
     PlayerSkills playerSkills;
     TimeTracking time;
 
-    private void Start()
+    protected virtual void Start()
     {
         playerStats = PlayerStats.Instance;
         playerSkills = PlayerSkills.Instance;
