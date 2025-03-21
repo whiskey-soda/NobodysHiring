@@ -5,6 +5,7 @@ public class Task : MonoBehaviour
 {
     [SerializeField] float progressMax;
     [SerializeField] float currentProgress;
+    public bool complete { get; private set; } = false;
     [Space]
 
     [SerializeField] float motivationCostPerHour = 10;
@@ -40,16 +41,24 @@ public class Task : MonoBehaviour
 
     PlayerStats playerStats;
     PlayerSkills playerSkills;
+    TimeTracking time;
 
     private void Start()
     {
         playerStats = PlayerStats.Instance;
         playerSkills = PlayerSkills.Instance;
+        time = TimeTracking.Instance;
     }
 
     private void Awake()
     {
         SetSkillRecs();
+    }
+
+    [ContextMenu("work 1h")]
+    public void work1h()
+    {
+        Work(1);
     }
 
     /// <summary>
@@ -66,18 +75,48 @@ public class Task : MonoBehaviour
         recommededSkillLevels = _recommendedSkillLevels;
     }
 
-    [ContextMenu("work 1 h")]
-    void work1h()
-    {
-        Work(1);
-    }
-
+    /// <summary>
+    /// adds progress with a multiplier calculated from various stats
+    /// </summary>
+    /// <param name="hours"></param>
     void Work(float hours)
     {
-        currentProgress += hours * CalculateProgressMult();
+        float progressMult = CalculateProgressMult();
+        float progressCompleted = hours * progressMult;
+
+        // overflow prevention. stops task early (when it is completed) if progress overflows
+        // takes the overflow progress, divides it by the multiplier to get the hours, and rounds up to get duration
+        if (currentProgress + progressCompleted > progressMax)
+        {
+            hours = ((currentProgress + progressCompleted) - progressMax) / progressMult;
+            hours = Mathf.Ceil(hours);
+
+            currentProgress = progressMax; //set progress to max
+        }
+        else
+        {
+            // add progress to current progress
+            currentProgress += progressCompleted;
+        }
+
 
         playerStats.ChangeMotivation(-motivationCostPerHour * hours);
         playerStats.ChangeEnergy(-energyCostPerHour * hours);
+
+        time.PassTime(hours);
+
+        if (currentProgress >= progressMax)
+        {
+            Complete();
+        }
+    }
+
+    /// <summary>
+    /// marks this task as complete
+    /// </summary>
+    protected virtual void Complete()
+    {
+        complete = true;
     }
 
     /// <summary>
