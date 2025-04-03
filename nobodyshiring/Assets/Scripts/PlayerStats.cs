@@ -29,6 +29,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float highMotivationEnergyCostMultMAX = .25f;
     [SerializeField] float lowMotivationEnergyCostMultMAX = 2;
 
+    [Space]
+    [SerializeField] float passOutEnergyThreshold = 5;
+
     public static PlayerStats Instance;
 
     private void Awake()
@@ -70,7 +73,7 @@ public class PlayerStats : MonoBehaviour
 
         energy += value;
 
-        if (energy <= 0)
+        if (energy <= passOutEnergyThreshold)
         {
             sleepManager.PassOut();
         }
@@ -99,7 +102,7 @@ public class PlayerStats : MonoBehaviour
             float interpValue = (lowMotivationThreshold - motivation) / lowMotivationThreshold;
             adjustedEnergyCost *= Mathf.Lerp(1, lowMotivationEnergyCostMultMAX, interpValue);
 
-            /*
+            /* 
             Debug.Log($"low motivation is making this cost more energy.\n" +
                 $"original cost: {energyCost}\n" +
                 $"adjusted cost: {adjustedEnergyCost}\n" +

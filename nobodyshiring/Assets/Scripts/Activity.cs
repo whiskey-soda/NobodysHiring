@@ -42,7 +42,7 @@ public class Activity : MonoBehaviour
     [SerializeField] List<SkillChange> skillChanges;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
         time = TimeTracking.Instance;
         playerStats = PlayerStats.Instance;

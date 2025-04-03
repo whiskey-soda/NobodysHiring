@@ -5,8 +5,12 @@ using System.Linq;
 
 public class Gig : MonoBehaviour
 {
+    [Space]
+    public string gigName;
+
     public List<GigStage> stages = new List<GigStage>();
     public GigStage currentStage;
+
 
     private void Awake()
     {

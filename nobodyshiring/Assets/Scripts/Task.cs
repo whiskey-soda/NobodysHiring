@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class Task : MonoBehaviour
 {
-    [SerializeField] float progressMax;
-    [SerializeField] float currentProgress;
-    public bool complete { get; private set; } = false;
+    public string taskName;
+
+    public float progressMax;
+    public float currentProgress;
+    public bool complete { get; protected set; } = false;
     [Space]
 
     [SerializeField] float motivationCostPerHour = 10;
-    [SerializeField] float energyCostPerHour = 25;
+    public float energyCostPerHour = 25;
     [Space]
 
     [SerializeField] float recommendedCoding;
@@ -43,6 +45,7 @@ public class Task : MonoBehaviour
     PlayerSkills playerSkills;
     TimeTracking time;
 
+
     protected virtual void Start()
     {
         playerStats = PlayerStats.Instance;
@@ -53,12 +56,6 @@ public class Task : MonoBehaviour
     private void Awake()
     {
         SetSkillRecs();
-    }
-
-    [ContextMenu("work 1h")]
-    public void work1h()
-    {
-        Work(1);
     }
 
     /// <summary>
@@ -79,7 +76,7 @@ public class Task : MonoBehaviour
     /// adds progress with a multiplier calculated from various stats
     /// </summary>
     /// <param name="hours"></param>
-    void Work(float hours)
+    public void Work(float hours)
     {
         float progressMult = CalculateProgressMult();
         float progressCompleted = hours * progressMult;

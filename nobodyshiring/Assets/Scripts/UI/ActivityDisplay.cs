@@ -26,7 +26,6 @@ public class ActivityDisplay : MonoBehaviour
     void Update()
     {
         nameText.text = activity.activityName;
-        //durationText.text = $"Duration: {activity.duration} hours";
         descriptionText.text = $"Description: {activity.description}";
         minDurationText.text = System.Math.Round(activity.minDuration,2).ToString();
 

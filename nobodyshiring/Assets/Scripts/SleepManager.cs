@@ -70,6 +70,8 @@ public class SleepManager : MonoBehaviour
         stats.SetEnergy(tiredEnergy);
 
         PassedOut.Invoke();
+
+        Debug.Log($"passed out for {passOutDuration} hours!");
     }
 
 }

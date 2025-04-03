@@ -3,7 +3,7 @@ using UnityEngine;
 public class GigStage : Task
 {
     [Space]
-    [SerializeField] float pay;
+    public float pay;
 
     /// <summary>
     /// pays the player for the completed gig stage
