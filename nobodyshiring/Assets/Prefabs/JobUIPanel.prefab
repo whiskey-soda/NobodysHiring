@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskName: Job
-  progressMax: 100
+  progressMax: 140
   currentProgress: 0
   motivationCostPerHour: 10
   energyCostPerHour: 25
@@ -799,7 +799,7 @@ MonoBehaviour:
   recommendedGameMaker: 0
   recommendedAudio: 0
   recommendedArt: 0
-  pay: 1000
+  pay: 7000
 --- !u!114 &5418957538215009603
 MonoBehaviour:
   m_ObjectHideFlags: 0
