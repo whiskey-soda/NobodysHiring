@@ -14,6 +14,7 @@ public class Task : MonoBehaviour
     public float energyCostPerHour = 25;
     [Space]
 
+    // used for config and inspector editing
     [SerializeField] float recommendedCoding;
     [SerializeField] float recommendedNetworking;
     [SerializeField] float recommendedMarketing;
@@ -24,10 +25,9 @@ public class Task : MonoBehaviour
     [SerializeField] float recommendedGameMaker;
     [SerializeField] float recommendedAudio;
     [SerializeField] float recommendedArt;
-    [Space]
-    [Space]
 
-    float[] recommededSkillLevels = new float[10];
+    // used for actual processing
+    public float[] recommededSkillLevels { get; private set; } = new float[10];
 
 
     float lowSkillDiffMult = .3f;
