@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Inbox : MonoBehaviour
 {
-    public List<WorkOffer> AvailableOffers { get; private set; } = new List<WorkOffer>();
+    public List<WorkOffer> availableOffers { get; private set; } = new List<WorkOffer>();
     List<WorkOffer> upcomingOffers = new List<WorkOffer>();
 
 
@@ -29,12 +29,12 @@ public class Inbox : MonoBehaviour
 
     void UpdateInbox()
     {
-        foreach (WorkOffer offer in AvailableOffers)
+        foreach (WorkOffer offer in availableOffers)
         {
             // all jobs removed the next day
             if (offer is JobOffer)
             {
-                AvailableOffers.Remove(offer);
+                availableOffers.Remove(offer);
             }
             // gigs remain for multiple days
             else if (offer is GigOffer)
@@ -42,7 +42,7 @@ public class Inbox : MonoBehaviour
                 (offer as GigOffer).daysUntilRemoval--;
                 if ((offer as GigOffer).daysUntilRemoval <= 0)
                 {
-                    AvailableOffers.Remove(offer);
+                    availableOffers.Remove(offer);
                 }
             }
         }
@@ -54,7 +54,7 @@ public class Inbox : MonoBehaviour
             offer.daysUntilArrival--;
             if (offer.daysUntilArrival <= 0)
             {
-                AvailableOffers.Add(offer);
+                availableOffers.Add(offer);
                 upcomingOffers.Remove(offer);
             }
         }
@@ -63,12 +63,36 @@ public class Inbox : MonoBehaviour
 
     public void AddWorkOffer(JobOffer newJobOffer)
     {
-        AvailableOffers.Add(newJobOffer);
+        availableOffers.Add(newJobOffer);
     }
 
     public void AddWorkOffer(GigOffer newGigOffer)
     {
-        AvailableOffers.Add(newGigOffer);
+        availableOffers.Add(newGigOffer);
+    }
+
+    public void AcceptOffer(GigOffer gigToAccept)
+    {
+        // do nothing if gig is not in inbox
+        if (!availableOffers.Contains(gigToAccept)) { return; }
+
+        // if adding the work was successful, delete the offer
+        if (WorkManager.Instance.AddWork(gigToAccept.gig))
+        {
+            availableOffers.Remove((WorkOffer)gigToAccept);
+        }
+    }
+
+    public void AcceptOffer(JobOffer jobToAccept)
+    {
+        // do nothing if gig is not in inbox
+        if (!availableOffers.Contains(jobToAccept)) { return; }
+
+        // if adding the work was successful, delete the offer
+        if (WorkManager.Instance.AddWork(jobToAccept.job))
+        {
+            availableOffers.Remove((WorkOffer)jobToAccept);
+        }
     }
 
 }

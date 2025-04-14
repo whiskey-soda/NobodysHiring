@@ -787,8 +787,6 @@ MonoBehaviour:
   taskName: Job
   progressMax: 140
   currentProgress: 0
-  motivationCostPerHour: 10
-  energyCostPerHour: 25
   recommendedCoding: 0
   recommendedNetworking: 0
   recommendedMarketing: 0
@@ -816,7 +814,7 @@ MonoBehaviour:
   workButton: {fileID: 3499752369458600936}
   nameText: {fileID: 7699242036398458141}
   progressText: {fileID: 4522272907701393905}
-  payText: {fileID: 0}
+  payText: {fileID: 4639890428632543377}
   minDurationText: {fileID: 8213919926903299885}
   maxDurationText: {fileID: 8672447848089822733}
   durationText: {fileID: 1797832795601140947}

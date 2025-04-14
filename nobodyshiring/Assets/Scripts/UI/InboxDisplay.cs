@@ -38,7 +38,7 @@ public class InboxDisplay : MonoBehaviour
 
     public void PopulateInboxMenu()
     {
-        foreach (WorkOffer offer in inbox.AvailableOffers)
+        foreach (WorkOffer offer in inbox.availableOffers)
         {
             CreateWorkOfferUIPanel(offer);
         }

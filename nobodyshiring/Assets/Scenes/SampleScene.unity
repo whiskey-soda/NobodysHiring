@@ -1920,7 +1920,6 @@ GameObject:
   - component: {fileID: 513907920}
   - component: {fileID: 513907921}
   - component: {fileID: 513907922}
-  - component: {fileID: 513907923}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2048,22 +2047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2820f0a3278c2c44b8981a0d0c1f6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &513907923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513907915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c654a3e039e01241bf924f67bc1eb48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gigOfferDaysToArriveRange: 0000000000000000
-  jobOfferDaysToArriveRange: 0000000000000000
-  jobs: []
-  gigs: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6638,6 +6621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550475747}
+  - component: {fileID: 1550475748}
   m_Layer: 0
   m_Name: WORK
   m_TagString: Untagged
@@ -6662,6 +6646,22 @@ Transform:
   - {fileID: 2107713397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1550475748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550475746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c654a3e039e01241bf924f67bc1eb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gigOfferDaysToArriveRange: 0000000000000000
+  jobOfferDaysToArriveRange: 0000000000000000
+  jobs: []
+  gigs: []
 --- !u!1 &1554676402
 GameObject:
   m_ObjectHideFlags: 0
