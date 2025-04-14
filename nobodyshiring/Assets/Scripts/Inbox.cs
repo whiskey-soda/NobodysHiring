@@ -1,32 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkOffer
-{
-    public int daysUntilArrival;
-}
-public class JobOffer : WorkOffer
-{
-    public Job job;
-
-    public JobOffer(Job job, int daysUntilArrival)
-    {
-        this.job = job;
-        this.daysUntilArrival = daysUntilArrival;
-    }
-}
-public class GigOffer : WorkOffer
-{
-    public Gig gig;
-    public int daysUntilRemoval = 2;
-
-    public GigOffer(Gig gig, int daysUntilArrival)
-    {
-        this.gig = gig;
-        this.daysUntilRemoval = daysUntilArrival;
-    }
-}
-
 public class Inbox : MonoBehaviour
 {
     public List<WorkOffer> AvailableOffers { get; private set; } = new List<WorkOffer>();
@@ -87,14 +61,14 @@ public class Inbox : MonoBehaviour
 
     }
 
-    public void AddWorkOffer(Job job, int daysUntilArrival)
+    public void AddWorkOffer(JobOffer newJobOffer)
     {
-        AvailableOffers.Add(new JobOffer(job, daysUntilArrival));
+        AvailableOffers.Add(newJobOffer);
     }
 
-    public void AddWorkOffer(Gig gig, int daysUntilArrival)
+    public void AddWorkOffer(GigOffer newGigOffer)
     {
-        AvailableOffers.Add(new GigOffer(gig, daysUntilArrival));
+        AvailableOffers.Add(newGigOffer);
     }
 
 }
