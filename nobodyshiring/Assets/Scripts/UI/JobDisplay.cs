@@ -37,11 +37,13 @@ public class JobDisplay : MonoBehaviour
         minDurationText.text = "0";
         durationText.text = "Duration: " + System.Math.Round(durationSlider.value, 2).ToString();
 
+        /*
         // set max duration on the slider to maximum hours before passing out
         float hoursUntilNoEnergy = playerStats.energy / job.energyCostPerHour;
 
         durationSlider.maxValue = hoursUntilNoEnergy;
         maxDurationText.text = System.Math.Round(hoursUntilNoEnergy, 2).ToString();
+        */
 
         // button only interactable if job is incomplete
         if (!job.complete)

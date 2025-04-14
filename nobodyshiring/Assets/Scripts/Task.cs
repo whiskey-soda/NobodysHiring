@@ -10,10 +10,6 @@ public class Task : MonoBehaviour
     public bool complete { get; protected set; } = false;
     [Space]
 
-    [SerializeField] float motivationCostPerHour = 10;
-    public float energyCostPerHour = 25;
-    [Space]
-
     // used for config and inspector editing
     [SerializeField] float recommendedCoding;
     [SerializeField] float recommendedNetworking;
@@ -95,12 +91,6 @@ public class Task : MonoBehaviour
             // add progress to current progress
             currentProgress += progressCompleted;
         }
-
-
-        playerStats.ChangeMotivation(-motivationCostPerHour * hours);
-        playerStats.ChangeEnergy(-energyCostPerHour * hours);
-
-        time.PassTime(hours);
 
         if (currentProgress >= progressMax)
         {

@@ -39,10 +39,10 @@ public class GigDisplay : MonoBehaviour
         durationText.text = "Duration: " + System.Math.Round(durationSlider.value, 2).ToString();
 
         // set max duration on the slider to maximum hours before passing out
-        float hoursUntilNoEnergy = playerStats.energy / gig.currentStage.energyCostPerHour;
+        /*float hoursUntilNoEnergy = playerStats.energy / gig.currentStage.energyCostPerHour;
 
         durationSlider.maxValue = hoursUntilNoEnergy;
         maxDurationText.text = System.Math.Round(hoursUntilNoEnergy, 2).ToString();
-
+        */
     }
 }
