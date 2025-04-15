@@ -31,7 +31,7 @@ public class JobDisplay : MonoBehaviour
     void Update()
     {
         nameText.text = job.taskName;
-        progressText.text = $"Progress: {System.Math.Round(job.currentProgress, 2)} / {job.progressMax}";
+        progressText.text = $"Progress: {System.Math.Round(job.currentProgress, 2)} / {job.maxProgress}";
         payText.text = $"Pay: ${job.pay}";
 
         minDurationText.text = "0";

@@ -21,14 +21,15 @@ public class Gig : MonoBehaviour
     {
         if (currentStage.complete)
         {
-            if (stages.Last() != currentStage)
+            if (stages.Last() == currentStage)
             {
-                currentStage = stages.ElementAt(stages.IndexOf(currentStage) + 1);
+                // all stages complete
+                CompleteGig();
             }
-            // all stages complete
             else
             {
-                CompleteGig();
+                // complete current stage and update current stage
+                currentStage = stages.ElementAt(stages.IndexOf(currentStage) + 1);
             }
         }
     }

@@ -31,7 +31,7 @@ public class GigDisplay : MonoBehaviour
     void Update()
     {
         nameText.text = $"{gig.gigName}: {gig.currentStage.taskName}";
-        progressText.text = $"Progress: {System.Math.Round(gig.currentStage.currentProgress, 2)} / {gig.currentStage.progressMax} | " +
+        progressText.text = $"Progress: {System.Math.Round(gig.currentStage.currentProgress, 2)} / {gig.currentStage.maxProgress} | " +
             $"Stage: {gig.stages.IndexOf(gig.currentStage)+1} / {gig.stages.Count}";
         payText.text = $"Current Stage Pay: ${gig.currentStage.pay}";
 

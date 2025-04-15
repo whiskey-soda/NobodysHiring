@@ -5,7 +5,7 @@ public class Task : MonoBehaviour
 {
     public string taskName;
 
-    public float progressMax;
+    public float maxProgress;
     public float currentProgress;
     public bool complete { get; protected set; } = false;
     [Space]
@@ -79,12 +79,12 @@ public class Task : MonoBehaviour
 
         // overflow prevention. stops task early (when it is completed) if progress overflows
         // takes the overflow progress, divides it by the multiplier to get the hours, and rounds up to get duration
-        if (currentProgress + progressCompleted > progressMax)
+        if (currentProgress + progressCompleted > maxProgress)
         {
-            hours = ((currentProgress + progressCompleted) - progressMax) / progressMult;
+            hours = ((currentProgress + progressCompleted) - maxProgress) / progressMult;
             hours = Mathf.Ceil(hours);
 
-            currentProgress = progressMax; //set progress to max
+            currentProgress = maxProgress; //set progress to max
         }
         else
         {
@@ -92,7 +92,7 @@ public class Task : MonoBehaviour
             currentProgress += progressCompleted;
         }
 
-        if (currentProgress >= progressMax)
+        if (currentProgress >= maxProgress)
         {
             Complete();
         }
@@ -104,6 +104,7 @@ public class Task : MonoBehaviour
     protected virtual void Complete()
     {
         complete = true;
+        WorkManager.Instance.workListUpdated.Invoke();
     }
 
     /// <summary>
