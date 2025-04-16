@@ -9,7 +9,7 @@ public class JobOfferUIHelper : WorkOfferUIHelper
     public override void Configure(WorkOffer workOffer)
     {
         offer = workOffer;
-        PopulateJobInfo((JobOffer)workOffer);
+        PopulateJobInfo((JobOffer) workOffer);
     }
 
     void PopulateJobInfo(JobOffer jobOffer)

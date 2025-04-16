@@ -5,7 +5,8 @@ public class InboxDisplay : MonoBehaviour
     [SerializeField] GameObject inboxUI;
     [SerializeField] GameObject inboxContentParent;
     [Space]
-    [SerializeField] GameObject workOfferUIPrefab;
+    [SerializeField] GameObject jobOfferUIPrefab;
+    [SerializeField] GameObject gigOfferUIPrefab;
     [SerializeField] float rectHeightIncreasePerLine = 30;
 
     Inbox inbox;
@@ -46,7 +47,17 @@ public class InboxDisplay : MonoBehaviour
 
     void CreateWorkOfferUIPanel(WorkOffer offer)
     {
-        GameObject newWorkOfferUIObject = Instantiate(workOfferUIPrefab, inboxContentParent.transform);
+        GameObject offerUIPrefab = null;
+        if (offer is JobOffer)
+        {
+            offerUIPrefab = jobOfferUIPrefab;
+        }
+        else if (offer is GigOffer)
+        {
+            offerUIPrefab = gigOfferUIPrefab;
+        }
+
+        GameObject newWorkOfferUIObject = Instantiate(offerUIPrefab, inboxContentParent.transform);
         newWorkOfferUIObject.GetComponent<WorkOfferUIHelper>().Configure(offer);
 
         // extend panel to fit all relevant skills (one per line)

@@ -1503,6 +1503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b700f4a10d7804b920e035da03116d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  workName: {fileID: 8103364232650235065}
   gigProgress: {fileID: 4391409696714414423}
   stageProgress: {fileID: 2010735442922932787}
   estimatedHours: {fileID: 1611067401909652249}

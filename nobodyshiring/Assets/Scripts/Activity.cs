@@ -51,9 +51,7 @@ public class Activity : MonoBehaviour
 
     public virtual void DoActivity(float duration)
     {
-        // clamp duration to min/max values
-        if (duration < minDuration) { duration = minDuration; }
-        else if (maxDuration != 0 && duration > maxDuration) { duration = maxDuration; }
+        duration = ClampDuration(duration);
 
         time.PassTime(duration);
         playerStats.ChangeMotivation(-motivationCost * duration);
@@ -73,4 +71,12 @@ public class Activity : MonoBehaviour
         }
     }
 
+    protected float ClampDuration(float duration)
+    {
+        // clamp duration to min/max values
+        if (duration < minDuration) { duration = minDuration; }
+        else if (maxDuration != 0 && duration > maxDuration) { duration = maxDuration; }
+
+        return duration;
+    }
 }

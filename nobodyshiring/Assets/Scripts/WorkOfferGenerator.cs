@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 #region offer classes
+[System.Serializable]
 public class WorkOffer
 {
     public int daysUntilArrival;

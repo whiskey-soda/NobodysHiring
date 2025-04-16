@@ -18,6 +18,21 @@ public class LookForWork : MonoBehaviour
     WorkOfferGenerator offerGenerator;
     Inbox inbox;
 
+    public static LookForWork Instance;
+
+    private void Awake()
+    {
+        // singleton code
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
+    }
+
     private void Start()
     {
         offerGenerator = WorkOfferGenerator.Instance;

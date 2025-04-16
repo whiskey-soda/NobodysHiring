@@ -29,12 +29,13 @@ public class Inbox : MonoBehaviour
 
     void UpdateInbox()
     {
+        List<WorkOffer> expiredOffers = new List<WorkOffer>();
         foreach (WorkOffer offer in availableOffers)
         {
             // all jobs removed the next day
             if (offer is JobOffer)
             {
-                availableOffers.Remove(offer);
+                expiredOffers.Add(offer);
             }
             // gigs remain for multiple days
             else if (offer is GigOffer)
@@ -42,11 +43,18 @@ public class Inbox : MonoBehaviour
                 (offer as GigOffer).daysUntilRemoval--;
                 if ((offer as GigOffer).daysUntilRemoval <= 0)
                 {
-                    availableOffers.Remove(offer);
+                    expiredOffers.Add(offer);
                 }
             }
         }
+        // remove expired offers from available offers list
+        foreach (WorkOffer offer in expiredOffers)
+        {
+            availableOffers.Remove(offer);
+        }
 
+
+        List<WorkOffer> recievedOffers = new List<WorkOffer>();
         // decrement daysUntilArrival for all upcoming offers,
         // and move them into the availableOffers list when appropriate
         foreach (WorkOffer offer in upcomingOffers)
@@ -55,20 +63,25 @@ public class Inbox : MonoBehaviour
             if (offer.daysUntilArrival <= 0)
             {
                 availableOffers.Add(offer);
-                upcomingOffers.Remove(offer);
+                recievedOffers.Add(offer);
             }
+        }
+        //remove recieved offers from upcoming offers list
+        foreach (WorkOffer offer in recievedOffers)
+        {
+            upcomingOffers.Remove(offer);
         }
 
     }
 
     public void AddWorkOffer(JobOffer newJobOffer)
     {
-        availableOffers.Add(newJobOffer);
+        upcomingOffers.Add(newJobOffer);
     }
 
     public void AddWorkOffer(GigOffer newGigOffer)
     {
-        availableOffers.Add(newGigOffer);
+        upcomingOffers.Add(newGigOffer);
     }
 
     public void AcceptOffer(GigOffer gigToAccept)

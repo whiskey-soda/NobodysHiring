@@ -20,6 +20,8 @@ public class WorkOfferUIHelper : MonoBehaviour
         {
             Inbox.Instance.AcceptOffer((JobOffer)offer);
         }
+
+        Destroy(gameObject);
     }
 
 }

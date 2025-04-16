@@ -639,6 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7927242ff105986498d42b74f67288f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  workName: {fileID: 3171745752402536483}
   jobName: {fileID: 3171745752402536483}
   pay: {fileID: 8528909989268593480}
   progress: {fileID: 655521362806919283}

@@ -8,6 +8,7 @@ public class GigOfferUIHelper : WorkOfferUIHelper
 
     public override void Configure(WorkOffer workOffer)
     {
+        offer = workOffer;
         PopulateGigInfo((GigOffer)workOffer);
     }
 

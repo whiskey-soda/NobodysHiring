@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WorkInfoDisplay : MonoBehaviour
 {
-    protected TextMeshProUGUI workName;
+    [SerializeField] protected TextMeshProUGUI workName;
 
     public virtual void Configure(Gig gig)
     {
