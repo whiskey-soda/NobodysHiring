@@ -4,8 +4,10 @@ using UnityEngine.Events;
 
 public class WorkManager : MonoBehaviour
 {
-    public List<Gig> gigs { get; private set; } = new List<Gig>();
-    public List<Job> jobs { get; private set; } = new List<Job>();
+
+    public List<Project> projects { get; private set; } = new List<Project>();
+    //public List<Gig> gigs { get; private set; } = new List<Gig>();
+    //public List<Job> jobs { get; private set; } = new List<Job>();
 
     public UnityEvent workListUpdated;
 
@@ -25,9 +27,9 @@ public class WorkManager : MonoBehaviour
 
     public bool AddWork(Gig gig)
     {
-        if (!gigs.Contains(gig))
+        if (!projects.Contains(gig))
         {
-            gigs.Add(gig);
+        projects.Add(gig);
             workListUpdated.Invoke();
             return true;
         }
@@ -36,9 +38,9 @@ public class WorkManager : MonoBehaviour
 
     public bool AddWork(Job job)
     {
-        if (!jobs.Contains(job))
+        if (!projects.Contains(job))
         {
-            jobs.Add(job);
+            projects.Add(job);
             workListUpdated.Invoke();
             return true;
         }
@@ -47,9 +49,9 @@ public class WorkManager : MonoBehaviour
 
     public bool RemoveWork (Gig gig)
     {
-        if (gigs.Contains (gig))
+        if (projects.Contains (gig))
         {
-            gigs.Remove(gig);
+            projects.Remove(gig);
             workListUpdated.Invoke();
             return true;
         }
@@ -58,9 +60,9 @@ public class WorkManager : MonoBehaviour
 
     public bool RemoveWork (Job job)
     {
-        if (jobs.Contains(job))
+        if (projects.Contains(job))
         {
-            jobs.Remove(job);
+            projects.Remove(job);
             workListUpdated.Invoke();
             return true;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Gig
+public class Gig : Project
 {
     [Space]
     public string gigName;

@@ -2,7 +2,7 @@ using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 [System.Serializable]
-public class Task
+public class Task : Project
 {
     public string taskName;
 

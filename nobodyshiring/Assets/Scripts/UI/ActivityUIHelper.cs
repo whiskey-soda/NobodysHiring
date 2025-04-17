@@ -4,7 +4,7 @@ public class ActivityUIHelper : MonoBehaviour
 {
     public float desiredDuration;
 
-    [SerializeField] Activity activity;
+    [SerializeField] protected Activity activity;
 
     /// <summary>
     /// sets the desired duration for the activity. created for use with sliders
@@ -19,7 +19,7 @@ public class ActivityUIHelper : MonoBehaviour
     /// triggers the linked activity for the desired duration float value.
     /// created for use with "do activity" buttons
     /// </summary>
-    public void DoActivity()
+    public virtual void DoActivity()
     {
         activity.DoActivity(desiredDuration);
     }

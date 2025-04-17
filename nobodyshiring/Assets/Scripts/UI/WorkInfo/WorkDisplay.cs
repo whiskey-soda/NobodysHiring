@@ -23,16 +23,18 @@ public class WorkDisplay : MonoBehaviour
 
     void CreateWorkInfoPanels()
     {
-        foreach (Job job in workManager.jobs)
+        foreach (Project project in workManager.projects)
         {
-            GameObject jobInfoPanel = Instantiate(jobPanel, workInfoDisplayParentTransform);
-            jobInfoPanel.GetComponent<JobInfoDisplay>().Configure(job);
-        }
-
-        foreach (Gig gig in workManager.gigs)
-        {
-            GameObject gigInfoPanel = Instantiate(gigPanel, workInfoDisplayParentTransform);
-            gigInfoPanel.GetComponent <GigInfoDisplay>().Configure(gig);
+            if (project is Job)
+            {
+                GameObject jobInfoPanel = Instantiate(jobPanel, workInfoDisplayParentTransform);
+                jobInfoPanel.GetComponent<JobInfoDisplay>().Configure((Job)project);
+            }
+            else if (project is Gig)
+            {
+                GameObject gigInfoPanel = Instantiate(gigPanel, workInfoDisplayParentTransform);
+                gigInfoPanel.GetComponent<GigInfoDisplay>().Configure((Gig)project);
+            }
         }
     }
 
