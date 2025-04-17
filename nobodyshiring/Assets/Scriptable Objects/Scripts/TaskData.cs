@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TaskData", menuName = "Scriptable Objects/TaskData")]
 public class TaskData : ScriptableObject
 {
+    public string taskName;
+    [Space]
     public float recommendedCoding;
     public float recommendedNetworking;
     public float recommendedMarketing;

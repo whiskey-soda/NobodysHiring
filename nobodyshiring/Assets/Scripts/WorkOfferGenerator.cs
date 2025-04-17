@@ -41,10 +41,7 @@ public class WorkOfferGenerator : MonoBehaviour
     [SerializeField] uint[] gigOfferDaysToArriveRange = new uint[2];
     [SerializeField] uint[] jobOfferDaysToArriveRange = new uint[2];
     [Space]
-    [SerializeField]
-    List<Job> jobs = new List<Job>();
-    [SerializeField]
-    List<Gig> gigs = new List<Gig>();
+    [SerializeField] ProjectLibrary projectLibrary;
 
     public static WorkOfferGenerator Instance;
     private void Awake()
@@ -61,27 +58,35 @@ public class WorkOfferGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// generates a gig offer. randomly picks a gig from a list of gigs, 
+    /// generates a gig offer. randomly picks a gig from the project library, 
     /// and pairs it with a random arrival delay based on config values.
     /// </summary>
     /// <returns></returns>
     public GigOffer GenerateGigOffer()
     {
+        // get all gigs from the project library
+        List<Gig> gigs = projectLibrary.GetGigs();
+
+        // pick a random one and create an offer with a random arrival delay
         Gig gig = gigs[Random.Range(0, gigs.Count)];
         uint arrivalDelay = (uint)Random.Range((int)gigOfferDaysToArriveRange.First(), (int)gigOfferDaysToArriveRange.Last());
 
         return new GigOffer(gig, (int)arrivalDelay);
     }
     /// <summary>
-    /// generates a job offer. randomly picks a job from a list of jobs,
+    /// generates a job offer. randomly picks a job from the project library,
     /// and pairs it with a random arrival delay based on confic values
     /// </summary>
     /// <returns></returns>
     public JobOffer GenerateJobOffer()
     {
-        Job job = jobs[Random.Range(0, jobs.Count)];
+        // get all jobs from the project library
+        List<Job> jobs = projectLibrary.GetJobs();
+
+        // pick a random one and create an offer with a random arrival delay
+        Job newJob = jobs[Random.Range(0, jobs.Count)];
         uint arrivalDelay = (uint)Random.Range((int)jobOfferDaysToArriveRange.First(), (int)jobOfferDaysToArriveRange.Last());
 
-        return new JobOffer(job, (int)arrivalDelay);
+        return new JobOffer(newJob, (int)arrivalDelay);
     }
 }

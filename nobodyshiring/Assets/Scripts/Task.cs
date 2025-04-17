@@ -38,6 +38,8 @@ public class Task : Project
     /// <param name="data"></param>
     protected virtual void Init(TaskData data)
     {
+        taskName = data.taskName;
+
         float[] _recommendedSkillLevels = { data.recommendedCoding, data.recommendedNetworking,
             data.recommendedMarketing, data.recommendedGameDesign, data.recommendedUnity,
             data.recommendedUnrealEngine, data.recommendedGodot, data.recommendedGameMaker,
