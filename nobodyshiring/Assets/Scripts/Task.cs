@@ -1,29 +1,18 @@
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
-public class Task : MonoBehaviour
+[System.Serializable]
+public class Task
 {
     public string taskName;
 
     public float maxProgress;
     public float currentProgress;
     public bool complete { get; protected set; } = false;
-    [Space]
 
-    // used for config and inspector editing
-    [SerializeField] float recommendedCoding;
-    [SerializeField] float recommendedNetworking;
-    [SerializeField] float recommendedMarketing;
-    [SerializeField] float recommendedGameDesign;
-    [SerializeField] float recommendedUnity;
-    [SerializeField] float recommendedUnrealEngine;
-    [SerializeField] float recommendedGodot;
-    [SerializeField] float recommendedGameMaker;
-    [SerializeField] float recommendedAudio;
-    [SerializeField] float recommendedArt;
-
-    // used for actual processing
     public float[] recommededSkillLevels { get; private set; } = new float[10];
+
+    public float pay { get; private set; }
 
     // multipliers that apply at different levels of skill difference
     // between player skills and recommended skills
@@ -38,34 +27,28 @@ public class Task : MonoBehaviour
     float lowEnergyPenaltyCoefficient = .5f;
 
 
-    PlayerStats playerStats;
-    PlayerSkills playerSkills;
-
-
-    protected virtual void Start()
+    public Task(TaskData data)
     {
-        playerStats = PlayerStats.Instance;
-        playerSkills = PlayerSkills.Instance;
-    }
-
-    private void Awake()
-    {
-        SetSkillRecs();
+        Init(data);
     }
 
     /// <summary>
-    /// sets the recommended skill levels array based on the config floats.
-    /// makes it easier to edit values in the editor.
+    /// configures task with values from a scriptable object
     /// </summary>
-    void SetSkillRecs()
+    /// <param name="data"></param>
+    protected virtual void Init(TaskData data)
     {
-        float[] _recommendedSkillLevels = { recommendedCoding, recommendedNetworking,
-            recommendedMarketing, recommendedGameDesign, recommendedUnity,
-            recommendedUnrealEngine, recommendedGodot, recommendedGameMaker,
-            recommendedAudio, recommendedArt };
+        float[] _recommendedSkillLevels = { data.recommendedCoding, data.recommendedNetworking,
+            data.recommendedMarketing, data.recommendedGameDesign, data.recommendedUnity,
+            data.recommendedUnrealEngine, data.recommendedGodot, data.recommendedGameMaker,
+            data.recommendedAudio, data.recommendedArt };
 
         recommededSkillLevels = _recommendedSkillLevels;
+
+        maxProgress = data.maxProgress;
+        pay = data.pay;
     }
+
 
     /// <summary>
     /// adds progress with a multiplier calculated from various stats
@@ -103,6 +86,7 @@ public class Task : MonoBehaviour
     protected virtual void Complete()
     {
         complete = true;
+        Money.Instance.AddMoney(pay);
         WorkManager.Instance.workListUpdated.Invoke();
     }
 
@@ -136,6 +120,8 @@ public class Task : MonoBehaviour
     private float CalculateMultFromSkills()
     {
         float multFromSkills = 0;
+
+        PlayerSkills playerSkills = PlayerSkills.Instance;
 
         for (int i = 0; i < playerSkills.skills.Length; i++)
         {
@@ -174,6 +160,8 @@ public class Task : MonoBehaviour
     /// <returns></returns>
     float CalculateMultBonusFromStats()
     {
+        PlayerStats playerStats = PlayerStats.Instance;
+
         float multFromStats = 0;
 
         if (playerStats.motivation > playerStats.highMotivationThreshold)
@@ -195,6 +183,7 @@ public class Task : MonoBehaviour
     /// <returns></returns>
     float CalculateMultPenaltyCoefficientFromStats()
     {
+        PlayerStats playerStats = PlayerStats.Instance;
 
         // motivation and energy each make up half of the progress penalty coefficient.
         // low stats will lower the coefficient, dividing the amount of progress gained.

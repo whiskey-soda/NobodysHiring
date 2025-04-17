@@ -16,7 +16,7 @@ public class GigOfferUIHelper : WorkOfferUIHelper
     {
         nameText.text = gigOffer.gig.gigName;
 
-        foreach (GigStage stage in gigOffer.gig.stages)
+        foreach (Task stage in gigOffer.gig.stages)
         {
             stagesInfoText.text += $"{stage.taskName} (${stage.pay}\n";
             for (int i = 0; i < stage.recommededSkillLevels.Length; i++)

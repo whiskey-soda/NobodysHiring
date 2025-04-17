@@ -26,7 +26,7 @@ public class GigInfoDisplay : WorkInfoDisplay
 
         stageInfos.text = "";
 
-        foreach (GigStage stage in gig.stages)
+        foreach (Task stage in gig.stages)
         {
             stageInfos.text += $"{gig.currentStage.taskName}\n" +
                 $"Pay: ${gig.currentStage.pay}\n" +

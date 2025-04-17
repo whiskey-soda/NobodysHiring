@@ -3,21 +3,40 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Gig : MonoBehaviour
+public class Gig
 {
     [Space]
     public string gigName;
 
-    public List<GigStage> stages = new List<GigStage>();
-    public GigStage currentStage;
+    public List<Task> stages = new List<Task>();
+    public Task currentStage;
 
 
-    private void Awake()
+    public Gig(GigData data)
     {
+        Init(data);
+    }
+    
+    /// <summary>
+    /// configures gig with data from SO, and creates + configures tasks for the stages
+    /// </summary>
+    /// <param name="data"></param>
+    private void Init(GigData data)
+    {
+        gigName = data.gigName;
+
+        foreach (TaskData stageData in data.stages)
+        {
+            stages.Add(new Task(stageData));
+        }
+
         currentStage = stages.First();
+
+        // update current stages whenever the work list gets updated
+        WorkManager.Instance.workListUpdated.AddListener(UpdateCurrentStage);
     }
 
-    private void Update()
+    private void UpdateCurrentStage()
     {
         if (currentStage.complete)
         {

@@ -13,4 +13,8 @@ public class TaskData : ScriptableObject
     public float recommendedGameMaker;
     public float recommendedAudio;
     public float recommendedArt;
+    [Space]
+    public float maxProgress;
+    [Space]
+    public float pay;
 }

@@ -345,64 +345,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9191973540672343572, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
   m_PrefabInstance: {fileID: 47685165}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &73501061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 73501062}
-  - component: {fileID: 73501063}
-  m_Layer: 0
-  m_Name: JuniorSoftwareEngineer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &73501062
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73501061}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1738383283}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &73501063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73501061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7fb135f48ae0a2419b1efef4707f391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskName: Work (Junior Software Engineer)
-  maxProgress: 0
-  currentProgress: 0
-  recommendedCoding: 2
-  recommendedNetworking: 0
-  recommendedMarketing: 0
-  recommendedGameDesign: 0
-  recommendedUnity: 0
-  recommendedUnrealEngine: 0
-  recommendedGodot: 0
-  recommendedGameMaker: 0
-  recommendedAudio: 0
-  recommendedArt: 0
-  pay: 0
 --- !u!1 &75282516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,64 +2581,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &625430705
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 625430707}
-  - component: {fileID: 625430708}
-  m_Layer: 0
-  m_Name: TestJob
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &625430707
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625430705}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1738383283}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &625430708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625430705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7fb135f48ae0a2419b1efef4707f391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskName: test job
-  maxProgress: 0
-  currentProgress: 0
-  recommendedCoding: 0
-  recommendedNetworking: 0
-  recommendedMarketing: 0
-  recommendedGameDesign: 0
-  recommendedUnity: 0
-  recommendedUnrealEngine: 0
-  recommendedGodot: 0
-  recommendedGameMaker: 0
-  recommendedAudio: 0
-  recommendedArt: 0
-  pay: 7000
 --- !u!1 &632240522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,7 +2824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4876417078885054290, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -265
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6062370280571349516, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: energyCost
@@ -2996,7 +2880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8645229301841241306, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -265
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9191973540672343572, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_Pivot.x
@@ -5090,7 +4974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4876417078885054290, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -265
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6062370280571349516, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: energyCost
@@ -5126,7 +5010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8645229301841241306, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -265
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9191973540672343572, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_Pivot.x
@@ -7034,11 +6918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gigOfferDaysToArriveRange: 0100000003000000
   jobOfferDaysToArriveRange: 0700000015000000
-  jobs:
-  - {fileID: 73501063}
-  - {fileID: 625430708}
-  gigs:
-  - {fileID: 1982305336}
+  jobs: []
 --- !u!1 &1554676402
 GameObject:
   m_ObjectHideFlags: 0
@@ -7629,9 +7509,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 73501062}
-  - {fileID: 625430707}
+  m_Children: []
   m_Father: {fileID: 1550475747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751963542
@@ -8048,109 +7926,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958424343}
   m_CullTransparentMesh: 1
---- !u!1 &1982305331
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1982305333}
-  - component: {fileID: 1982305336}
-  - component: {fileID: 1982305335}
-  - component: {fileID: 1982305334}
-  m_Layer: 0
-  m_Name: TestGig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1982305333
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982305331}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2107713397}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1982305334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982305331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20096c8add971d4449c1c2bfe998cf35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskName: stage 2
-  maxProgress: 0
-  currentProgress: 0
-  recommendedCoding: 0
-  recommendedNetworking: 0
-  recommendedMarketing: 0
-  recommendedGameDesign: 0
-  recommendedUnity: 0
-  recommendedUnrealEngine: 0
-  recommendedGodot: 0
-  recommendedGameMaker: 0
-  recommendedAudio: 0
-  recommendedArt: 0
-  pay: 0
---- !u!114 &1982305335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982305331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20096c8add971d4449c1c2bfe998cf35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskName: stage 1
-  maxProgress: 0
-  currentProgress: 0
-  recommendedCoding: 0
-  recommendedNetworking: 0
-  recommendedMarketing: 0
-  recommendedGameDesign: 0
-  recommendedUnity: 0
-  recommendedUnrealEngine: 0
-  recommendedGodot: 0
-  recommendedGameMaker: 0
-  recommendedAudio: 0
-  recommendedArt: 0
-  pay: 0
---- !u!114 &1982305336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982305331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbebb6c447bce746928584e698d09f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gigName: test gig
-  stages:
-  - {fileID: 1982305335}
-  - {fileID: 1982305334}
-  currentStage: {fileID: 0}
 --- !u!1 &1991059328
 GameObject:
   m_ObjectHideFlags: 0
@@ -8977,8 +8752,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1982305333}
+  m_Children: []
   m_Father: {fileID: 1550475747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2129178884

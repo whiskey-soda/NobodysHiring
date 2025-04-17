@@ -1,14 +1,16 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Job : Task
 {
-
-    [Space]
-    public float pay;
-
-    protected override void Start()
+    public Job(TaskData data) : base(data)
     {
-        base.Start();
+    }
+
+    // override to add payday event as listener
+    protected override void Init(TaskData data)
+    {
+        base.Init(data);
 
         // payday triggers at month end
         TimeTracking.Instance.monthEnd.AddListener(Payday);
