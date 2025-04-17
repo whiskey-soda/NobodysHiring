@@ -2940,7 +2940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4876417078885054290, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -265
       objectReference: {fileID: 0}
     - target: {fileID: 6062370280571349516, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: energyCost
@@ -2996,7 +2996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8645229301841241306, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -265
       objectReference: {fileID: 0}
     - target: {fileID: 9191973540672343572, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_Pivot.x
@@ -5090,7 +5090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4876417078885054290, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -265
       objectReference: {fileID: 0}
     - target: {fileID: 6062370280571349516, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: energyCost
@@ -5126,7 +5126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8645229301841241306, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -265
       objectReference: {fileID: 0}
     - target: {fileID: 9191973540672343572, guid: a68e86f260342b74ea5174c2ee5744d7, type: 3}
       propertyPath: m_Pivot.x

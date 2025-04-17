@@ -25,7 +25,8 @@ public class Task : MonoBehaviour
     // used for actual processing
     public float[] recommededSkillLevels { get; private set; } = new float[10];
 
-
+    // multipliers that apply at different levels of skill difference
+    // between player skills and recommended skills
     float lowSkillDiffMult = .3f;
     float highSkillDiffMult = .7f;
     float extremeSkillDiffMult = 1;
@@ -39,14 +40,12 @@ public class Task : MonoBehaviour
 
     PlayerStats playerStats;
     PlayerSkills playerSkills;
-    TimeTracking time;
 
 
     protected virtual void Start()
     {
         playerStats = PlayerStats.Instance;
         playerSkills = PlayerSkills.Instance;
-        time = TimeTracking.Instance;
     }
 
     private void Awake()

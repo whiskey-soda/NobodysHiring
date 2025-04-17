@@ -1,0 +1,16 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TaskData", menuName = "Scriptable Objects/TaskData")]
+public class TaskData : ScriptableObject
+{
+    public float recommendedCoding;
+    public float recommendedNetworking;
+    public float recommendedMarketing;
+    public float recommendedGameDesign;
+    public float recommendedUnity;
+    public float recommendedUnrealEngine;
+    public float recommendedGodot;
+    public float recommendedGameMaker;
+    public float recommendedAudio;
+    public float recommendedArt;
+}
