@@ -4,7 +4,6 @@ using UnityEngine.Events;
 
 public class WorkManager : MonoBehaviour
 {
-
     public List<Project> projects { get; private set; } = new List<Project>();
     //public List<Gig> gigs { get; private set; } = new List<Gig>();
     //public List<Job> jobs { get; private set; } = new List<Job>();

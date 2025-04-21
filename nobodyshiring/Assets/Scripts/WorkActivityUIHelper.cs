@@ -40,5 +40,7 @@ public class WorkActivityUIHelper : ActivityUIHelper
             }
         }
 
+        projectDropdown.AddOptions(projectNames);
+
     }
 }

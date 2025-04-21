@@ -13,6 +13,7 @@ public class WorkDisplay : MonoBehaviour
         workManager = WorkManager.Instance;
 
         workManager.workListUpdated.AddListener(PopulateWorkInfoDisplay);
+        PopulateWorkInfoDisplay();
     }
 
     void PopulateWorkInfoDisplay()
