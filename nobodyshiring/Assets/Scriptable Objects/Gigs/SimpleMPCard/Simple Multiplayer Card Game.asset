@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc6e04e0fb39a4d9a358680f38322d, type: 3}
+  m_Name: Simple Multiplayer Card Game
+  m_EditorClassIdentifier: 
+  gigName: Simple Multiplayer Card Game
+  stages:
+  - {fileID: 11400000, guid: a848192923def084fa014fadb4f617fe, type: 2}
+  - {fileID: 11400000, guid: a57a97eee5e99ef46a0e8a825b684664, type: 2}
+  - {fileID: 11400000, guid: b2f3fc9318362c84b95e326a939661e0, type: 2}
+  - {fileID: 11400000, guid: 77cf8bdaf6914c146bdd692efed4a4c5, type: 2}
+  - {fileID: 11400000, guid: d0c72d36f5feb5b4a99c79ea69dfdd45, type: 2}

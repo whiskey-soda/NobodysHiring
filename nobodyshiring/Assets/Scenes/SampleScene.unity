@@ -7980,7 +7980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gigOfferDaysToArriveRange: 0100000003000000
   jobOfferDaysToArriveRange: 0700000015000000
-  projectLibrary: {fileID: 0}
+  projectLibrary: {fileID: 11400000, guid: f8d9c6d3bf1fa36499eecc1274ad54b7, type: 2}
 --- !u!1 &1554676402
 GameObject:
   m_ObjectHideFlags: 0

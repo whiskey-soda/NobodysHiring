@@ -4,18 +4,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ProjectLibrary", menuName = "Scriptable Objects/ProjectLibrary")]
 public class ProjectLibrary : ScriptableObject
 {
-    public List<Project> projects = new List<Project>();
+    public List<ProjectData> projects = new List<ProjectData>();
 
     /// <summary>
     /// returns a list of jobs contained in the project list
     /// </summary>
     /// <returns></returns>
-    public List<Job> GetJobs()
+    public List<TaskData> GetJobs()
     {
-        List<Job> jobs = new List<Job>();
-        foreach (Project project in projects)
+        List<TaskData> jobs = new List<TaskData>();
+        foreach (ProjectData project in projects)
         {
-            Job job = project as Job;
+            TaskData job = project as TaskData;
             if (job != null)
             {
                 jobs.Add(job);
@@ -28,12 +28,12 @@ public class ProjectLibrary : ScriptableObject
     /// returns a list of gigs contained in the project list
     /// </summary>
     /// <returns></returns>
-    public List<Gig> GetGigs()
+    public List<GigData> GetGigs()
     {
-        List<Gig> gigs = new List<Gig>();
-        foreach (Project project in projects)
+        List<GigData> gigs = new List<GigData>();
+        foreach (ProjectData project in projects)
         {
-            Gig gig = project as Gig;
+            GigData gig = project as GigData;
             if (gig != null)
             {
                 gigs.Add(gig);

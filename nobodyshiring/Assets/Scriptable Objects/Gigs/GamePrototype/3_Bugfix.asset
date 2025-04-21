@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f7201f1fb7bba40bda707a2a5a89ba, type: 3}
+  m_Name: 3_Bugfix
+  m_EditorClassIdentifier: 
+  taskName: Bugfixing and Polish
+  recommendedCoding: 2
+  recommendedNetworking: 0
+  recommendedMarketing: 0
+  recommendedGameDesign: 0
+  recommendedUnity: 2
+  recommendedUnrealEngine: 0
+  recommendedGodot: 0
+  recommendedGameMaker: 0
+  recommendedAudio: 0
+  recommendedArt: 0
+  maxProgress: 12
+  pay: 700

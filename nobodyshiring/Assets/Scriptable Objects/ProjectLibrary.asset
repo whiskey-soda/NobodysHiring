@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf71243ddab5d14aa034a8e7e19461b, type: 3}
   m_Name: ProjectLibrary
   m_EditorClassIdentifier: 
+  projects: []

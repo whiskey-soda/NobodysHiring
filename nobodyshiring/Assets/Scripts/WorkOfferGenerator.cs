@@ -65,10 +65,10 @@ public class WorkOfferGenerator : MonoBehaviour
     public GigOffer GenerateGigOffer()
     {
         // get all gigs from the project library
-        List<Gig> gigs = projectLibrary.GetGigs();
+        List<GigData> gigs = projectLibrary.GetGigs();
 
         // pick a random one and create an offer with a random arrival delay
-        Gig gig = gigs[Random.Range(0, gigs.Count)];
+        Gig gig = new Gig( gigs[Random.Range(0, gigs.Count)] );
         uint arrivalDelay = (uint)Random.Range((int)gigOfferDaysToArriveRange.First(), (int)gigOfferDaysToArriveRange.Last());
 
         return new GigOffer(gig, (int)arrivalDelay);
@@ -81,10 +81,10 @@ public class WorkOfferGenerator : MonoBehaviour
     public JobOffer GenerateJobOffer()
     {
         // get all jobs from the project library
-        List<Job> jobs = projectLibrary.GetJobs();
+        List<TaskData> jobs = projectLibrary.GetJobs();
 
         // pick a random one and create an offer with a random arrival delay
-        Job newJob = jobs[Random.Range(0, jobs.Count)];
+        Job newJob = new Job( jobs[Random.Range(0, jobs.Count)] );
         uint arrivalDelay = (uint)Random.Range((int)jobOfferDaysToArriveRange.First(), (int)jobOfferDaysToArriveRange.Last());
 
         return new JobOffer(newJob, (int)arrivalDelay);
