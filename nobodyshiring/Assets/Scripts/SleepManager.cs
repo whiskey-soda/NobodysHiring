@@ -48,13 +48,15 @@ public class SleepManager : MonoBehaviour
 
         float newEnergyLevel = restedEnergy;
 
-        if (duration >= wellRestedHours)
+        if (duration >= wellRestedHours) // well rested gives bonus energy
         {
             newEnergyLevel = wellRestedEnergy;
         }
-        else if (duration < tiredHours)
+        else if (duration < tiredHours) // duration in tired range gives less energy depending as duration approaches 0
         {
-            newEnergyLevel = tiredEnergy;
+            // tiredenergy is maximum amount recovered when sleeping less than the "tired" threshold
+            // recover less than tiredEnergy based on how much less you slept than the tired threshold, to a min of 0
+            newEnergyLevel = (duration / tiredHours) * tiredEnergy;
         }
 
         stats.SetEnergy(newEnergyLevel);
