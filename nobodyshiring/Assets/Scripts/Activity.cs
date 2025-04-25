@@ -74,6 +74,11 @@ public class Activity : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// clamps the duration of the activity to the activity's max/min duration
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <returns></returns>
     protected float ClampDuration(float duration)
     {
         // clamp duration to min/max values
