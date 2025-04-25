@@ -53,9 +53,12 @@ public class Activity : MonoBehaviour
     {
         duration = ClampDuration(duration);
 
+        // adjusts the duration based on how much time was spent before the player passed out.
+        // only counts time spent working BEFORE passing out
+        duration *= playerStats.ChangeEnergy(-energyCost * duration);
+
         time.PassTime(duration);
         playerStats.ChangeMotivation(-motivationCost * duration);
-        playerStats.ChangeEnergy(-energyCost * duration);
 
         playerStats.ChangeMotivation(motivationGain * duration);
         playerStats.ChangeEnergy(energyGain * duration);

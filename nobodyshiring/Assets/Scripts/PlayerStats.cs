@@ -66,18 +66,28 @@ public class PlayerStats : MonoBehaviour
         motivation += value;
     }
 
-    public void ChangeEnergy(float value)
+    /// <summary>
+    /// changes the players energy, accounting for motivation influence.
+    /// </summary>
+    /// <param name="energyChange"></param>
+    /// <returns>the proportion of energy that was used before passing out.</returns>
+    public float ChangeEnergy(float energyChange)
     {
         // if energy is being lost, high/low motivation multiplies the energy cost
-        if (Mathf.Sign(value) < 0) { value = CalculateMotivationInfluence(value); }
+        if (Mathf.Sign(energyChange) < 0) { energyChange = CalculateMotivationInfluence(energyChange); }
 
-        energy += value;
+        energy += energyChange;
+
+        float proportionEnergyUsed = 1;
 
         if (energy <= passOutEnergyThreshold)
         {
             sleepManager.PassOut();
+
+            proportionEnergyUsed = (energyChange - energy) / energyChange;
         }
 
+        return proportionEnergyUsed;
     }
 
     public void SetEnergy(float value)
