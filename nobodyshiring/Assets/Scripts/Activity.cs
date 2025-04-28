@@ -65,7 +65,7 @@ public class Activity : MonoBehaviour
 
         foreach (LifeFactorChange change in lifeFactorChanges)
         {
-            lifeFactors.ChangeFactorCoefficient(change.lifeFactor, change.value * duration);
+            lifeFactors.ChangeFactorValue(change.lifeFactor, change.value * duration);
         }
 
         foreach (SkillChange change in skillChanges)

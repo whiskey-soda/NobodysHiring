@@ -30,10 +30,29 @@ public class LifeFactors : MonoBehaviour
     /// </summary>
     /// <param name="factor"></param>
     /// <param name="value"></param>
-    public void ChangeFactorCoefficient(LifeFactor factor, float value)
+    public void ChangeFactorValue(LifeFactor factor, float value)
     {
         factorValues[(int)factor] += value;
+        ClampFactorValue(factor);
+    }
 
+    /// <summary>
+    /// sets a factor's value
+    /// </summary>
+    /// <param name="factor"></param>
+    /// <param name="value"></param>
+    public void SetFactorValue(LifeFactor factor, float value)
+    {
+        factorValues[(int)factor] = value;
+        ClampFactorValue(factor);
+    }
+
+    /// <summary>
+    /// clamps a factor value between 0 and 1
+    /// </summary>
+    /// <param name="factor"></param>
+    private void ClampFactorValue(LifeFactor factor)
+    {
         // clamp from 0-1
         if (factorValues[(int)factor] > 1)
         {
@@ -44,5 +63,6 @@ public class LifeFactors : MonoBehaviour
             factorValues[(int)factor] = 0;
         }
     }
+
 
 }

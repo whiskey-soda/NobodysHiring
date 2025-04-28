@@ -91,6 +91,11 @@ public class ExpensesController : MonoBehaviour
                 // try to pay from wallet
                 if (TryPayFromMoney(expense) == false) { expensePaid = false; } // failed to pay expense
             }
+
+            if (expense == Expense.rent && expensePaid)
+            {
+                lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 1);
+            }
         }
 
         return expensePaid;
