@@ -5,7 +5,7 @@ public class Money : MonoBehaviour
 
     public static Money Instance;
 
-    public float money { get; private set; }
+    public float moneyTotal { get; private set; }
 
     private void Awake()
     {
@@ -22,12 +22,12 @@ public class Money : MonoBehaviour
 
     public bool CanAfford(float price)
     {
-        return price < money;
+        return price < moneyTotal;
     }
 
     public void AddMoney(float amount)
     {
-        money += amount;
+        moneyTotal += amount;
     }
 
     public void SubtractMoney(float amount)
@@ -35,7 +35,7 @@ public class Money : MonoBehaviour
         if ( CanAfford(amount) )
         {
 
-            money -= amount;
+            moneyTotal -= amount;
         }
     }
 

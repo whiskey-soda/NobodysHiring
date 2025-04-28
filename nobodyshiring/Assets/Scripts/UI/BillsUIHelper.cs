@@ -8,15 +8,16 @@ public class BillsUIHelper : MonoBehaviour
     [SerializeField] TextMeshProUGUI rentText;
     [SerializeField] Button payRentButton;
 
-    Bills bills;
+    ExpensesController bills;
 
     private void Start()
     {
-        bills = Bills.Instance;
+        bills = ExpensesController.Instance;
     }
 
     private void Update()
     {
+        /*
         rentText.text = $"Rent/Mortgage: ${bills.rentPrice} ";
         if (bills.rentPaid)
         {
@@ -30,6 +31,7 @@ public class BillsUIHelper : MonoBehaviour
             payRentButton.interactable = false;
         }
         else { payRentButton.interactable = true; }
+        */
     }
 
 }

@@ -16,6 +16,6 @@ public class MoneyDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moneyText.text = $"money: ${money.money}";
+        moneyText.text = $"money: ${money.moneyTotal}";
     }
 }

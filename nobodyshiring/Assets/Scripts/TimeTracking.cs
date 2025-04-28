@@ -1,6 +1,24 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+public struct Date
+{
+    public uint month;
+    public uint day;
+
+    public Date(uint month, uint day)
+    {
+        this.month = month;
+        this.day = day;
+    }
+
+    public bool Equals(Date other)
+    {
+        if (other.month == month && other.day == day) { return true; }
+        else { return false; }
+    }
+}
+
 public class TimeTracking : MonoBehaviour
 {
 
@@ -70,6 +88,11 @@ public class TimeTracking : MonoBehaviour
         }
 
         monthEnd.Invoke();
+    }
+
+    public Date GetCurrentDate()
+    {
+        return new Date(month, day);
     }
 
 }
