@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
 public struct Date
 {
     public uint month;
@@ -14,7 +15,10 @@ public struct Date
 
     public bool Equals(Date other)
     {
-        if (other.month == month && other.day == day) { return true; }
+        // if month is 0, means the month doesnt matter. only look at the day.
+        // used for monthly due dates and stuff
+        if ((other.month == month || other.month == 0)
+            && other.day == day) { return true; }
         else { return false; }
     }
 }

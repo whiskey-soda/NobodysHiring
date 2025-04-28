@@ -2769,8 +2769,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec850f20d4377a142ae3b63921dc6b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rentDueDay: 1
-  rentPrice: 500
+  expenseDueDates:
+  - expense: 0
+    date:
+      month: 0
+      day: 1
+  - expense: 1
+    date:
+      month: 0
+      day: 1
+  - expense: 2
+    date:
+      month: 0
+      day: 1
   billPastDue:
     m_PersistentCalls:
       m_Calls: []

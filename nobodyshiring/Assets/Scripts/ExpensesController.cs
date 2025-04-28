@@ -2,22 +2,59 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public enum Expense { rent, utilities, groceries }
 
 public class ExpensesController : MonoBehaviour
 {
-    Money money;
-    TimeTracking time;
-    LifeFactors lifeFactors;
+    [System.Serializable]
+    struct DueDate
+    {
+        public Expense expense;
+        public Date date;
+    }
 
-    [SerializeField] uint rentDueDay = 1;
+    [SerializeField]
+    List<DueDate> expenseDueDates = new List<DueDate>();
+
+    [Space]
+
+    [SerializeField] Date escrowChangeDate; // yearly date when rent has a chance to increase
+
+    [Space]
+
+    [SerializeField] float utilitiesBaseCost = 300;
+    [SerializeField] float utilityBaseVarianceMin = .9f;
+    [SerializeField] float utilityBaseVarianceMax = 1.1f;
+
+    [SerializeField] float thermostatHourlyCostMin = .19f;
+    [SerializeField] float thermostatHourlyCostMax = .23f;
+
+    [Space]
+    
+    // amount that grocery cost increases each day
+    [SerializeField] float groceryDailyCostMax = 15;
+    [SerializeField] float groceryDailyCostMin = 22;
+
+    // days until grocery expense is due
+    [SerializeField] uint groceryDueIntervalMin = 16;
+    [SerializeField] uint groceryDueIntervalMax = 21;
+
+    // days until player incurs motivation penalty from groceries.
+    // motivation drains from unexciting and bad meals
+    [SerializeField] uint groceryPenaltyThreshold = 10;
+
+    [Space]
+    public UnityEvent billPastDue;
 
     Date[] dueDates;
     float[] moneyDue;
     float[] budget;
 
-    public UnityEvent billPastDue;
+    Money money;
+    TimeTracking time;
+    LifeFactors lifeFactors;
 
     public static ExpensesController Instance;
     private void Awake()
@@ -38,7 +75,13 @@ public class ExpensesController : MonoBehaviour
         moneyDue = new float[expenseCount];
         budget = new float[expenseCount];
 
+        foreach (DueDate dueDate in expenseDueDates)
+        {
+            dueDates[(int)dueDate.expense] = dueDate.date;
+        }
+
     }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -173,4 +216,11 @@ public class ExpensesController : MonoBehaviour
         return moneyDue[(int)expense] <= 0;
     }
 
+    void YearlyEscrowChange()
+    {
+        if (time.GetCurrentDate().Equals(escrowChangeDate))
+        {
+
+        }
+    }
 }
