@@ -14,16 +14,17 @@ public class ExpensesController : MonoBehaviour
         public Expense expense;
         public Date date;
     }
+    #region variables
 
     [SerializeField]
     List<DueDate> expenseDueDates = new List<DueDate>();
 
     [Space]
-
+    [Header("Rent")]
     [SerializeField] Date escrowChangeDate; // yearly date when rent has a chance to increase
 
     [Space]
-
+    [Header("Utilities")]
     [SerializeField] float utilitiesBaseCost = 300;
     [SerializeField] float utilityBaseVarianceMin = .9f;
     [SerializeField] float utilityBaseVarianceMax = 1.1f;
@@ -32,17 +33,22 @@ public class ExpensesController : MonoBehaviour
     [SerializeField] float thermostatHourlyCostMax = .23f;
 
     [Space]
-    
+    [Header("Groceries")]
     // amount that grocery cost increases each day
+    [Tooltip("MIN amount that grocery cost increases each day")]
     [SerializeField] float groceryDailyCostMax = 15;
+    [Tooltip("MAX amount that grocery cost increases each day")]
     [SerializeField] float groceryDailyCostMin = 22;
 
     // days until grocery expense is due
+    [Tooltip("MIN days until grocery expense is due")]
     [SerializeField] uint groceryDueIntervalMin = 16;
+    [Tooltip("MAX days until grocery expense is due")]
     [SerializeField] uint groceryDueIntervalMax = 21;
 
     // days until player incurs motivation penalty from groceries.
     // motivation drains from unexciting and bad meals
+    [Tooltip("days until player incurs motivation penalty from groceries")]
     [SerializeField] uint groceryPenaltyThreshold = 10;
 
     [Space]
@@ -57,6 +63,9 @@ public class ExpensesController : MonoBehaviour
     LifeFactors lifeFactors;
 
     public static ExpensesController Instance;
+
+    #endregion
+
     private void Awake()
     {
         // singleton code
