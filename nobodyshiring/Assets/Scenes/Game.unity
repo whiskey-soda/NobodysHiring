@@ -2782,6 +2782,19 @@ MonoBehaviour:
     date:
       month: 0
       day: 1
+  escrowChangeDate:
+    month: 4
+    day: 2
+  utilitiesBaseCost: 300
+  utilityBaseVarianceMin: 0.9
+  utilityBaseVarianceMax: 1.1
+  thermostatHourlyCostMin: 0.19
+  thermostatHourlyCostMax: 0.23
+  groceryDailyCostMax: 15
+  groceryDailyCostMin: 22
+  groceryDueIntervalMin: 16
+  groceryDueIntervalMax: 21
+  groceryPenaltyThreshold: 10
   billPastDue:
     m_PersistentCalls:
       m_Calls: []
