@@ -62,7 +62,7 @@ public class ExpensesController : MonoBehaviour
     [Tooltip("days until player incurs motivation penalty from groceries")]
     [SerializeField] uint groceryPenaltyThreshold = 10;
     [Tooltip("proportion of grocery cost needed to buy enough food to survive")]
-    [SerializeField] float bareMinimumGroceryProportion = .6f;
+    [SerializeField] float survivalGroceryProportion = .6f;
     uint daysSinceGroceryShopping = 0;
 
     [Space]
@@ -114,6 +114,8 @@ public class ExpensesController : MonoBehaviour
         lifeFactors = LifeFactors.Instance;
 
         time.dayEnd.AddListener(CheckBillsDue);
+        time.dayEnd.AddListener(DailyGroceryPriceIncrease);
+        time.dayEnd.AddListener(UpdateGroceryLifeFactor);
     }
 
     /// <summary>
@@ -132,13 +134,34 @@ public class ExpensesController : MonoBehaviour
             {
                 // try to pay expense
                 Expense expense = (Expense)Array.IndexOf(dueDates, dueDate);
-                if (TryPayDueExpense(expense) == false) { billsPaid = false; } // fail to pay expense, means bills not paid
-                else // expense paid successfully
+
+                // RENT
+                if (expense == Expense.rent)
                 {
-                    // logic for resetting rent price
-                    if (expense == Expense.rent)
+                    if (TryPayExpense(expense) == true) // try to pay rent with budget AND wallet money, since its due today
                     {
+                        // reset price and life factor for new month
                         moneyDue[(int)expense] = rentPrice;
+                        lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 0);
+                    }
+                    else { billsPaid = false; } // rent payment failed
+                }
+
+                // UTILITIES
+                else if (expense == Expense.utilities)
+                {
+                    CalculateUtilitiesPrice(); // price calculated now since it depends on thermostat usage for entire month
+                    if (TryPayExpense(expense) == false) { billsPaid = false; } // utilities payment failed
+                }
+
+                // GROCERIES
+                else if (expense == Expense.groceries)
+                {
+                    // try to buy all groceries
+                    if (BuyAllGroceries() == false) // not enough money to buy all groceries
+                    {
+                        // not enough for all groceries, so try to buy survival groceries
+                        if (BuySurvivalGroceries() == false) { billsPaid = false; } // groceries payment failed
                     }
                 }
             }
@@ -165,22 +188,25 @@ public class ExpensesController : MonoBehaviour
     #region paying expenses
 
     /// <summary>
-    /// tries to pay a given expense with the budget.
-    /// if that fails to cover the expense, tries to pay the difference from the player's wallet.
+    /// if player can afford an expense, method tries to pay with the budget.
+    /// if that fails to fully cover the expense, tries to pay the difference from the player's wallet.
     /// </summary>
     /// <param name="expense"></param>
     /// <returns>true if expense was paid successfully. false if insufficient funds</returns>
-    private bool TryPayDueExpense(Expense expense)
+    private bool TryPayExpense(Expense expense)
     {
+        // do nothing if expense is unaffordable
+        if (!CanAfford(expense)) { return false; }
+
         bool expensePaid = true;
 
         if (!ExpensePaid(expense)) // if any money is due
         {
             // try to pay from budget
-            if (PayFromBudget(expense) == false) // not enough money in budget to cover expense
+            if (PayFromBudget(expense) == false) // not enough money in budget to fully cover expense
             {
-                // try to pay from wallet
-                if (TryPayFromMoney(expense) == false) { expensePaid = false; } // failed to pay expense
+                // try to pay remainder from wallet
+                if (TryPayFromMoney(expense) == false) { expensePaid = false; } // failed to pay expense, GAME OVER
             }
         }
 
@@ -188,49 +214,85 @@ public class ExpensesController : MonoBehaviour
     }
 
     /// <summary>
-    /// tries to pay the rent with the rent budget.
+    /// tries to pay the rent with ONLY the rent budget. if successful, sets the unpaidBills life factor accordingly.
     /// if the budget is insufficient, nothing happens.
     /// </summary>
     /// <returns>true if payment was successful. false if payment failed.</returns>
-    bool TryPayRent()
+    bool TryPayRentEarly()
     {
         if (SufficientBudget(Expense.rent))
         {
-            PayFromBudget(Expense.rent);
-            lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 1);
-            return true;
+            if (PayFromBudget(Expense.rent) == true) // paid successfully
+            {
+                lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 1);
+                return true;
+            }
         }
         return false;
     }
 
+
     /// <summary>
-    /// tries to pay grocery bill with grocery budget (and wallet, if budget is insufficient).
-    /// if player has enough money to afford all their groceries, 
-    /// OR if they have enough for bare minimum survival necessities, the grocery due date is refreshed.
-    /// only deducts money if groceries were purchased successfully.
+    /// tries to purchase all groceries using budget and wallet. if successful, updates life factor and grocery due date.
+    /// if unsufficient funds, does not deduct any money.
     /// </summary>
-    /// <returns>true if groceries were purchased. false if insufficient funds for groceries</returns>
-    bool TryPayGroceries()
+    /// <returns>true if purchase was successful, false if purchase was unsuccessful</returns>
+    bool BuyAllGroceries()
     {
-        float groceryCost = moneyDue[(int)Expense.groceries];
+        bool groceriesPurchased = false;
+
+        if (CanAfford(Expense.groceries))
+        {
+            if (TryPayExpense(Expense.groceries)) // purchase successful
+            {
+                lifeFactors.SetFactorValue(LifeFactor.GroceryQuality, 1); // set life factor
+                SetGroceryDueDate();
+                groceriesPurchased = true;
+            }
+        }
+
+        return groceriesPurchased;
+    }
+
+    /// <summary>
+    /// purchases bare minimum survival groceries for a fraction of the total grocery cost.
+    /// if successful, updates grocery due date.
+    /// if funds are insufficient, nothing happens.
+    /// </summary>
+    /// <returns>true if purchase was succesful, false if unsuccessful</returns>
+    bool BuySurvivalGroceries()
+    {
+        bool groceriesPurchased = false;
+
+        float groceryCost = moneyDue[(int)Expense.groceries] * survivalGroceryProportion;
         float availableFunds = budget[(int)Expense.groceries] + money.moneyTotal;
 
-        // not enough money for groceries
-        if (availableFunds < bareMinimumGroceryProportion * groceryCost) { return false; }
-
-        // if player can afford their groceries, the life factor gets reset.
-        // if the player cannot afford their full grocery list, the life factor does not reset.
-        if (TryPayDueExpense(Expense.groceries) == true)
+        if (availableFunds >= groceryCost) // can afford grocery bill
         {
-            // player able to afford all groceries, resets life factor
-            lifeFactors.SetFactorValue(LifeFactor.GroceryQuality, 1);
+            // if budget can afford the grocery bill...
+            if (budget[(int)Expense.groceries] >= groceryCost)
+            {
+                budget[(int)Expense.groceries] -= groceryCost; // pay in full with budget
+                groceriesPurchased = true; // success
+            }
+            else // insufficient budget to cover bill
+            {
+                // pay with budget first
+                groceryCost -= budget[(int)Expense.groceries];
+                budget[(int)Expense.groceries] = 0;
+
+                // pay remainder out of wallet
+                if (money.moneyTotal > groceryCost)
+                {
+                    money.SubtractMoney(groceryCost);
+                    groceriesPurchased = true; // success
+                }
+            }
         }
-        // if player can afford groceries OR
-        // if player not able to afford groceries but IS able to afford bare minimum for survival,
-        // they get a refreshed grocery due date and a reset grocery bill
-        SetGroceryDueDate();
-        moneyDue[(int)Expense.groceries] = 0;
-        return true;
+
+        if (groceriesPurchased) { SetGroceryDueDate(); }// no life factor change
+
+        return groceriesPurchased; // returns false if groceries were not purchased successfully
     }
 
     /// <summary>
@@ -300,6 +362,16 @@ public class ExpensesController : MonoBehaviour
         return budget[(int)expense] >= moneyDue[(int)expense];
     }
 
+    /// <summary>
+    /// checks if player can afford an expense, using budget and wallet money
+    /// </summary>
+    /// <param name="expense"></param>
+    /// <returns></returns>
+    bool CanAfford(Expense expense)
+    {
+        return budget[(int)expense] + money.moneyTotal > moneyDue[(int)expense];
+    }
+
     #endregion
 
     /// <summary>
@@ -358,6 +430,8 @@ public class ExpensesController : MonoBehaviour
     /// </summary>
     void UpdateGroceryLifeFactor()
     {
+        daysSinceGroceryShopping++;
+
         if (daysSinceGroceryShopping >= groceryPenaltyThreshold)
         {
             lifeFactors.SetFactorValue(LifeFactor.GroceryQuality, 0);
