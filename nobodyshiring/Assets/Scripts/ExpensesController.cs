@@ -254,6 +254,10 @@ public class ExpensesController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// calculates and returns the utilities price for the month
+    /// </summary>
+    /// <returns></returns>
     float CalculateUtilitiesPrice()
     {
         float baseCost = utilitiesBaseCost * UnityEngine.Random.Range(utilityBaseVarianceMin, utilityBaseVarianceMax);
@@ -269,5 +273,7 @@ public class ExpensesController : MonoBehaviour
     {
         thermostatCost += UnityEngine.Random.Range(thermostatHourlyCostMin, thermostatHourlyCostMax);
     }
+
+
 
 }
