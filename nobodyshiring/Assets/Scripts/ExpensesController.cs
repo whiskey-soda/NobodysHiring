@@ -60,6 +60,8 @@ public class ExpensesController : MonoBehaviour
     // motivation drains from unexciting and bad meals
     [Tooltip("days until player incurs motivation penalty from groceries")]
     [SerializeField] uint groceryPenaltyThreshold = 10;
+    [Tooltip("proportion of grocery cost needed to buy enough food to survive")]
+    [SerializeField] float bareMinimumGroceryProportion = .6f;
     uint daysSinceGroceryShopping = 0;
 
     [Space]
@@ -191,9 +193,40 @@ public class ExpensesController : MonoBehaviour
         if (SufficientBudget(Expense.rent))
         {
             PayFromBudget(Expense.rent);
+            lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 1);
             return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// tries to pay grocery bill with grocery budget (and wallet, if budget is insufficient).
+    /// if player has enough money to afford all their groceries, 
+    /// OR if they have enough for bare minimum survival necessities, the grocery due date is refreshed.
+    /// only deducts money if groceries were purchased successfully.
+    /// </summary>
+    /// <returns>true if groceries were purchased. false if insufficient funds for groceries</returns>
+    bool TryPayGroceries()
+    {
+        float groceryCost = moneyDue[(int)Expense.groceries];
+        float availableFunds = budget[(int)Expense.groceries] + money.moneyTotal;
+
+        // not enough money for groceries
+        if (availableFunds < bareMinimumGroceryProportion * groceryCost) { return false; }
+
+        // if player can afford their groceries, the life factor gets reset.
+        // if the player cannot afford their full grocery list, the life factor does not reset.
+        if (TryPayDueExpense(Expense.groceries) == true)
+        {
+            // player able to afford all groceries, resets life factor
+            lifeFactors.SetFactorValue(LifeFactor.GroceryQuality, 1);
+        }
+        // if player can afford groceries OR
+        // if player not able to afford groceries but IS able to afford bare minimum for survival,
+        // they get a refreshed grocery due date and a reset grocery bill
+        SetGroceryDueDate();
+        moneyDue[(int)Expense.groceries] = 0;
+        return true;
     }
 
     /// <summary>
