@@ -22,8 +22,9 @@ public class ExpensesController : MonoBehaviour
 
     [Space]
     [Header("Rent")]
+    [SerializeField] float rentPrice = 2600;
+    
     [SerializeField] Date escrowChangeDate; // yearly date when rent has a chance to increase
-
     [Tooltip("chance for escrow to raise each year")]
     [SerializeField] float escrowRaiseChance = .7f;
     [Tooltip("minimum percent that rent price will increase")]
@@ -132,6 +133,14 @@ public class ExpensesController : MonoBehaviour
                 // try to pay expense
                 Expense expense = (Expense)Array.IndexOf(dueDates, dueDate);
                 if (TryPayDueExpense(expense) == false) { billsPaid = false; } // fail to pay expense, means bills not paid
+                else // expense paid successfully
+                {
+                    // logic for resetting rent price
+                    if (expense == Expense.rent)
+                    {
+                        moneyDue[(int)expense] = rentPrice;
+                    }
+                }
             }
         }
 
@@ -172,11 +181,6 @@ public class ExpensesController : MonoBehaviour
             {
                 // try to pay from wallet
                 if (TryPayFromMoney(expense) == false) { expensePaid = false; } // failed to pay expense
-            }
-
-            if (expense == Expense.rent && expensePaid)
-            {
-                lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 1);
             }
         }
 
@@ -308,7 +312,7 @@ public class ExpensesController : MonoBehaviour
             // roll under
             if (UnityEngine.Random.Range(0f, 1f) < escrowRaiseChance )
             {
-                moneyDue[(int)Expense.rent] *= 1 + UnityEngine.Random.Range(escrowIncreaseMin, escrowIncreaseMax);
+                rentPrice *= 1 + UnityEngine.Random.Range(escrowIncreaseMin, escrowIncreaseMax);
             }
         }
     }
