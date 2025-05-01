@@ -46,9 +46,9 @@ public class ExpensesController : MonoBehaviour
     [Header("Groceries")]
     // amount that grocery cost increases each day
     [Tooltip("MIN amount that grocery cost increases each day")]
-    [SerializeField] float groceryDailyCostMax = 15;
+    [SerializeField] float groceryDailyCostMin = 15;
     [Tooltip("MAX amount that grocery cost increases each day")]
-    [SerializeField] float groceryDailyCostMin = 22;
+    [SerializeField] float groceryDailyCostMax = 22;
 
     // days until grocery expense is due
     [Tooltip("MIN days until grocery expense is due")]
@@ -274,6 +274,20 @@ public class ExpensesController : MonoBehaviour
         thermostatCost += UnityEngine.Random.Range(thermostatHourlyCostMin, thermostatHourlyCostMax);
     }
 
+    /// <summary>
+    /// raises price of next grocery run by a daily amount
+    /// </summary>
+    void DailyGroceryPriceIncrease()
+    {
+        moneyDue[(int)Expense.groceries] += UnityEngine.Random.Range(groceryDailyCostMin, groceryDailyCostMax);
+    }
 
+    /// <summary>
+    /// sets the grocery due date to a future date (determined by config parameters)
+    /// </summary>
+    void SetGroceryDueDate()
+    {
+        dueDates[(int)Expense.groceries].MoveDate((uint)UnityEngine.Random.Range(groceryDueIntervalMin, groceryDueIntervalMax));
+    }
 
 }

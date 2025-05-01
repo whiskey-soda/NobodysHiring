@@ -21,6 +21,22 @@ public struct Date
             && other.day == day) { return true; }
         else { return false; }
     }
+
+    public void MoveDate(uint days)
+    {
+        for (int i = 0; i < Mathf.Abs(days); i++)
+        {
+            // increase day value into future
+            if (Mathf.Sign(days) > 0) { day++; }
+            // decrease day value into past
+            else if (Mathf.Sign(days) < 0) {  day--; }
+
+            // set to max day value. decrement month
+            if (day < 1){ day = TimeTracking.Instance.daysInMonth; month--; }
+            // set to minimum day value. increment month
+            else if (day > TimeTracking.Instance.daysInMonth) { day = 1; month++; }
+        }
+    }
 }
 
 public class TimeTracking : MonoBehaviour
@@ -30,7 +46,7 @@ public class TimeTracking : MonoBehaviour
     public uint day { get; private set; } = 1;
     public uint month { get; private set; } = 1;
 
-    float daysInMonth = 30;
+    public uint daysInMonth { get; private set; } = 30;
 
     public UnityEvent dayEnd;
     public UnityEvent monthEnd;
@@ -73,7 +89,7 @@ public class TimeTracking : MonoBehaviour
 
     void IncrementDay()
     {
-        day ++;
+        day++;
         if (day > daysInMonth)
         {
             IncrementMonth();
