@@ -60,6 +60,7 @@ public class ExpensesController : MonoBehaviour
     // motivation drains from unexciting and bad meals
     [Tooltip("days until player incurs motivation penalty from groceries")]
     [SerializeField] uint groceryPenaltyThreshold = 10;
+    uint daysSinceGroceryShopping = 0;
 
     [Space]
     public UnityEvent billPastDue;
@@ -128,41 +129,11 @@ public class ExpensesController : MonoBehaviour
             {
                 // try to pay expense
                 Expense expense = (Expense)Array.IndexOf(dueDates, dueDate);
-                if (TryPayExpense(expense) == false) { billsPaid = false; } // fail to pay expense, means bills not paid
+                if (TryPayDueExpense(expense) == false) { billsPaid = false; } // fail to pay expense, means bills not paid
             }
         }
 
         if (!billsPaid) { billPastDue.Invoke(); }
-    }
-
-    #region paying expenses
-
-    /// <summary>
-    /// tries to pay a given expense with the budget.
-    /// if that fails to cover the expense, tries to pay the difference from the player's wallet.
-    /// </summary>
-    /// <param name="expense"></param>
-    /// <returns>true if expense was paid successfully. false if insufficient funds</returns>
-    private bool TryPayExpense(Expense expense)
-    {
-        bool expensePaid = true;
-
-        if (!ExpensePaid(expense)) // if any money is due
-        {
-            // try to pay from budget
-            if (TryPayFromBudget(expense) == false) // not enough money in budget to cover expense
-            {
-                // try to pay from wallet
-                if (TryPayFromMoney(expense) == false) { expensePaid = false; } // failed to pay expense
-            }
-
-            if (expense == Expense.rent && expensePaid)
-            {
-                lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 1);
-            }
-        }
-
-        return expensePaid;
     }
 
 
@@ -180,13 +151,58 @@ public class ExpensesController : MonoBehaviour
         money.SubtractMoney(moneyAmount);
     }
 
+    #region paying expenses
+
+    /// <summary>
+    /// tries to pay a given expense with the budget.
+    /// if that fails to cover the expense, tries to pay the difference from the player's wallet.
+    /// </summary>
+    /// <param name="expense"></param>
+    /// <returns>true if expense was paid successfully. false if insufficient funds</returns>
+    private bool TryPayDueExpense(Expense expense)
+    {
+        bool expensePaid = true;
+
+        if (!ExpensePaid(expense)) // if any money is due
+        {
+            // try to pay from budget
+            if (PayFromBudget(expense) == false) // not enough money in budget to cover expense
+            {
+                // try to pay from wallet
+                if (TryPayFromMoney(expense) == false) { expensePaid = false; } // failed to pay expense
+            }
+
+            if (expense == Expense.rent && expensePaid)
+            {
+                lifeFactors.SetFactorValue(LifeFactor.UnpaidBills, 1);
+            }
+        }
+
+        return expensePaid;
+    }
+
+    /// <summary>
+    /// tries to pay the rent with the rent budget.
+    /// if the budget is insufficient, nothing happens.
+    /// </summary>
+    /// <returns>true if payment was successful. false if payment failed.</returns>
+    bool TryPayRent()
+    {
+        if (SufficientBudget(Expense.rent))
+        {
+            PayFromBudget(Expense.rent);
+            return true;
+        }
+        return false;
+    }
+
     /// <summary>
     /// tries to pay an expense with the money from the budget. removes the money used for the payment from the budget
     /// and adjusts amount due accordingly.
     /// </summary>
     /// <param name="expense"></param>
     /// <returns>returns true if expense was fully paid, false if there were inadequate funds in the budget</returns>
-    public bool TryPayFromBudget(Expense expense)
+    public bool PayFromBudget(Expense expense)
     {
         bool expensePaid = false;
 
@@ -235,6 +251,16 @@ public class ExpensesController : MonoBehaviour
     bool ExpensePaid(Expense expense)
     {
         return moneyDue[(int)expense] <= 0;
+    }
+
+    /// <summary>
+    /// checks if an expense's budget can cover its cost
+    /// </summary>
+    /// <param name="expense"></param>
+    /// <returns></returns>
+    bool SufficientBudget(Expense expense)
+    {
+        return budget[(int)expense] >= moneyDue[(int)expense];
     }
 
     #endregion
@@ -288,6 +314,18 @@ public class ExpensesController : MonoBehaviour
     void SetGroceryDueDate()
     {
         dueDates[(int)Expense.groceries].MoveDate((uint)UnityEngine.Random.Range(groceryDueIntervalMin, groceryDueIntervalMax));
+    }
+
+    /// <summary>
+    /// updates the groceryQuality life factor based on how long its been since the player shopped for groceries
+    /// </summary>
+    void UpdateGroceryLifeFactor()
+    {
+        if (daysSinceGroceryShopping >= groceryPenaltyThreshold)
+        {
+            lifeFactors.SetFactorValue(LifeFactor.GroceryQuality, 0);
+        }
+        else { lifeFactors.SetFactorValue(LifeFactor.GroceryQuality, 1); }
     }
 
 }
