@@ -40,6 +40,8 @@ public class ExpensesController : MonoBehaviour
     [SerializeField] float thermostatHourlyCostMin = .19f;
     [SerializeField] float thermostatHourlyCostMax = .23f;
 
+    float thermostatCost = 0;
+
     [Space]
     [Header("Groceries")]
     // amount that grocery cost increases each day
@@ -132,6 +134,8 @@ public class ExpensesController : MonoBehaviour
 
         if (!billsPaid) { billPastDue.Invoke(); }
     }
+
+    #region paying expenses
 
     /// <summary>
     /// tries to pay a given expense with the budget.
@@ -233,6 +237,8 @@ public class ExpensesController : MonoBehaviour
         return moneyDue[(int)expense] <= 0;
     }
 
+    #endregion
+
     /// <summary>
     /// has a chance to raise rent price each year due to escrow increasing
     /// </summary>
@@ -247,4 +253,21 @@ public class ExpensesController : MonoBehaviour
             }
         }
     }
+
+    float CalculateUtilitiesPrice()
+    {
+        float baseCost = utilitiesBaseCost * UnityEngine.Random.Range(utilityBaseVarianceMin, utilityBaseVarianceMax);
+        return baseCost + thermostatCost;
+    }
+
+    /// <summary>
+    /// raises the thermostat cost total for this month.
+    /// raises by a random amount per hour used.
+    /// </summary>
+    /// <param name="duration"></param>
+    void UseThermostat(float duration)
+    {
+        thermostatCost += UnityEngine.Random.Range(thermostatHourlyCostMin, thermostatHourlyCostMax);
+    }
+
 }
