@@ -14,6 +14,7 @@ public class ExpensesController : MonoBehaviour
         public Expense expense;
         public Date date;
     }
+
     #region variables
 
     [SerializeField]
@@ -22,6 +23,13 @@ public class ExpensesController : MonoBehaviour
     [Space]
     [Header("Rent")]
     [SerializeField] Date escrowChangeDate; // yearly date when rent has a chance to increase
+
+    [Tooltip("chance for escrow to raise each year")]
+    [SerializeField] float escrowRaiseChance = .7f;
+    [Tooltip("minimum percent that rent price will increase")]
+    [SerializeField] float escrowIncreaseMin = .02f;
+    [Tooltip("maximum percent that rent price will increase")]
+    [SerializeField] float escrowIncreaseMax = .06f;
 
     [Space]
     [Header("Utilities")]
@@ -225,11 +233,18 @@ public class ExpensesController : MonoBehaviour
         return moneyDue[(int)expense] <= 0;
     }
 
+    /// <summary>
+    /// has a chance to raise rent price each year due to escrow increasing
+    /// </summary>
     void YearlyEscrowChange()
     {
         if (time.GetCurrentDate().Equals(escrowChangeDate))
         {
-
+            // roll under
+            if (UnityEngine.Random.Range(0f, 1f) < escrowRaiseChance )
+            {
+                moneyDue[(int)Expense.rent] *= 1 + UnityEngine.Random.Range(escrowIncreaseMin, escrowIncreaseMax);
+            }
         }
     }
 }
