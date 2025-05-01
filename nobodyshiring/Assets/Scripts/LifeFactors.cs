@@ -1,14 +1,16 @@
+using System;
 using UnityEngine;
+using System.Linq;
 
 public enum LifeFactor
 {
-    UnpaidBills, Cleanliness, HousingQuality,
-    SavingsAmount, WorkstationQuality
+    UnpaidBills, Cleanliness, GroceryQuality,
+    HousingQuality, SavingsAmount, WorkstationQuality
 }
 
 public class LifeFactors : MonoBehaviour
 {
-    public float[] factorValues = { 0, 0, 0, 0, 0 }; // 0 is bad, 1 is good
+    public float[] factorValues { get; private set; } // 0 is bad, 1 is good
 
     public static LifeFactors Instance;
 
@@ -23,6 +25,8 @@ public class LifeFactors : MonoBehaviour
         {
             Destroy(this);
         }
+
+        factorValues = new float[Enum.GetNames(typeof(LifeFactor)).Count()];
     }
 
     /// <summary>
