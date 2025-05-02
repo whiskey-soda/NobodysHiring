@@ -33,21 +33,22 @@ public class BillsUIHelper : MonoBehaviour
 
     private void Update()
     {
-        rentCost.text = "Cost: " + expensesController.moneyDue[(int)Expense.rent].ToString();
+        rentCost.text = "Cost: " + System.Math.Round(expensesController.moneyDue[(int)Expense.rent], 2);
         rentBudget.text = "Budget: " + expensesController.budget[(int)Expense.rent].ToString();
         rentDueDate.text = "Due: " + expensesController.dueDates[(int)Expense.rent].ToString();
 
 
 
-        utilitiesCost.text = "Cost: " + expensesController.moneyDue[(int)Expense.utilities].ToString();
+        utilitiesCost.text = "Cost: ~" + System.Math.Round(expensesController.moneyDue[(int)Expense.utilities], 2);
         utilitiesBudget.text = "Budget: " + expensesController.budget[(int)(Expense.utilities)].ToString();
         utilitiesDueDate.text = "Due: " + expensesController.dueDates[(int)Expense.utilities].ToString();
 
 
 
-        groceriesCost.text = "Cost: " + expensesController.moneyDue[(int)Expense.groceries].ToString();
+        groceriesCost.text = "Cost: " + System.Math.Round(expensesController.moneyDue[(int)Expense.groceries], 2);
         groceriesBudget.text = "Budget: " + expensesController.budget[(int)Expense.groceries].ToString();
         groceriesDueDate.text = "Due: " + expensesController.dueDates[(int)Expense.groceries].ToString();
+
     }
 
     public void RentBudget()

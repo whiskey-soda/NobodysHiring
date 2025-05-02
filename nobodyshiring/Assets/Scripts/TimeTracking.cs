@@ -13,6 +13,12 @@ public struct Date
         this.day = day;
     }
 
+    /// <summary>
+    /// comparison method, returns true if both dates are the same.
+    /// if month is 0, then only the date is considered
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     public bool Equals(Date other)
     {
         // if month is 0, means the month doesnt matter. only look at the day.

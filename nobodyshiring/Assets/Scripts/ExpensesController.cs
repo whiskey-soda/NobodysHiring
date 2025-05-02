@@ -116,6 +116,16 @@ public class ExpensesController : MonoBehaviour
         time.dayEnd.AddListener(CheckBillsDue);
         time.dayEnd.AddListener(DailyGroceryPriceIncrease);
         time.dayEnd.AddListener(UpdateGroceryLifeFactor);
+
+        Init();
+    }
+
+    void Init()
+    {
+        moneyDue[(int)Expense.rent] = rentPrice;
+        UpdateUtilitiesPrice();
+        moneyDue[(int)Expense.groceries] = 0;
+        SetGroceryDueDate();
     }
 
     /// <summary>
@@ -150,7 +160,7 @@ public class ExpensesController : MonoBehaviour
                 // UTILITIES
                 else if (expense == Expense.utilities)
                 {
-                    CalculateUtilitiesPrice(); // price calculated now since it depends on thermostat usage for entire month
+                    UpdateUtilitiesPrice(); // price calculated now since it depends on thermostat usage for entire month
                     if (TryPayExpense(expense) == false) { billsPaid = false; } // utilities payment failed
                 }
 
@@ -245,6 +255,7 @@ public class ExpensesController : MonoBehaviour
         {
             if (TryPayExpense(Expense.groceries)) // purchase successful
             {
+                moneyDue[(int)Expense.groceries] = 0;
                 lifeFactors.SetFactorValue(LifeFactor.GroceryQuality, 1); // set life factor
                 SetGroceryDueDate();
                 groceriesPurchased = true;
@@ -290,7 +301,7 @@ public class ExpensesController : MonoBehaviour
             }
         }
 
-        if (groceriesPurchased) { SetGroceryDueDate(); }// no life factor change
+        if (groceriesPurchased) { SetGroceryDueDate(); moneyDue[(int)Expense.groceries] = 0; }// no life factor change
 
         return groceriesPurchased; // returns false if groceries were not purchased successfully
     }
@@ -393,10 +404,10 @@ public class ExpensesController : MonoBehaviour
     /// calculates and returns the utilities price for the month
     /// </summary>
     /// <returns></returns>
-    float CalculateUtilitiesPrice()
+    public void UpdateUtilitiesPrice()
     {
         float baseCost = utilitiesBaseCost * UnityEngine.Random.Range(utilityBaseVarianceMin, utilityBaseVarianceMax);
-        return baseCost + thermostatCost;
+        moneyDue[(int)Expense.utilities] = baseCost + thermostatCost;
     }
 
     /// <summary>
@@ -422,6 +433,7 @@ public class ExpensesController : MonoBehaviour
     /// </summary>
     void SetGroceryDueDate()
     {
+        dueDates[(int)Expense.groceries] = TimeTracking.Instance.GetCurrentDate();
         dueDates[(int)Expense.groceries].MoveDate((uint)UnityEngine.Random.Range(groceryDueIntervalMin, groceryDueIntervalMax));
     }
 
