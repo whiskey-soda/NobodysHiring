@@ -5,33 +5,41 @@ using UnityEngine.UI;
 
 public class BillsUIHelper : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI rentText;
-    [SerializeField] Button payRentButton;
+    [Header("rent")]
+    [SerializeField] TextMeshProUGUI rentCost;
+    [SerializeField] TextMeshProUGUI rentBudget;
+    [SerializeField] TextMeshProUGUI rentDueDate;
+    [Space(2)]
+    [Header("utilities")]
+    [SerializeField] TextMeshProUGUI utilitiesCost;
+    [SerializeField] TextMeshProUGUI utilitiesBudget;
+    [SerializeField] TextMeshProUGUI utilitiesDueDate;
+    [Space(2)]
+    [Header("groceries")]
+    [SerializeField] TextMeshProUGUI groceriesCost;
+    [SerializeField] TextMeshProUGUI groceriesBudget;
+    [SerializeField] TextMeshProUGUI groceriesDueDate;
 
-    ExpensesController bills;
+    ExpensesController expensesController;
 
     private void Start()
     {
-        bills = ExpensesController.Instance;
+        expensesController = ExpensesController.Instance;
     }
 
     private void Update()
     {
-        /*
-        rentText.text = $"Rent/Mortgage: ${bills.rentPrice} ";
-        if (bills.rentPaid)
-        {
-            rentText.text += "(PAID)";
-        }
-        else { rentText.text += "(UNPAID)"; }
+        rentCost.text = "Cost: " + expensesController.moneyDue[(int)Expense.rent].ToString();
+        rentBudget.text = "Budget: " + expensesController.budget[(int)Expense.rent].ToString();
+        rentDueDate.text = "Due: " + expensesController.dueDates[(int)Expense.rent].ToString();
 
+        utilitiesCost.text = "Cost: " + expensesController.moneyDue[(int)Expense.utilities].ToString();
+        utilitiesBudget.text = "Budget: " + expensesController.budget[(int)(Expense.utilities)].ToString();
+        utilitiesDueDate.text = "Due: " + expensesController.dueDates[(int)Expense.utilities].ToString();
 
-        if (bills.rentPaid)
-        {
-            payRentButton.interactable = false;
-        }
-        else { payRentButton.interactable = true; }
-        */
+        groceriesCost.text = "Cost: " + expensesController.moneyDue[(int)Expense.groceries].ToString();
+        groceriesBudget.text = "Budget: " + expensesController.budget[(int)Expense.groceries].ToString();
+        groceriesDueDate.text = "Due: " + expensesController.dueDates[(int)Expense.groceries].ToString();
     }
 
 }

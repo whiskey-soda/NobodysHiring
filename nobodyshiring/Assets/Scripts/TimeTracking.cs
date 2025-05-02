@@ -37,6 +37,11 @@ public struct Date
             else if (day > TimeTracking.Instance.daysInMonth) { day = 1; month++; }
         }
     }
+
+    public override string ToString()
+    {
+        return $"{month} / {day}";
+    }
 }
 
 public class TimeTracking : MonoBehaviour

@@ -68,9 +68,9 @@ public class ExpensesController : MonoBehaviour
     [Space]
     public UnityEvent billPastDue;
 
-    Date[] dueDates;
-    float[] moneyDue;
-    float[] budget;
+    public Date[] dueDates { get; private set; }
+    public float[] moneyDue { get; private set; }
+    public float[] budget {  get; private set; }
 
     Money money;
     TimeTracking time;
