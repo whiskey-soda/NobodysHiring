@@ -1784,7 +1784,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 142500367}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770078030}
+        m_TargetAssemblyTypeName: BillsUIHelper, Assembly-CSharp
+        m_MethodName: UtilitiesBudget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &142500367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1995,7 +2007,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 182377047}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770078030}
+        m_TargetAssemblyTypeName: BillsUIHelper, Assembly-CSharp
+        m_MethodName: RentBudget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &182377047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2385,7 +2409,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 233477789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770078030}
+        m_TargetAssemblyTypeName: BillsUIHelper, Assembly-CSharp
+        m_MethodName: ShopGroceries
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &233477789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4148,7 +4184,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 425813359}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770078030}
+        m_TargetAssemblyTypeName: BillsUIHelper, Assembly-CSharp
+        m_MethodName: GroceriesBudget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &425813359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7082,7 +7130,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 724667994}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770078030}
+        m_TargetAssemblyTypeName: BillsUIHelper, Assembly-CSharp
+        m_MethodName: PayRent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &724667994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7311,12 +7371,15 @@ MonoBehaviour:
   rentCost: {fileID: 2088151015}
   rentBudget: {fileID: 1301393115}
   rentDueDate: {fileID: 35052865}
+  rentInput: {fileID: 1225848396}
   utilitiesCost: {fileID: 403952432}
   utilitiesBudget: {fileID: 238406968}
   utilitiesDueDate: {fileID: 32133359}
+  utilitiesInput: {fileID: 337270304}
   groceriesCost: {fileID: 693726139}
   groceriesBudget: {fileID: 1079821198}
   groceriesDueDate: {fileID: 1257425300}
+  groceriesInput: {fileID: 559093228}
 --- !u!1 &792661626
 GameObject:
   m_ObjectHideFlags: 0
@@ -13509,7 +13572,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1559320297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770078030}
+        m_TargetAssemblyTypeName: BillsUIHelper, Assembly-CSharp
+        m_MethodName: ShopSurvivalGroceries
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1559320297
 MonoBehaviour:
   m_ObjectHideFlags: 0

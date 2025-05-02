@@ -218,7 +218,7 @@ public class ExpensesController : MonoBehaviour
     /// if the budget is insufficient, nothing happens.
     /// </summary>
     /// <returns>true if payment was successful. false if payment failed.</returns>
-    bool TryPayRentEarly()
+    public bool TryPayRentEarly()
     {
         if (SufficientBudget(Expense.rent))
         {
@@ -237,7 +237,7 @@ public class ExpensesController : MonoBehaviour
     /// if unsufficient funds, does not deduct any money.
     /// </summary>
     /// <returns>true if purchase was successful, false if purchase was unsuccessful</returns>
-    bool BuyAllGroceries()
+    public bool BuyAllGroceries()
     {
         bool groceriesPurchased = false;
 
@@ -260,7 +260,7 @@ public class ExpensesController : MonoBehaviour
     /// if funds are insufficient, nothing happens.
     /// </summary>
     /// <returns>true if purchase was succesful, false if unsuccessful</returns>
-    bool BuySurvivalGroceries()
+    public bool BuySurvivalGroceries()
     {
         bool groceriesPurchased = false;
 
