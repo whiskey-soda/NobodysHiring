@@ -426,6 +426,7 @@ public class ExpensesController : MonoBehaviour
     }
 
     /// <summary>
+    /// registers a day since grocery shopping.
     /// updates the groceryQuality life factor based on how long its been since the player shopped for groceries
     /// </summary>
     void UpdateGroceryLifeFactor()

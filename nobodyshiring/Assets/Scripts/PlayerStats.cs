@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -5,6 +6,7 @@ using UnityEngine.Rendering;
 public class PlayerStats : MonoBehaviour
 {
     SleepManager sleepManager;
+    Thermostat thermostat;
 
     public float motivationMax { get; private set; } = 100;
     public float energyMax { get; private set; } = 100;
@@ -59,11 +61,19 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         sleepManager = SleepManager.Instance;
+        thermostat = Thermostat.Instance;
     }
 
-    public void ChangeMotivation(float value)
+    public void ChangeMotivation(float motivationChange)
     {
-        motivation += value;
+        // if motivation is being lost, cost gets modified
+        if (Mathf.Sign(motivationChange) < 0)
+        {
+            // thermostat applies multiplier
+            if (!thermostat.On) { motivationChange *= thermostat.motivationCostMult; }
+        }
+
+        motivation += motivationChange;
     }
 
     /// <summary>
@@ -73,8 +83,15 @@ public class PlayerStats : MonoBehaviour
     /// <returns>the proportion of energy that was used before passing out.</returns>
     public float ChangeEnergy(float energyChange)
     {
-        // if energy is being lost, high/low motivation multiplies the energy cost
-        if (Mathf.Sign(energyChange) < 0) { energyChange = CalculateMotivationInfluence(energyChange); }
+        // if energy is being lost, cost gets modified
+        if (Mathf.Sign(energyChange) < 0) 
+        {
+            // high/low motivation multiplies the energy cost
+            energyChange = CalculateMotivationInfluence(energyChange); 
+
+            // thermostat applies multiplier
+            if (!thermostat.On) { energyChange *= thermostat.energyCostMult; }
+        }
 
         energy += energyChange;
 
