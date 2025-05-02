@@ -64,10 +64,31 @@ public class PlayerStats : MonoBehaviour
         thermostat = Thermostat.Instance;
     }
 
+    /// <summary>
+    /// modifies the player's motivation by a given value, factoring in thermostat affects
+    /// </summary>
+    /// <param name="motivationChange"></param>
     public void ChangeMotivation(float motivationChange)
     {
         // if motivation is being lost, cost gets modified
         if (Mathf.Sign(motivationChange) < 0)
+        {
+            // thermostat applies multiplier
+            if (!thermostat.On) { motivationChange *= thermostat.motivationCostMult; }
+        }
+
+        motivation += motivationChange;
+    }
+
+    /// <summary>
+    /// modifies the player's motivation, with a parameter option to use/ignore thermostat affects
+    /// </summary>
+    /// <param name="motivationChange"></param>
+    /// <param name="considerThermostat"></param>
+    public void ChangeMotivation(float motivationChange, bool considerThermostat)
+    {
+        // if motivation is being lost, cost gets modified
+        if (considerThermostat && Mathf.Sign(motivationChange) < 0)
         {
             // thermostat applies multiplier
             if (!thermostat.On) { motivationChange *= thermostat.motivationCostMult; }

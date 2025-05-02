@@ -81,7 +81,7 @@ public class MotivationDrain : MonoBehaviour
 
         //Debug.Log($"{hours} hours passed. motivation drained by {drainAmount}");
 
-        playerStats.ChangeMotivation(-drainAmount);
+        playerStats.ChangeMotivation(-drainAmount, false);
     }
 
 }

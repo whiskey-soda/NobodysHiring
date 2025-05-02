@@ -54,10 +54,14 @@ public class TimeTracking : MonoBehaviour
     public static TimeTracking Instance;
 
     MotivationDrain motivationDrain;
+    Thermostat thermostat;
+    ExpensesController expensesController;
 
     private void Start()
     {
         motivationDrain = MotivationDrain.Instance;
+        thermostat = Thermostat.Instance;
+        expensesController = ExpensesController.Instance;
     }
 
     private void Awake()
@@ -85,6 +89,8 @@ public class TimeTracking : MonoBehaviour
         // apply passive motivation drain per hour passed
         motivationDrain.ApplyMotivationDrain(time);
 
+        // add thermostat running time, if needed
+        if (thermostat.On) { expensesController.UseThermostat(time); }
     }
 
     void IncrementDay()

@@ -404,7 +404,7 @@ public class ExpensesController : MonoBehaviour
     /// raises by a random amount per hour used.
     /// </summary>
     /// <param name="duration"></param>
-    void UseThermostat(float duration)
+    public void UseThermostat(float duration)
     {
         thermostatCost += UnityEngine.Random.Range(thermostatHourlyCostMin, thermostatHourlyCostMax);
     }
