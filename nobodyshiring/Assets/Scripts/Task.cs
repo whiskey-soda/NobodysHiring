@@ -132,20 +132,24 @@ public class Task : Project
             {
                 // give a bonus multiplier to progress if skill level is above or below rec level
 
-                float skillDiff = playerSkills.skills[i] - recommededSkillLevels[i];
+                // cast to ints rounds towards zero. no decimal comparisons because reqs will always be whole numbers
+                int skillDiff = (int)playerSkills.skills[i] - (int)recommededSkillLevels[i];
                 float progressMultAwarded = 0;
 
                 if (Mathf.Abs(skillDiff) > 2)
                 {
                     progressMultAwarded = extremeSkillDiffMult;
+                    Debug.Log($"{(Skill)i} skill difference is extreme (2+). progress multiplier changed by {extremeSkillDiffMult * Mathf.Sign(skillDiff)}");
                 }
-                else if (Mathf.Abs(skillDiff) > 1)
+                else if (Mathf.Abs(skillDiff) == 2)
                 {
                     progressMultAwarded = highSkillDiffMult;
+                    Debug.Log($"{(Skill)i} skill difference is high (2). progress multiplier changed by {highSkillDiffMult * Mathf.Sign(skillDiff)}");
                 }
-                else if (Mathf.Abs(skillDiff) > 0)
+                else if (Mathf.Abs(skillDiff) == 1)
                 {
                     progressMultAwarded = lowSkillDiffMult;
+                    Debug.Log($"{(Skill)i} skill difference is low (1). progress multiplier changed by {lowSkillDiffMult * Mathf.Sign(skillDiff)}");
                 }
 
                 multFromSkills += Mathf.Sign(skillDiff) * progressMultAwarded;
