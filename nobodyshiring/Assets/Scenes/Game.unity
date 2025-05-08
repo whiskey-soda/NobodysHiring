@@ -4889,7 +4889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aea9cfc64d8e954a8180c20a36332b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHour: 0
   dayEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -6346,6 +6345,9 @@ MonoBehaviour:
   lifeFactorChanges: []
   skillChanges: []
   progressMultiplier: 2
+  lowSkillImprovementRate: 0.015
+  equalSkillImprovementRate: 0.01
+  highSkillImprovementRate: 0.005
 --- !u!1 &642887976
 GameObject:
   m_ObjectHideFlags: 0
@@ -10900,6 +10902,9 @@ MonoBehaviour:
   lifeFactorChanges: []
   skillChanges: []
   progressMultiplier: 1
+  lowSkillImprovementRate: 0.015
+  equalSkillImprovementRate: 0.01
+  highSkillImprovementRate: 0.005
 --- !u!1 &1225848394
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,8 +53,8 @@ public struct Date
 public class TimeTracking : MonoBehaviour
 {
 
-    public float currentHour = 0;
-    public uint day { get; private set; } = 1;
+    public float currentHour { get; private set; } = 7.5f;
+    public uint day { get; private set; } = 2;
     public uint month { get; private set; } = 1;
 
     public uint daysInMonth { get; private set; } = 30;

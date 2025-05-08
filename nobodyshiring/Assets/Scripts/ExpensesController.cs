@@ -117,6 +117,10 @@ public class ExpensesController : MonoBehaviour
         time.dayEnd.AddListener(DailyGroceryPriceIncrease);
         time.dayEnd.AddListener(UpdateGroceryLifeFactor);
 
+        // temp: make game end if a bill is past due.
+        // REMOVE THIS LATER, it should not be added by the expenses controller. WAY out of this scripts jurisdiction
+        if (GameController.Instance != null) { billPastDue.AddListener(GameController.Instance.GoToMainMenu); }
+
         Init();
     }
 
