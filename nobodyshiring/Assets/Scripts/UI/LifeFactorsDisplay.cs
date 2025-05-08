@@ -20,7 +20,7 @@ public class LifeFactorsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        factorsText.text = $"life factors\n";
+        factorsText.text = $"(0 is bad, 1 is good)\n";
         for (int i = 0; i < factors.factorValues.Length; i++)
         {
             factorsText.text += $"{(LifeFactor)i}: {System.Math.Round(factors.factorValues[i], 2)}\n";

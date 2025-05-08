@@ -23,10 +23,10 @@ public class SkillsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        statsText.text = $"skills\n";
+        statsText.text = $"";
         for (int i = 0; i < playerSkills.skills.Length; i++)
         {
-            statsText.text += $"{(Skill)i}: {System.Math.Round(playerSkills.skills[i], 2)}\n";
+            statsText.text += $"{(Skill)i}: {System.Math.Round(playerSkills.skills[i], 2)} / 4\n";
         }
     }
 }

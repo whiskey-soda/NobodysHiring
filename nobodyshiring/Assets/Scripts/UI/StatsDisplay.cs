@@ -23,8 +23,7 @@ public class StatsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        statsText.text = $"stats\n" +
-            $"motivation: {System.Math.Round(playerStats.motivation)}\n" +
+        statsText.text = $"motivation: {System.Math.Round(playerStats.motivation)}\n" +
             $"energy:  {System.Math.Round(playerStats.energy)}\n";
     }
 }
