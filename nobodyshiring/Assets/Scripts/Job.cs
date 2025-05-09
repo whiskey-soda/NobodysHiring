@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class Job : Task
 {
-    public Job(TaskData data) : base(data)
+    public Job(TaskData data) : base(data) // job constructor
     {
     }
 
