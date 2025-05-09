@@ -3,10 +3,16 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-struct SkillChange
+public struct SkillChange
 {
     public Skill skill;
     public float value;
+
+    public SkillChange(Skill skill, float value)
+    {
+        this.skill = skill;
+        this.value = value;
+    }
 }
 
 [System.Serializable]
@@ -39,7 +45,7 @@ public class Activity : MonoBehaviour
 
     [Space]
     [SerializeField] List<LifeFactorChange> lifeFactorChanges;
-    [SerializeField] List<SkillChange> skillChanges;
+    [SerializeField] public List<SkillChange> skillChanges;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
