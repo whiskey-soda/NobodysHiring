@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Thermostat : MonoBehaviour
 {
-    public bool On = false;
+    public bool isOn = false;
     public float motivationCostMult = 1.2f;
     public float energyCostMult = 1.2f;
 
@@ -22,16 +22,16 @@ public class Thermostat : MonoBehaviour
 
     void TurnOn()
     {
-        On = true;
+        isOn = true;
     }
 
     void TurnOff()
     {
-        On = false;
+        isOn = false;
     }
 
     public void Toggle()
     {
-        On = !On;
+        isOn = !isOn;
     }
 }

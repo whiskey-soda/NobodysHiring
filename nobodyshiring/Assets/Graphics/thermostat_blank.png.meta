@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b7ea92d2fb4f149428ff28316cee0e60
+guid: d54cf9dc93edbdb4a9bd8e059534ebec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6864705659591406222
-    second: monitor_0
+      213: 920018132905704586
+    second: thermostat_blank_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: monitor_0
+      name: thermostat_blank_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 558
-        width: 2841
-        height: 2211
+        x: 370
+        y: 763
+        width: 2369
+        height: 1744
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e823f873d65544f50800000000000000
-      internalID: 6864705659591406222
+      spriteID: a8c33ce0e9f84cc00800000000000000
+      internalID: 920018132905704586
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      monitor_0: 6864705659591406222
+      thermostat_blank_0: 920018132905704586
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

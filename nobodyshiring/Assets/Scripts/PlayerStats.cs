@@ -73,7 +73,7 @@ public class PlayerStats : MonoBehaviour
         if (Mathf.Sign(motivationChange) < 0)
         {
             // thermostat applies multiplier
-            if (!thermostat.On) { motivationChange *= thermostat.motivationCostMult; }
+            if (!thermostat.isOn) { motivationChange *= thermostat.motivationCostMult; }
         }
 
         motivation += motivationChange;
@@ -90,7 +90,7 @@ public class PlayerStats : MonoBehaviour
         if (considerThermostat && Mathf.Sign(motivationChange) < 0)
         {
             // thermostat applies multiplier
-            if (!thermostat.On) { motivationChange *= thermostat.motivationCostMult; }
+            if (!thermostat.isOn) { motivationChange *= thermostat.motivationCostMult; }
         }
 
         motivation += motivationChange;
@@ -110,7 +110,7 @@ public class PlayerStats : MonoBehaviour
             energyChange = CalculateMotivationInfluence(energyChange); 
 
             // thermostat applies multiplier
-            if (!thermostat.On) { energyChange *= thermostat.energyCostMult; }
+            if (!thermostat.isOn) { energyChange *= thermostat.energyCostMult; }
         }
 
         energy += energyChange;

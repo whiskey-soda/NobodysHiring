@@ -101,7 +101,7 @@ public class TimeTracking : MonoBehaviour
         motivationDrain.ApplyMotivationDrain(time);
 
         // add thermostat running time, if needed
-        if (thermostat.On) { expensesController.UseThermostat(time); }
+        if (thermostat.isOn) { expensesController.UseThermostat(time); }
     }
 
     void IncrementDay()
