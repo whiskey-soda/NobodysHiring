@@ -2,8 +2,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+public enum PlayerStat { energy, motivation }
+
 public class PlayerStats : MonoBehaviour
 {
+
     SleepManager sleepManager;
     Thermostat thermostat;
 

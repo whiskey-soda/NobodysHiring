@@ -1,11 +1,15 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Statbars : MonoBehaviour
 {
-    [SerializeField] RectTransform energyBar;
-    [SerializeField] RectTransform motivationBar;
+    [SerializeField] RectTransform energyBarRect;
+    [SerializeField] RectTransform motivationBarRect;
+    Image energyBarImage;
+    Image motivationBarImage;
+
     [Space]
     [SerializeField] float barChangeSpeed = 40;
     [SerializeField] float energyMaxDisplayVal = 120;
@@ -14,11 +18,34 @@ public class Statbars : MonoBehaviour
     float energyDisplayValue;
     float motivationDisplayValue;
 
+    bool previewOn = false;
+    [Space]
+    [SerializeField] RectTransform energyPreviewRect;
+    [SerializeField] RectTransform motivationPreviewRect;
+    Image energyPreviewImage;
+    Image motivationPreviewImage;
+    [SerializeField] float previewedAlpha = .6f;
+
+    // values displayed by preview bars
+    float energyPreviewDisplayValue;
+    float motivationPreviewDisplayValue;
+
+    // values that are to be previewed (bars approach these values when they are activated)
+    float energyPreviewedValue;
+    float motivationPreviewedValue;
+
+
     PlayerStats playerStats;
 
     private void Start()
     {
         playerStats = PlayerStats.Instance;
+
+        energyBarImage = energyBarRect.GetComponentInChildren<Image>();
+        motivationBarImage = motivationBarRect.GetComponentInChildren<Image>();
+
+        energyPreviewImage = energyPreviewRect.GetComponentInChildren<Image>();
+        motivationPreviewImage = motivationPreviewRect.GetComponentInChildren<Image>();
 
         energyDisplayValue = playerStats.energy;
         motivationDisplayValue = playerStats.motivation;
@@ -29,6 +56,12 @@ public class Statbars : MonoBehaviour
     {
         UpdateDisplayValue(ref energyDisplayValue, playerStats.energy);
         UpdateDisplayValue(ref motivationDisplayValue, playerStats.motivation);
+
+        if (previewOn)
+        {
+            UpdateDisplayValue(ref energyPreviewDisplayValue, energyPreviewedValue);
+            UpdateDisplayValue(ref motivationPreviewDisplayValue, motivationPreviewedValue);
+        }
 
         UpdateBarSizes();
     }
@@ -58,8 +91,92 @@ public class Statbars : MonoBehaviour
     /// </summary>
     void UpdateBarSizes()
     {
-        energyBar.localScale = new Vector3(energyDisplayValue/energyMaxDisplayVal, energyBar.localScale.y, energyBar.localScale.z);
-        motivationBar.localScale = new Vector3(motivationDisplayValue/motivMaxDisplayVal, motivationBar.localScale.y, motivationBar.localScale.z);
+        energyBarRect.localScale = new Vector3(energyDisplayValue/energyMaxDisplayVal, energyBarRect.localScale.y, energyBarRect.localScale.z);
+        motivationBarRect.localScale = new Vector3(motivationDisplayValue/motivMaxDisplayVal, motivationBarRect.localScale.y, motivationBarRect.localScale.z);
+
+        if (previewOn)
+        {
+            energyPreviewRect.localScale = new Vector3(energyPreviewDisplayValue / energyMaxDisplayVal, energyPreviewRect.localScale.y, energyPreviewRect.localScale.z);
+            motivationPreviewRect.localScale = new Vector3(motivationPreviewDisplayValue / motivMaxDisplayVal, motivationPreviewRect.localScale.y, motivationPreviewRect.localScale.z);
+        }
+    }
+
+    /// <summary>
+    /// makes main stat bars slightly transparent, makes preview bars opaque, and configures preview bar values
+    /// </summary>
+    /// <param name="stat"></param>
+    /// <param name="previewValue"></param>
+    public void ShowPreview(PlayerStat stat, float previewValue)
+    {
+        Image statbarImage;
+        Image previewbarImage;
+
+        // fetch appropriate image objects for specified stat
+        if (stat == PlayerStat.energy)
+        {
+            statbarImage = energyBarImage;
+            previewbarImage = energyPreviewImage;
+        }
+        else if (stat == PlayerStat.motivation)
+        {
+            statbarImage = motivationBarImage;
+            previewbarImage = motivationPreviewImage;
+        }
+        else { return; } // failure to fetch player stat
+
+
+
+        Color barColor = Color.white;
+
+        // make main stat bar transparent
+        barColor = statbarImage.color;
+        barColor.a = previewedAlpha;
+        statbarImage.color = barColor;
+
+        // make preview bar opaque
+        barColor = previewbarImage.color;
+        barColor.a = 255;
+        previewbarImage.color = barColor;
+
+        // set preview values equal to current display values, so preview bars start at the current value and then change.
+        // also set preview values to the desired preview values
+        if (stat == PlayerStat.energy) { energyPreviewDisplayValue = energyDisplayValue; energyPreviewedValue = previewValue; }
+        else if (stat == PlayerStat.motivation) { motivationPreviewDisplayValue = motivationDisplayValue; motivationPreviewedValue = previewValue; }
+
+        previewOn = true;
+    }
+
+    /// <summary>
+    /// hides all preview bars and returns main bars to full opacity
+    /// </summary>
+    public void HidePreviews()
+    {
+        if (!previewOn) { return; } // do nothing if preview bars are not on
+
+        Color barColor = Color.white;
+
+
+        // make main stat bars opaque
+        barColor = energyBarImage.color;
+        barColor .a = 255;
+        energyBarImage.color = barColor;
+
+        barColor = motivationBarImage.color;
+        barColor.a = 255;
+        motivationBarImage.color = barColor;
+
+
+        // make preview bars fully transparent
+        barColor = energyPreviewImage.color;
+        barColor.a = 255;
+        energyPreviewImage.color = barColor;
+
+        barColor = motivationPreviewImage.color;
+        barColor.a = 0;
+        motivationPreviewImage.color = barColor;
+
+
+        previewOn = false;
     }
 
 }
