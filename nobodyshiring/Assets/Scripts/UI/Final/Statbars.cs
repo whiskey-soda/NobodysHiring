@@ -18,7 +18,6 @@ public class Statbars : MonoBehaviour
     float energyDisplayValue;
     float motivationDisplayValue;
 
-    bool previewOn = false;
     [Space]
     [SerializeField] RectTransform energyPreviewRect;
     [SerializeField] RectTransform motivationPreviewRect;
@@ -57,11 +56,8 @@ public class Statbars : MonoBehaviour
         UpdateDisplayValue(ref energyDisplayValue, playerStats.energy);
         UpdateDisplayValue(ref motivationDisplayValue, playerStats.motivation);
 
-        if (previewOn)
-        {
-            UpdateDisplayValue(ref energyPreviewDisplayValue, energyPreviewedValue);
-            UpdateDisplayValue(ref motivationPreviewDisplayValue, motivationPreviewedValue);
-        }
+        UpdateDisplayValue(ref energyPreviewDisplayValue, energyPreviewedValue);
+        UpdateDisplayValue(ref motivationPreviewDisplayValue, motivationPreviewedValue);
 
         UpdateBarSizes();
     }
@@ -83,6 +79,11 @@ public class Statbars : MonoBehaviour
                 // add speed value to get display closer to real value
                 displayValue += Mathf.Sign(statValue - displayValue) * barChangeSpeed * Time.deltaTime;
             }
+
+            // hide previews if main bars hit the same value
+            if (displayValue == energyDisplayValue && energyDisplayValue == energyPreviewDisplayValue) { HidePreview(PlayerStat.energy); }
+            else if (displayValue == motivationDisplayValue && motivationDisplayValue == motivationPreviewDisplayValue) { HidePreview(PlayerStat.motivation); }
+
         }
     }
 
@@ -91,14 +92,13 @@ public class Statbars : MonoBehaviour
     /// </summary>
     void UpdateBarSizes()
     {
-        energyBarRect.localScale = new Vector3(energyDisplayValue/energyMaxDisplayVal, energyBarRect.localScale.y, energyBarRect.localScale.z);
-        motivationBarRect.localScale = new Vector3(motivationDisplayValue/motivMaxDisplayVal, motivationBarRect.localScale.y, motivationBarRect.localScale.z);
+        energyBarRect.localScale = new Vector3(energyDisplayValue / energyMaxDisplayVal, energyBarRect.localScale.y, energyBarRect.localScale.z);
+        motivationBarRect.localScale = new Vector3(motivationDisplayValue / motivMaxDisplayVal, motivationBarRect.localScale.y, motivationBarRect.localScale.z);
 
-        if (previewOn)
-        {
-            energyPreviewRect.localScale = new Vector3(energyPreviewDisplayValue / energyMaxDisplayVal, energyPreviewRect.localScale.y, energyPreviewRect.localScale.z);
-            motivationPreviewRect.localScale = new Vector3(motivationPreviewDisplayValue / motivMaxDisplayVal, motivationPreviewRect.localScale.y, motivationPreviewRect.localScale.z);
-        }
+        // update preview bar sizes
+        energyPreviewRect.localScale = new Vector3(energyPreviewDisplayValue / energyMaxDisplayVal, energyPreviewRect.localScale.y, energyPreviewRect.localScale.z);
+        motivationPreviewRect.localScale = new Vector3(motivationPreviewDisplayValue / motivMaxDisplayVal, motivationPreviewRect.localScale.y, motivationPreviewRect.localScale.z);
+
     }
 
     /// <summary>
@@ -109,18 +109,18 @@ public class Statbars : MonoBehaviour
     public void ShowPreview(PlayerStat stat, float previewValue)
     {
         Image statbarImage;
-        Image previewbarImage;
+        Image previewImage;
 
         // fetch appropriate image objects for specified stat
         if (stat == PlayerStat.energy)
         {
             statbarImage = energyBarImage;
-            previewbarImage = energyPreviewImage;
+            previewImage = energyPreviewImage;
         }
         else if (stat == PlayerStat.motivation)
         {
             statbarImage = motivationBarImage;
-            previewbarImage = motivationPreviewImage;
+            previewImage = motivationPreviewImage;
         }
         else { return; } // failure to fetch player stat
 
@@ -134,49 +134,51 @@ public class Statbars : MonoBehaviour
         statbarImage.color = barColor;
 
         // make preview bar opaque
-        barColor = previewbarImage.color;
+        barColor = previewImage.color;
         barColor.a = 255;
-        previewbarImage.color = barColor;
+        previewImage.color = barColor;
 
         // set preview values equal to current display values, so preview bars start at the current value and then change.
         // also set preview values to the desired preview values
         if (stat == PlayerStat.energy) { energyPreviewDisplayValue = energyDisplayValue; energyPreviewedValue = previewValue; }
         else if (stat == PlayerStat.motivation) { motivationPreviewDisplayValue = motivationDisplayValue; motivationPreviewedValue = previewValue; }
-
-        previewOn = true;
     }
 
     /// <summary>
-    /// hides all preview bars and returns main bars to full opacity
+    /// hides preview bar and returns main bar to full opacity for a given stat
     /// </summary>
-    public void HidePreviews()
+    public void HidePreview(PlayerStat stat)
     {
-        if (!previewOn) { return; } // do nothing if preview bars are not on
+        Image statbarImage;
+        Image previewImage;
+
+        // fetch appropriate image objects for specified stat
+        if (stat == PlayerStat.energy)
+        {
+            statbarImage = energyBarImage;
+            previewImage = energyPreviewImage;
+        }
+        else if (stat == PlayerStat.motivation)
+        {
+            statbarImage = motivationBarImage;
+            previewImage = motivationPreviewImage;
+        }
+        else { return; } // failure to fetch player stat
+
+
 
         Color barColor = Color.white;
 
 
-        // make main stat bars opaque
-        barColor = energyBarImage.color;
-        barColor .a = 255;
-        energyBarImage.color = barColor;
+        // make main stat bar opaque
+        barColor = statbarImage.color;
+        barColor.a = 1;
+        statbarImage.color = barColor;
 
-        barColor = motivationBarImage.color;
-        barColor.a = 255;
-        motivationBarImage.color = barColor;
-
-
-        // make preview bars fully transparent
-        barColor = energyPreviewImage.color;
-        barColor.a = 255;
-        energyPreviewImage.color = barColor;
-
-        barColor = motivationPreviewImage.color;
+        // make preview bar fully transparent
+        barColor = previewImage.color;
         barColor.a = 0;
-        motivationPreviewImage.color = barColor;
-
-
-        previewOn = false;
+        previewImage.color = barColor;
     }
 
 }

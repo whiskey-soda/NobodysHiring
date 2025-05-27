@@ -7,16 +7,27 @@ public class StatbarPreviewDebugger : MonoBehaviour
 
     public void ShowMotivationPreview()
     {
-        statbars.ShowPreview(PlayerStat.motivation, 40);
+        statbars.ShowPreview(PlayerStat.motivation, 80);
     }
 
     public void ShowEnergyPreview()
     {
-        statbars.ShowPreview(PlayerStat.energy, 40);
+        statbars.ShowPreview(PlayerStat.energy, 80);
     }
 
-    public void HidePreviews()
+    public void HideEnergyPreview()
     {
-        statbars.HidePreviews();
+        statbars.HidePreview(PlayerStat.energy);
+    }
+
+    public void HideMotivationPreview()
+    {
+        statbars.HidePreview(PlayerStat.motivation);
+    }
+
+
+    public void ApplyEnergyPreview()
+    {
+        PlayerStats.Instance.SetEnergy(80);
     }
 }
