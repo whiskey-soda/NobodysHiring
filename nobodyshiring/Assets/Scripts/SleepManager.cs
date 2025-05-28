@@ -18,6 +18,7 @@ public class SleepManager : MonoBehaviour
     [SerializeField] float passOutDuration = 11;
 
     public UnityEvent PassedOut;
+    public UnityEvent sleep;
 
     private void Awake()
     {
@@ -61,6 +62,8 @@ public class SleepManager : MonoBehaviour
 
         stats.SetEnergy(newEnergyLevel);
 
+        sleep.Invoke();
+
     }
 
     /// <summary>
@@ -72,6 +75,7 @@ public class SleepManager : MonoBehaviour
         stats.SetEnergy(tiredEnergy);
 
         PassedOut.Invoke();
+        sleep.Invoke();
 
         Debug.Log($"passed out for {passOutDuration} hours!");
     }

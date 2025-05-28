@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 60c1ebb1a6c53174ea12a8c68285e95d
+guid: 7596c82489cc67846bc82845d11a5b9a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6934609301849017773
-    second: button_thickshadow_0
+      213: 8297919318811674542
+    second: curled_prug_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: button_thickshadow_0
+      name: curled_prug_0
       rect:
         serializedVersion: 2
-        x: 232
-        y: 641
-        width: 2657
-        height: 1743
+        x: 346
+        y: 436
+        width: 1952
+        height: 1638
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3527b23c49153cf90800000000000000
-      internalID: -6934609301849017773
+      spriteID: ea70f9cf7a1282370800000000000000
+      internalID: 8297919318811674542
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      button_thickshadow_0: -6934609301849017773
+      curled_prug_0: 8297919318811674542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
