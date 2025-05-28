@@ -92,8 +92,10 @@ public class Statbars : MonoBehaviour
     /// </summary>
     void UpdateBarSizes()
     {
-        energyBarRect.localScale = new Vector3(energyDisplayValue / energyMaxDisplayVal, energyBarRect.localScale.y, energyBarRect.localScale.z);
-        motivationBarRect.localScale = new Vector3(motivationDisplayValue / motivMaxDisplayVal, motivationBarRect.localScale.y, motivationBarRect.localScale.z);
+        energyBarRect.localScale = new Vector3(Mathf.Min(1, energyDisplayValue / energyMaxDisplayVal), 
+                                                    energyBarRect.localScale.y, energyBarRect.localScale.z);
+        motivationBarRect.localScale = new Vector3(Mathf.Min(1, motivationDisplayValue / motivMaxDisplayVal), 
+                                                    motivationBarRect.localScale.y, motivationBarRect.localScale.z);
 
         // update preview bar sizes
         energyPreviewRect.localScale = new Vector3(energyPreviewDisplayValue / energyMaxDisplayVal, energyPreviewRect.localScale.y, energyPreviewRect.localScale.z);
