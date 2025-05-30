@@ -3,7 +3,6 @@ using UnityEngine;
 public class DayEnd : MonoBehaviour
 {
     [SerializeField] float energyBoostThresholdPercent = .3f;
-    [SerializeField] float energyBoostAmount = 20;
     [SerializeField] float motivationBoostAmount = 8;
 
     SleepManager sleep;
@@ -40,10 +39,10 @@ public class DayEnd : MonoBehaviour
 
         sleep.Sleep(sleepHours);
 
-        // give energy boost based on if energy was left over on previous day
+        // give motivation boost based on if energy was left over on previous day
+        // simulates pacing yourself and maintaining your excitement for work
         if (significantEnergyRemaining)
         {
-            playerStats.ChangeEnergy(energyBoostAmount);
             playerStats.ChangeMotivation(motivationBoostAmount);
         }
     }

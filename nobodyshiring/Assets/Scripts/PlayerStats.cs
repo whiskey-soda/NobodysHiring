@@ -79,7 +79,12 @@ public class PlayerStats : MonoBehaviour
             if (!thermostat.isOn) { motivationChange *= thermostat.motivationCostMult; }
         }
 
-        motivation += motivationChange;
+        // cap motivation at max and 0 min
+        float newMotivation = motivation + motivationChange;
+        if (newMotivation > motivationMax) { newMotivation = motivationMax; }
+        else if (newMotivation < 0) { newMotivation = 0; }
+
+        motivation = newMotivation;
     }
 
     /// <summary>
@@ -92,11 +97,16 @@ public class PlayerStats : MonoBehaviour
         // if motivation is being lost, cost gets modified
         if (considerThermostat && Mathf.Sign(motivationChange) < 0)
         {
-            // thermostat applies multiplier
+            // thermostat applies multiplier when off. uncomfortable temperatures make things take more effort
             if (!thermostat.isOn) { motivationChange *= thermostat.motivationCostMult; }
         }
 
-        motivation += motivationChange;
+        // cap motivation at max and 0 min
+        float newMotivation = motivation + motivationChange;
+        if (newMotivation > motivationMax) {  newMotivation = motivationMax; }
+        else if (newMotivation < 0) {  newMotivation = 0; }
+
+        motivation = newMotivation;
     }
 
     /// <summary>
@@ -116,14 +126,20 @@ public class PlayerStats : MonoBehaviour
             if (!thermostat.isOn) { energyChange *= thermostat.energyCostMult; }
         }
 
-        energy += energyChange;
+        // cap energy at 0 min
+        // dont cap at max because energy can increase over the cap with rest
+        float newEnergy = energy + energyChange;
+        if (newEnergy < 0) { newEnergy = 0; }
+        energy = newEnergy;
 
-        float proportionEnergyUsed = 1;
 
+        // calculate the proportion of energy used before passing out
+        float proportionEnergyUsed = 1; // if player doesnt pass out, they use all the energy
+
+        // if player passes out, return the proportion of energy that was used before passing out
         if (energy <= passOutEnergyThreshold)
         {
             sleepManager.PassOut();
-
             proportionEnergyUsed = (energyChange - energy) / energyChange;
         }
 
@@ -132,6 +148,8 @@ public class PlayerStats : MonoBehaviour
 
     public void SetEnergy(float value)
     {
+        // this does not check for caps because certain events, like well rested, can cause energy to go over the cap.
+        // BUT this is purely a bonus, all calculations are still made with the 100 cap assumption
         energy = value;
     }
 
