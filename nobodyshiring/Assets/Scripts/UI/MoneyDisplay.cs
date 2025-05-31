@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class MoneyDisplay : MonoBehaviour
+public class MoneyUIDisplay : MonoBehaviour
 {
     Money money;
 
