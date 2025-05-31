@@ -36,6 +36,12 @@ public class PlayerStats : MonoBehaviour
     [Space]
     [SerializeField] float passOutEnergyThreshold = 5;
 
+    [Space]
+    [Tooltip("when the player ends the day by sleeping, if their energy is above this threshold percentage," +
+        "they recieve a bonus to their motivation.")]
+    [SerializeField] float motivationBoostEnergyThreshold = .3f;
+    [SerializeField] float motivationBoostAmount = 8;
+
     public static PlayerStats Instance;
 
     private void Awake()
@@ -191,5 +197,21 @@ public class PlayerStats : MonoBehaviour
         }
 
         return adjustedEnergyCost;
+    }
+
+    /// <summary>
+    /// if the player has a percentage of energy remaining, motivation is boosted.
+    /// occurs when the player ends the day.
+    /// </summary>
+    public void ApplyMotivationBoostFromLeftoverEnergy()
+    {
+        bool significantEnergyRemaining = energy > motivationBoostEnergyThreshold * energyMax;
+
+        // give motivation boost based on if energy was left over on previous day
+        // simulates pacing yourself and maintaining your excitement for work
+        if (significantEnergyRemaining)
+        {
+            ChangeMotivation(motivationBoostAmount);
+        }
     }
 }
