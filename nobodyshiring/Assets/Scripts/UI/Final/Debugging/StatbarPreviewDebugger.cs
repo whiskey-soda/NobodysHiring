@@ -2,32 +2,34 @@ using UnityEngine;
 
 public class StatbarPreviewDebugger : MonoBehaviour
 {
-
-    [SerializeField] Statbars statbars;
+    [SerializeField] StatbarController energyStatbar;
+    [SerializeField] StatbarController motivationStatbar;
+    [Space]
+    [SerializeField] float previewValue = 80;
 
     public void ShowMotivationPreview()
     {
-        statbars.ShowPreview(PlayerStat.motivation, 80);
+        motivationStatbar.ShowPreview(previewValue);
     }
 
     public void ShowEnergyPreview()
     {
-        statbars.ShowPreview(PlayerStat.energy, 80);
+        energyStatbar.ShowPreview(previewValue);
     }
 
     public void HideEnergyPreview()
     {
-        statbars.HidePreview(PlayerStat.energy);
+        energyStatbar.HidePreview();
     }
 
     public void HideMotivationPreview()
     {
-        statbars.HidePreview(PlayerStat.motivation);
+        motivationStatbar.HidePreview();
     }
 
 
     public void ApplyEnergyPreview()
     {
-        PlayerStats.Instance.SetEnergy(80);
+        PlayerStats.Instance.SetEnergy(previewValue);
     }
 }
