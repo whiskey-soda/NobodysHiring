@@ -17,9 +17,9 @@ public class WorkActivityUIHelper : ActivityUIHelper
 
     public override void DoActivity()
     {
-        if (activity as WorkActivity != null)
+        if (activity as WorkOnProject != null)
         {
-            ((WorkActivity)activity).DoActivity(desiredDuration, WorkManager.Instance.projects.ElementAt(projectDropdown.value));
+            ((WorkOnProject)activity).DoActivity(desiredDuration, WorkManager.Instance.projects.ElementAt(projectDropdown.value));
         }
     }
 

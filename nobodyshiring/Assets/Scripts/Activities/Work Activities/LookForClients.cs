@@ -7,7 +7,7 @@ public class LookForClients : Activity
         base.DoActivity(duration);
 
         duration = ClampDuration(duration);
-        LookForWork.Instance.LookForGigs(duration);
+        LookForWork.Instance.LookForGigs(duration); // TODO: make this consider partial activity completions
 
     }
 }

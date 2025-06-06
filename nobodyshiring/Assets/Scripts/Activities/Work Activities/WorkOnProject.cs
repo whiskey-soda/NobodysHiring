@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WorkActivity : Activity
+public class WorkOnProject : Activity
 {
     [Space]
     [SerializeField] float progressMultiplier = 1; // used for working at different paces

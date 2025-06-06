@@ -35,6 +35,9 @@ public class Activity : MonoBehaviour
     public float minDuration = 0;
     public float maxDuration = 0; // 0 means uncapped
 
+    [SerializeField] bool oncePerDay = false;
+    bool isAvailable = true;
+
     TimeTracking time;
     PlayerStats playerStats;
     LifeFactors lifeFactors;
@@ -53,10 +56,16 @@ public class Activity : MonoBehaviour
         time = TimeTracking.Instance;
         playerStats = PlayerStats.Instance;
         lifeFactors = LifeFactors.Instance;
+
+        // for resetting availability at the end of the day
+        if (oncePerDay) { time.dayEnd.AddListener(ResetLimitedAvailability); }
     }
 
     public virtual void DoActivity(float duration)
     {
+        // do nothing if activity is not available
+        if (!isAvailable) { return; }
+
         duration = ClampDuration(duration);
 
         // adjusts the duration based on how much time was spent before the player passed out.
@@ -69,15 +78,22 @@ public class Activity : MonoBehaviour
         playerStats.ChangeMotivation(motivationGain * duration);
         playerStats.ChangeEnergy(energyGain * duration);
 
+        // apply life factor changes
         foreach (LifeFactorChange change in lifeFactorChanges)
         {
             lifeFactors.ChangeFactorValue(change.lifeFactor, change.value * duration);
         }
 
+        // apply skill changes
         foreach (SkillChange change in skillChanges)
         {
             PlayerSkills.Instance.ChangeSkill(change.skill, change.value * duration);
         }
+
+
+        // make activity unavailable if it is limited to once per day
+        if (oncePerDay) { isAvailable = false; }
+
     }
 
     /// <summary>
@@ -92,5 +108,16 @@ public class Activity : MonoBehaviour
         else if (maxDuration != 0 && duration > maxDuration) { duration = maxDuration; }
 
         return duration;
+    }
+
+    /// <summary>
+    /// if the activity is limited to once per day, it is made available. this method is used at the end of a day.
+    /// </summary>
+    void ResetLimitedAvailability()
+    {
+        if (oncePerDay && !isAvailable)
+        {
+            isAvailable = true;
+        }
     }
 }
