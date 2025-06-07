@@ -26,6 +26,7 @@ public class Activity : MonoBehaviour
 {
     public string activityName;
     public string description;
+    public string imperativeVerb;
 
     // EVERY CHANGE IS PER HOUR
     [SerializeField] float motivationCost;
