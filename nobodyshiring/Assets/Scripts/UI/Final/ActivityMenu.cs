@@ -1,16 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ActivityMenu : MonoBehaviour
+public class ActivityMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Animator animator;
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
         if (animator == null) { return; } // do nothing if animator is null
         animator.Play("Opening");
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData pointerEventData)
     {
         if (animator == null) { return; } // do nothing if animator is null
         animator.Play("Closing");
