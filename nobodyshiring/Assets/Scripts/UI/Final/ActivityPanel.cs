@@ -14,6 +14,10 @@ public class ActivityPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI buttonTMP;
     [SerializeField] Slider durationSlider;
 
+    // slider values are locked to whole numbers. values are converted to time values with the step size
+    // (time * 60 / step size) converts from hours to slider values by converting hours to minutes, then dividing minutes by step size
+    [SerializeField] float sliderStepSize = 5;
+
     private void Awake()
     {
         nameTMP.text = activity.activityName;
@@ -21,18 +25,20 @@ public class ActivityPanel : MonoBehaviour
         minDurationTMP.text = ConvertToHourMinFormat(activity.minDuration);
         maxDurationTMP.text = ConvertToHourMinFormat(activity.maxDuration);
 
-        durationSlider.minValue = activity.minDuration;
-        durationSlider.maxValue = activity.maxDuration;
+        durationSlider.minValue = activity.minDuration * (60 / sliderStepSize);
+        durationSlider.maxValue = activity.maxDuration * (60 / sliderStepSize);
     }
 
     // Update is called once per frame
     void Update()
     {
-         buttonTMP.text = $"{activity.imperativeVerb} for {ConvertToHourMinFormat(durationSlider.value)}";
+        // set text to display the prompt with chosen duration
+        // value is multiplied by step size to convert from slider value to real time value
+         buttonTMP.text = $"{activity.imperativeVerb} for {ConvertToHourMinFormat(durationSlider.value / (60 / sliderStepSize))}";
     }
 
     /// <summary>
-    /// converts a time in float to hour:minute format (xh ym)
+    /// converts a time in float (hours) to hour:minute format (xh ym)
     /// </summary>
     /// <param name="duration"></param>
     /// <returns></returns>

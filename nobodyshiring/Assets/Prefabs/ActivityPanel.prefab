@@ -635,6 +635,7 @@ MonoBehaviour:
   maxDurationTMP: {fileID: 7755000986710550126}
   buttonTMP: {fileID: 4736799811417317013}
   durationSlider: {fileID: 3746556882956295495}
+  sliderStepSize: 5
 --- !u!114 &8023308748346418768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +783,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
