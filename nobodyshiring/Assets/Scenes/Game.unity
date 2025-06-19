@@ -13190,7 +13190,7 @@ GameObject:
   - component: {fileID: 771945267}
   - component: {fileID: 771945268}
   m_Layer: 5
-  m_Name: Energy Statbar
+  m_Name: EnergyStatbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27582,8 +27582,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1529017570}
+  - component: {fileID: 1529017571}
   m_Layer: 5
-  m_Name: Stat Bars
+  m_Name: StatBars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27610,6 +27611,20 @@ RectTransform:
   m_AnchoredPosition: {x: 225.55, y: 0}
   m_SizeDelta: {x: 249.0437, y: 29.3}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1529017571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529017569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef222107326927428fb5630a16118b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: {fileID: 771945268}
+  motivation: {fileID: 458661525}
 --- !u!1 &1541311965
 GameObject:
   m_ObjectHideFlags: 0
