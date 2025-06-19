@@ -109,7 +109,7 @@ public class StatbarController : MonoBehaviour
     }
 
     /// <summary>
-    /// makes main stat bars slightly transparent, makes preview bars opaque, and configures preview bar values
+    /// makes preview bars opaque and configures preview bar values
     /// </summary>
     /// <param name="stat"></param>
     /// <param name="previewValue"></param>
@@ -123,6 +123,14 @@ public class StatbarController : MonoBehaviour
         // since the preview display value is the same as the statbar display value,
         // this method call hides the preview statbar behind the normal stat bar as it appears
         SetStatbarLayers();
+    }
+
+    /// <summary>
+    /// makes preview bar opaque and sets preview value to the current statbar display value, making the preview invisible but active.
+    /// </summary>
+    public void ShowPreview()
+    {
+        ShowPreview(statbarDisplayValue);
     }
 
     /// <summary>
