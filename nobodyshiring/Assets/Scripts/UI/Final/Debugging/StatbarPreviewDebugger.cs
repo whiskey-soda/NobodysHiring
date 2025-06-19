@@ -32,4 +32,9 @@ public class StatbarPreviewDebugger : MonoBehaviour
     {
         PlayerStats.Instance.SetEnergy(previewValue);
     }
+
+    public void ChangeEnergyPreviewValue()
+    {
+        energyStatbar.SetPreviewValue(previewValue);
+    }
 }

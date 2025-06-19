@@ -63,6 +63,9 @@ public class StatbarController : MonoBehaviour
         UpdateDisplayValue(ref previewDisplayValue, previewedValue);
 
         UpdateBarSizes();
+
+        // if preview bar is displayed, set layering according to display values
+        if (previewImage.color.a > 0) { SetStatbarLayers(); }
     }
 
     /// <summary>
@@ -83,9 +86,10 @@ public class StatbarController : MonoBehaviour
                 displayValue += Mathf.Sign(statValue - displayValue) * barChangeSpeed * Time.deltaTime;
             }
 
-
+            /* removed because why did i add this? TODO: delete this
             // hide preview if main bars hit the same value
             if (displayValue == statbarDisplayValue && statbarDisplayValue == previewDisplayValue) { HidePreview(); }
+            */
 
         }
     }
@@ -111,7 +115,22 @@ public class StatbarController : MonoBehaviour
     /// <param name="previewValue"></param>
     public void ShowPreview(float previewValue)
     {
-        if (previewValue < statbarDisplayValue) // previewing a stat decrease
+        // set preview values equal to current display values, so preview bars start at the current value and then change.
+        // also set preview values to the desired preview values
+        previewDisplayValue = statbarDisplayValue;
+        previewedValue = previewValue;
+
+        // since the preview display value is the same as the statbar display value,
+        // this method call hides the preview statbar behind the normal stat bar as it appears
+        SetStatbarLayers();
+    }
+
+    /// <summary>
+    /// changes the layer order of the preview and stat bar depending on if the preview bar is showing an increase or decrease
+    /// </summary>
+    private void SetStatbarLayers()
+    {
+        if (previewDisplayValue < statbarDisplayValue) // previewing a stat decrease
         {
             // preview is in front of statbar, statbar color is red.
             // this makes the difference between preview and actual appear red to signify the decrease
@@ -119,19 +138,19 @@ public class StatbarController : MonoBehaviour
             statbarImage.color = previewDecreaseColor;
             previewImage.color = statbarOriginalColor;
         }
-        else if (previewValue > statbarDisplayValue) // previewing a stat increase
+        else if (previewDisplayValue >= statbarDisplayValue) // previewing a stat increase
         {
             // preview is behind statbar and turns green.
             // this makes the previewed increase appears green
             previewRect.SetParent(backgroundParent, true);
+            statbarImage.color = statbarOriginalColor;
             previewImage.color = previewIncreaseColor;
         }
+    }
 
-
-        // set preview values equal to current display values, so preview bars start at the current value and then change.
-        // also set preview values to the desired preview values
-        previewDisplayValue = statbarDisplayValue;
-        previewedValue = previewValue;
+    public void SetPreviewValue(float value)
+    {
+        previewedValue = value;
     }
 
     /// <summary>
