@@ -1464,7 +1464,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7802541086739320980}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5121827587242583147}
+        m_TargetAssemblyTypeName: ActivityPanel, Assembly-CSharp
+        m_MethodName: DoActivity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4025371844723765314
 MonoBehaviour:
   m_ObjectHideFlags: 0

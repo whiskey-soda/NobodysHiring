@@ -20,7 +20,7 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     // slider values are locked to whole numbers. values are converted to time values with the step size
     // (time * 60 / step size) converts from hours to slider values by converting hours to minutes, then dividing minutes by step size
-    // (time * 60 / step size) converts from slider values to hours
+    // (value / (60 / step size) ) converts from slider values to hours
     [SerializeField] float sliderStepSize = 5;
 
     Statbars statbars;
@@ -51,13 +51,15 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     /// <summary>
     /// updates the display based on the duration chosen on the slider
     /// </summary>
-    public void DurationUpdated(float newDuration)
+    public void DurationUpdated(float sliderValue)
     {
         // set text to display the prompt with chosen duration
         // value is multiplied by step size to convert from slider value to real time value
-        buttonTMP.text = $"{activity.imperativeVerb} for {ConvertToHourMinFormat(newDuration / (60 / sliderStepSize))}";
+        buttonTMP.text = $"{activity.imperativeVerb} for {ConvertToHourMinFormat(sliderValue / (60 / sliderStepSize))}";
 
         if (hovered) { ActivateStatPreview(); }
+
+        Debug.Log($"{sliderValue / (60/sliderStepSize)}h");
     }
 
     private void ActivateStatPreview()
@@ -79,7 +81,8 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if ((int)duration > 0) { hourMinFormatString += $"{(int)duration}h "; }
 
         // get minute by taking the decimal portion and multiplying by 60 and then truncating off the decimal with an int cast
-        hourMinFormatString += $"{(int)((duration - (int)duration) * 60)}m";
+        // rounds to nearest int because of floating point errors causing it to round down erroneously
+        hourMinFormatString += $"{Mathf.Round(((duration - (int)duration) * 60))}m";
 
         return hourMinFormatString;
     }
@@ -116,6 +119,11 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         Color color = panelOutline.color;
         color.a = 0;
         panelOutline.color = color;
+    }
+
+    public void DoActivity()
+    {
+        activity.DoActivity(durationSlider.value / (60 / sliderStepSize));
     }
 
 }

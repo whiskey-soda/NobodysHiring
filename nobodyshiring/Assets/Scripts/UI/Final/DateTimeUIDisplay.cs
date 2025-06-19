@@ -22,7 +22,7 @@ public class DateTimeUIDisplay : MonoBehaviour
 
         // calculate in 24 hour time
         uint hour = (uint)Mathf.Floor(time.currentHour);
-        uint minute = (uint)Mathf.FloorToInt((time.currentHour - hour) * 60);
+        uint minute = (uint)Mathf.Round((time.currentHour - hour) * 60);
 
         // convert to 12 hour time
         string ampm = "AM";
