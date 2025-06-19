@@ -3,8 +3,8 @@ using UnityEngine;
 public class Statbars : MonoBehaviour
 {
 
-    [SerializeField] StatbarController energy;
-    [SerializeField] StatbarController motivation;
+    [SerializeField] public StatbarController energy;
+    [SerializeField] public StatbarController motivation;
 
     public static Statbars Instance;
 
