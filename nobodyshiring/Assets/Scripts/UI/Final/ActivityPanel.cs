@@ -15,6 +15,8 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [Space]
     [SerializeField] TextMeshProUGUI buttonTMP;
     [SerializeField] Slider durationSlider;
+    [Space]
+    [SerializeField] Image panelOutline;
 
     // slider values are locked to whole numbers. values are converted to time values with the step size
     // (time * 60 / step size) converts from hours to slider values by converting hours to minutes, then dividing minutes by step size
@@ -85,6 +87,7 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         hovered = true;
+        ShowOutline();
 
         ActivateStatPreview();
     }
@@ -92,5 +95,27 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         hovered = false;
+        HideOutline();
     }
+
+    /// <summary>
+    /// makes panel outline color transparent
+    /// </summary>
+    void ShowOutline()
+    {
+        Color color = panelOutline.color;
+        color.a = 1;
+        panelOutline.color = color;
+    }
+
+    /// <summary>
+    /// makes panel outline color opaque
+    /// </summary>
+    void HideOutline()
+    {
+        Color color = panelOutline.color;
+        color.a = 0;
+        panelOutline.color = color;
+    }
+
 }
