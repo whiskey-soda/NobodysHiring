@@ -626,6 +626,7 @@ GameObject:
   - component: {fileID: 1127663626446005323}
   - component: {fileID: 5121827587242583147}
   - component: {fileID: 8023308748346418768}
+  - component: {fileID: 451847587650861993}
   m_Layer: 5
   m_Name: ActivityPanel
   m_TagString: Untagged
@@ -711,7 +712,6 @@ MonoBehaviour:
   maxDurationTMP: {fileID: 7755000986710550126}
   buttonTMP: {fileID: 4736799811417317013}
   durationSlider: {fileID: 3746556882956295495}
-  panelOutline: {fileID: 5135886200448926720}
   sliderStepSize: 5
 --- !u!114 &8023308748346418768
 MonoBehaviour:
@@ -737,6 +737,19 @@ MonoBehaviour:
   energyGain: 0
   lifeFactorChanges: []
   skillChanges: []
+--- !u!114 &451847587650861993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4537663610320886288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87f680d67919e3e4c90be2181ab7f7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelOutline: {fileID: 5135886200448926720}
 --- !u!1 &5086683667499983324
 GameObject:
   m_ObjectHideFlags: 0
