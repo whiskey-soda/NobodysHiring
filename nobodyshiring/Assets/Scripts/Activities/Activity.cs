@@ -46,10 +46,12 @@ public class Activity : MonoBehaviour
     LifeFactors lifeFactors;
 
     [Space]
-    [SerializeField] float motivationGain;
-    [SerializeField] float energyGain;
+    // still per hour
+    [SerializeField] public float motivationGain;
+    [SerializeField] public float energyGain;
 
     [Space]
+    // per hour
     [SerializeField] List<LifeFactorChange> lifeFactorChanges;
     [SerializeField] public List<SkillChange> skillChanges;
 

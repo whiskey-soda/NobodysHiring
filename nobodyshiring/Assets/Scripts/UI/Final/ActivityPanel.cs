@@ -58,8 +58,13 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void ActivateStatPreview()
     {
-        statbars.energy.SetPreviewValue(stats.energy - activity.energyCost * durationSlider.value / (60 / sliderStepSize));
-        statbars.motivation.SetPreviewValue(stats.motivation - activity.motivationCost * durationSlider.value / (60 / sliderStepSize));
+        float energyCost = activity.energyCost * durationSlider.value / (60 / sliderStepSize);
+        float energyGain = activity.energyGain * durationSlider.value / (60 / sliderStepSize);
+        statbars.energy.SetPreviewValue(stats.energy - energyCost + energyGain);
+
+        float motivationCost = activity.motivationCost * durationSlider.value / (60 / sliderStepSize);
+        float motivationGain = activity.motivationGain * durationSlider.value / (60 / sliderStepSize);
+        statbars.motivation.SetPreviewValue(stats.motivation - motivationCost + motivationGain);
     }
 
     /// <summary>

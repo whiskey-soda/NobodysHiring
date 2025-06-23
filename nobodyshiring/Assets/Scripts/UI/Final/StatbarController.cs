@@ -58,9 +58,11 @@ public class StatbarController : MonoBehaviour
         if (stat == PlayerStat.energy) { statValue = playerStats.energy; }
         else if (stat == PlayerStat.motivation) { statValue = playerStats.motivation; }
 
-
+        // update actual statbar
         UpdateDisplayValue(ref statbarDisplayValue, statValue);
-        UpdateDisplayValue(ref previewDisplayValue, previewedValue);
+        // only update preview bar if the actual statbar is not changing
+        if (statbarDisplayValue == statValue) { UpdateDisplayValue(ref previewDisplayValue, previewedValue); }
+        
 
         UpdateBarSizes();
 
@@ -75,6 +77,10 @@ public class StatbarController : MonoBehaviour
     /// <param name="statValue"></param>
     private void UpdateDisplayValue(ref float displayValue, float statValue)
     {
+        // cap display values so bars dont overextend
+        if (displayValue > maxDisplayVal) { displayValue = maxDisplayVal; }
+        else if (displayValue < 0) { displayValue = 0; }
+
         if (displayValue != statValue)
         {
             // display value is less than the change per frame, set it equal
@@ -85,11 +91,6 @@ public class StatbarController : MonoBehaviour
                 // add speed value to get display closer to real value
                 displayValue += Mathf.Sign(statValue - displayValue) * barChangeSpeed * Time.deltaTime;
             }
-
-            /* removed because why did i add this? TODO: delete this
-            // hide preview if main bars hit the same value
-            if (displayValue == statbarDisplayValue && statbarDisplayValue == previewDisplayValue) { HidePreview(); }
-            */
 
         }
     }
