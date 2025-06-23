@@ -2700,7 +2700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: description
-      value: a short break. restores some motivation
+      value: a short rest from work\n+ motivation
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: maxDuration
@@ -2724,7 +2724,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: motivationGain
-      value: 0.6
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: maxDurationMins
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: minDurationMins
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8871639289797376050, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6213,8 +6221,8 @@ MonoBehaviour:
   imperativeVerb: 
   motivationCost: 8
   energyCost: 23
-  minDuration: 0.5
-  maxDuration: 0
+  minDurationMins: 0
+  maxDurationMins: 0
   oncePerDay: 0
   motivationGain: 0
   energyGain: 0
@@ -6552,7 +6560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -36.5}
+  m_AnchoredPosition: {x: 6.599984, y: -36.5}
   m_SizeDelta: {x: 218, y: -123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &332959808
@@ -7953,7 +7961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: description
-      value: a long break. restores a lot of motivation
+      value: take time for yourself with a long break\n++ motivation
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: maxDuration
@@ -7978,6 +7986,14 @@ PrefabInstance:
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: motivationGain
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: maxDurationMins
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: minDurationMins
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8871639289797376050, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -15543,8 +15559,8 @@ MonoBehaviour:
   imperativeVerb: 
   motivationCost: 5
   energyCost: 12
-  minDuration: 0.5
-  maxDuration: 0
+  minDurationMins: 0
+  maxDurationMins: 0
   oncePerDay: 0
   motivationGain: 0
   energyGain: 0
@@ -18409,7 +18425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: description
-      value: rest for a while. restores a lot of energy
+      value: rest for a while\n++ energy
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: maxDuration
@@ -18430,6 +18446,14 @@ PrefabInstance:
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: motivationCost
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: maxDurationMins
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: minDurationMins
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8871639289797376050, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -20231,7 +20255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -36.5}
+  m_AnchoredPosition: {x: 6.6, y: -36.5}
   m_SizeDelta: {x: 218, y: -123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1082192926
@@ -31450,8 +31474,8 @@ MonoBehaviour:
   imperativeVerb: 
   motivationCost: 6
   energyCost: 15
-  minDuration: 0.8
-  maxDuration: 3
+  minDurationMins: 0
+  maxDurationMins: 0
   oncePerDay: 0
   motivationGain: 0
   energyGain: 0
@@ -33989,7 +34013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: description
-      value: Clean the house.
+      value: clean up your space a bit\n+ cleanliness
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: maxDuration
@@ -34010,6 +34034,14 @@ PrefabInstance:
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: motivationCost
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: maxDurationMins
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
+      propertyPath: minDurationMins
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8023308748346418768, guid: 119f57f0ac3d0ec4d889aa8871b85f1b, type: 3}
       propertyPath: lifeFactorChanges.Array.size
@@ -35440,8 +35472,8 @@ MonoBehaviour:
   imperativeVerb: 
   motivationCost: 12
   energyCost: 20
-  minDuration: 2
-  maxDuration: 0
+  minDurationMins: 0
+  maxDurationMins: 0
   oncePerDay: 0
   motivationGain: 0
   energyGain: 0

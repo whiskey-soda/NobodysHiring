@@ -32,9 +32,11 @@ public class Activity : MonoBehaviour
     [SerializeField] public float motivationCost;
     public float energyCost;
 
-    [SerializeField]
-    public float minDuration = 0;
-    public float maxDuration = 0; // 0 means uncapped
+    [SerializeField] float minDurationMins = 0;
+    [SerializeField] float maxDurationMins = 240;
+
+    public float minDuration { get; private set; } = 0;
+    public float maxDuration { get; private set; } = 0; // 0 means uncapped
 
     [SerializeField] bool oncePerDay = false;
     bool isAvailable = true;
@@ -50,6 +52,14 @@ public class Activity : MonoBehaviour
     [Space]
     [SerializeField] List<LifeFactorChange> lifeFactorChanges;
     [SerializeField] public List<SkillChange> skillChanges;
+
+    private void Awake()
+    {
+        // convert from mins to hours
+        // config times in mins is easier for balancing in inspector
+        minDuration = minDurationMins / 60;
+        maxDuration = maxDurationMins / 60;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()

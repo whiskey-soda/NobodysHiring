@@ -25,8 +25,10 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     PlayerStats stats;
     bool hovered = false;
 
-    private void Awake()
+    private void Start()
     {
+        // initialize all text fields
+        // not in awake because the activity sets itself up in awake
         nameTMP.text = activity.activityName;
         descriptionTMP.text = activity.description;
         minDurationTMP.text = ConvertToHourMinFormat(activity.minDuration);
@@ -35,10 +37,6 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         durationSlider.minValue = activity.minDuration * (60 / sliderStepSize);
         durationSlider.maxValue = activity.maxDuration * (60 / sliderStepSize);
 
-    }
-
-    private void Start()
-    {
         statbars = Statbars.Instance;
         stats = PlayerStats.Instance;
 
@@ -78,8 +76,9 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         // get minute by taking the decimal portion and multiplying by 60 and then truncating off the decimal with an int cast
         // rounds to nearest int because of floating point errors causing it to round down erroneously
-        hourMinFormatString += $"{Mathf.Round(((duration - (int)duration) * 60))}m";
-
+        float minutes = Mathf.Round((duration - (int)duration) * 60);
+        if (minutes != 0) { hourMinFormatString += $"{minutes}m"; } // dont display 0m
+        
         return hourMinFormatString;
     }
 
