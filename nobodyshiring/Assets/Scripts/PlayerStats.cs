@@ -78,11 +78,30 @@ public class PlayerStats : MonoBehaviour
     /// <param name="motivationChange"></param>
     public void ChangeMotivation(float motivationChange)
     {
-        // if motivation is being lost, cost gets modified
-        if (Mathf.Sign(motivationChange) < 0)
+        motivationChange = ApplyMotivationChangeModifiers(motivationChange);
+
+        // cap motivation at max and 0 min
+        float newMotivation = motivation + motivationChange;
+        if (newMotivation > motivationMax) { newMotivation = motivationMax; }
+        else if (newMotivation < 0) { newMotivation = 0; }
+
+        motivation = newMotivation;
+    }
+
+    
+
+    /// <summary>
+    /// modifies the player's motivation, with a parameter option to use/ignore thermostat affects
+    /// </summary>
+    /// <param name="motivationChange"></param>
+    /// <param name="considerThermostat"></param>
+    public void ChangeMotivation(float motivationChange, bool considerThermostat)
+    {
+        // only apply modifiers if thermostat is being considered
+        // NOTE: will need to change this if other things besides thermostat can affect motiv costs
+        if (considerThermostat)
         {
-            // thermostat applies multiplier
-            if (!thermostat.isOn) { motivationChange *= thermostat.motivationCostMult; }
+            ApplyMotivationChangeModifiers(motivationChange);
         }
 
         // cap motivation at max and 0 min
@@ -94,25 +113,20 @@ public class PlayerStats : MonoBehaviour
     }
 
     /// <summary>
-    /// modifies the player's motivation, with a parameter option to use/ignore thermostat affects
+    /// applies any applicable modifiers to a proposed motivation change
     /// </summary>
     /// <param name="motivationChange"></param>
-    /// <param name="considerThermostat"></param>
-    public void ChangeMotivation(float motivationChange, bool considerThermostat)
+    /// <returns></returns>
+    public float ApplyMotivationChangeModifiers(float motivationChange)
     {
         // if motivation is being lost, cost gets modified
-        if (considerThermostat && Mathf.Sign(motivationChange) < 0)
+        if (Mathf.Sign(motivationChange) < 0)
         {
-            // thermostat applies multiplier when off. uncomfortable temperatures make things take more effort
+            // thermostat applies multiplier
             if (!thermostat.isOn) { motivationChange *= thermostat.motivationCostMult; }
         }
 
-        // cap motivation at max and 0 min
-        float newMotivation = motivation + motivationChange;
-        if (newMotivation > motivationMax) {  newMotivation = motivationMax; }
-        else if (newMotivation < 0) {  newMotivation = 0; }
-
-        motivation = newMotivation;
+        return motivationChange;
     }
 
     /// <summary>
@@ -122,21 +136,17 @@ public class PlayerStats : MonoBehaviour
     /// <returns>the proportion of energy that was used before passing out.</returns>
     public float ChangeEnergy(float energyChange)
     {
-        // if energy is being lost, cost gets modified
-        if (Mathf.Sign(energyChange) < 0) 
-        {
-            // high/low motivation multiplies the energy cost
-            energyChange = CalculateMotivationInfluence(energyChange); 
 
-            // thermostat applies multiplier
-            if (!thermostat.isOn) { energyChange *= thermostat.energyCostMult; }
-        }
+        energyChange = ApplyEnergyChangeModifiers(energyChange);
 
         // cap energy at 0 min
         // dont cap at max because energy can increase over the cap with rest
         float newEnergy = energy + energyChange;
         if (newEnergy < 0) { newEnergy = 0; }
         energy = newEnergy;
+
+        Debug.Log($"energy changed from {energy - energyChange} to {newEnergy}\n" +
+            $"{energy - energyChange} energy + {energyChange}");
 
 
         // calculate the proportion of energy used before passing out
@@ -150,6 +160,27 @@ public class PlayerStats : MonoBehaviour
         }
 
         return proportionEnergyUsed;
+    }
+
+    /// <summary>
+    /// applies any applicable modifiers to a proposed energy change
+    /// </summary>
+    /// <param name="energyChange"></param>
+    /// <returns></returns>
+    public float ApplyEnergyChangeModifiers(float energyChange)
+    {
+        // if energy is being lost, cost gets modified
+        if (Mathf.Sign(energyChange) < 0)
+        {
+
+            // high/low motivation multiplies the energy cost
+            energyChange = CalculateMotivationInfluence(energyChange);
+
+            // thermostat applies multiplier
+            if (!thermostat.isOn) { energyChange *= thermostat.energyCostMult; }
+        }
+
+        return energyChange;
     }
 
     public void SetEnergy(float value)

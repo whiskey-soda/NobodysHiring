@@ -58,13 +58,21 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void ActivateStatPreview()
     {
-        float energyCost = activity.energyCost * durationSlider.value / (60 / sliderStepSize);
+        // NOTE: costs are passed in as negative numbers to recieve modifiers, then negated for better readability
+
+        float energyCost = - PlayerStats.Instance.ApplyEnergyChangeModifiers(- activity.energyCost * durationSlider.value / (60 / sliderStepSize));
         float energyGain = activity.energyGain * durationSlider.value / (60 / sliderStepSize);
         statbars.energy.SetPreviewValue(stats.energy - energyCost + energyGain);
 
-        float motivationCost = activity.motivationCost * durationSlider.value / (60 / sliderStepSize);
+        Debug.Log($"energy preview value: {stats.energy - energyCost + energyGain}\n" +
+            $"{stats.energy} energy - {energyCost} cost + {energyGain} gain");
+
+        float motivationCost = - PlayerStats.Instance.ApplyMotivationChangeModifiers(- activity.motivationCost * durationSlider.value / (60 / sliderStepSize));
         float motivationGain = activity.motivationGain * durationSlider.value / (60 / sliderStepSize);
         statbars.motivation.SetPreviewValue(stats.motivation - motivationCost + motivationGain);
+
+        Debug.Log($"motivation preview value: {stats.motivation - motivationCost + motivationGain}\n" +
+            $"{stats.motivation} motivation - {motivationCost} cost + {motivationGain} gain");
     }
 
     /// <summary>
