@@ -730,8 +730,8 @@ MonoBehaviour:
   imperativeVerb: do activity
   motivationCost: 5
   energyCost: 10
-  minDuration: 0.3
-  maxDuration: 1.5
+  minDurationMins: 0
+  maxDurationMins: 240
   oncePerDay: 0
   motivationGain: 0
   energyGain: 0

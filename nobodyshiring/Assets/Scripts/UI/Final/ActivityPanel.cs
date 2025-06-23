@@ -103,6 +103,11 @@ public class ActivityPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void DoActivity()
     {
         activity.DoActivity(durationSlider.value / (60 / sliderStepSize));
+
+        // update duration display so previews update once the statbar is done changing
+        // even though this is called when the activity is performed, the preview bars wont change until the actual bars are done changing
+        // (that code is on statbarcontroller)
+        DurationUpdated(durationSlider.value);
     }
 
 }
